@@ -4,10 +4,10 @@ import { Outlet } from 'react-router-dom'
 
 const HomeLayout = () => {
   return (
-    <p>
+    <>
       <Header/>
       <Outlet/>
-    </p>
+    </>
   )
 }
 
