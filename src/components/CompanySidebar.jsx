@@ -6,7 +6,7 @@ import internLogo from "@/assets/internlogoWhite.png";
 import homeIcon from "@/assets/homeicon.svg";
 import applicationIcon from "@/assets/appMng.svg";
 import salesIcon from "@/assets/sales.svg";
-import postinternship from "@/assets/postinternship.svg";
+import postIntern from "@/assets/postIntern.svg";
 import internEvaluate from "@/assets/internEvaluate.svg";
 import feedback from "@/assets/feedback.svg";
 import logoutIcon from "@/assets/logouticon.svg";
@@ -14,7 +14,7 @@ import logoutIcon from "@/assets/logouticon.svg";
 const CompanySidebar = () => {
   const sidebarItems = [
     { label: "Home", href: "/", icon: homeIcon },
-    { label: "Post internship recruitment", href: "/post-recruitment", icon: postinternship },
+    { label: "Post internship recruitment", href: "/post-recruitment", icon: postIntern },
     { label: "Manage applications", href: "/manage-applications", icon: applicationIcon },
     { label: "Internship Evaluation", href: "/evaluation", icon: internEvaluate },
     { label: "Interns Feedback", href: "/feedback", icon: feedback },
@@ -43,10 +43,15 @@ const CompanySidebar = () => {
                 "flex items-center space-x-3 rounded-md px-4 py-3",
                 "text-sm font-medium",
                 "transition-colors hover:bg-[#FFFFFF] hover:text-[#1E34C0]",
-                "focus:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400"
+                "focus:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400",
+                "group"
               )}
             >
-              <img src={item.icon} alt={item.label} className="h-6 w-6" />
+              <img 
+                src={item.icon} 
+                alt={item.label} 
+                className="h-6 w-6 [filter:brightness(0)_invert(1)] group-hover:[filter:brightness(0)_saturate(100%)_invert(11%)_sepia(82%)_saturate(3825%)_hue-rotate(232deg)_brightness(94%)_contrast(102%)]" 
+              />
               <span>{item.label}</span>
             </Link>
           ))}
@@ -60,10 +65,15 @@ const CompanySidebar = () => {
               "flex items-center space-x-3 rounded-md px-4 py-3",
               "text-sm font-medium",
               "transition-colors hover:bg-[#FFFFFF] hover:text-[#1E34C0]",
-              "focus:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400"
+              "focus:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400",
+              "group"
             )}
           >
-            <img src={logoutIcon} alt="Logout" className="h-6 w-6" />
+            <img 
+              src={logoutIcon} 
+              alt="Logout" 
+              className="h-6 w-6 [filter:brightness(0)_invert(1)] group-hover:[filter:brightness(0)_saturate(100%)_invert(11%)_sepia(82%)_saturate(3825%)_hue-rotate(232deg)_brightness(94%)_contrast(102%)]" 
+            />
             <span>Log out</span>
           </Link>
         </div>
