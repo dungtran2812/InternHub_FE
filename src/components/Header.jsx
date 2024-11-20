@@ -7,7 +7,7 @@ import {
   NavigationMenuList,
 } from "@/components/ui/navigation-menu";
 import { cn } from "@/lib/utils";
-import internLogo from "@/assets/internlogo.png";
+import internlogoWhite from "@/assets/internlogoWhite.png";
 import internText from "@/assets/interntext.png";
 
 const Header = () => {
@@ -26,7 +26,7 @@ const Header = () => {
         <div className="flex items-center">
           <a href="/" className="flex items-center space-x-2">
             <div className="h-14 w-12 p-1">
-              <img src={internLogo} alt="Intern Logo" className="h-full w-full object-contain" />
+              <img src={internlogoWhite} alt="Intern Logo" className="h-full w-full object-contain" />
             </div>
             <div className="h-12 w-18">
               <img src={internText} alt="Intern Text" className="h-full w-full object-contain" />
