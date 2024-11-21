@@ -1,5 +1,7 @@
 import React from 'react'
 import CompanyCard from '../../../components/CompanyCard'
+import JobSearchBar from '@/components/JobSearchBar'
+import JobCategoryBrowse from '@/components/JobCategoryBrowse'
 
 const Home = () => {
   return (
@@ -15,6 +17,8 @@ const Home = () => {
         employees="500+ employees"
         baseColor="bg-red-500"
       />
+      <JobSearchBar />
+      <JobCategoryBrowse />
     </>
 
   )
