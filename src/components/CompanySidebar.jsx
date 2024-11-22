@@ -1,14 +1,14 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { cn } from "@/lib/utils";
-import internText from "@/assets/interntext.png";
-import internLogo from "@/assets/internlogoWhite.png";
-import homeIcon from "@/assets/homeicon.svg";
-import applicationIcon from "@/assets/appMng.svg";
-import salesIcon from "@/assets/sales.svg";
-import postIntern from "@/assets/postIntern.svg";
-import internEvaluate from "@/assets/internEvaluate.svg";
-import feedback from "@/assets/feedback.svg";
+import internText from "@/assets/orgLogo/interntext.png";
+import internLogo from "@/assets/orgLogo/internlogoWhite.png";
+import homeIcon from "@/assets/sidebarIcon/homeicon.svg";
+import applicationIcon from "@/assets/sidebarIcon/appMng.svg";
+import salesIcon from "@/assets/sidebarIcon/sales.svg";
+import postIntern from "@/assets/sidebarIcon/postIntern.svg";
+import internEvaluate from "@/assets/sidebarIcon/internEvaluate.svg";
+import feedback from "@/assets/sidebarIcon/feedback.svg";
 import logoutIcon from "@/assets/logouticon.svg";
 
 const CompanySidebar = () => {
