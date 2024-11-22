@@ -1,5 +1,5 @@
 import React from 'react';
-import settingIcon from '@/assets/settingIcon.svg';
+import settingIcon from '@/assets/sidebarIcon/settingIcon.svg';
 
 const CompanyProfile = ({ 
   name = "FPT Software",

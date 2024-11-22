@@ -7,8 +7,8 @@ import {
   NavigationMenuList,
 } from "@/components/ui/navigation-menu";
 import { cn } from "@/lib/utils";
-import internlogoWhite from "@/assets/internlogoWhite.png";
-import internText from "@/assets/interntext.png";
+import internlogoWhite from "@/assets/orgLogo/internlogoWhite.png";
+import internText from "@/assets/orgLogo/interntext.png";
 
 const Header = () => {
   const navItems = [
