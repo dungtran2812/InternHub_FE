@@ -3,7 +3,7 @@ import CompanyCard from '../../../components/CompanyCard'
 import JobSearchBar from '@/components/JobSearchBar'
 import JobCategoryBrowse from '@/components/JobCategoryBrowse'
 import PremiumSubCard from '@/components/PremiumSubCard'
-import FreePlanCard from '@/components/freePlanCard'
+import FreePlanCard from '@/components/FreePlanCard'
 
 const Home = () => {
   return (
