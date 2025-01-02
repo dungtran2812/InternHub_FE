@@ -1,4 +1,3 @@
-import { Button } from "@/components/ui/button";
 import freeFeature from '../assets/planCard/freeFeature.svg';
 
 const FreePlanCard = () => {

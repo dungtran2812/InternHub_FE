@@ -1,13 +1,20 @@
-import React from 'react'
 import CompanyCard from '../../../components/CompanyCard'
 import JobSearchBar from '@/components/JobSearchBar'
 import JobCategoryBrowse from '@/components/JobCategoryBrowse'
 import PremiumSubCard from '@/components/PremiumSubCard'
 import FreePlanCard from '@/components/FreePlanCard'
+import RecruiterCard from '@/components/RecruiterCard'
 
 const Home = () => {
   return (
     <>
+      <RecruiterCard 
+        name="Alipo Creative"
+        logo="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQubhAFso_7zGCtcA5a1mopHOLsPXhdtVZxqA&s"
+        location="Ho Chi Minh City"
+        jobsAvailable={42}
+        field="Design & Creation"
+      />
       <CompanyCard
         name="Alipo Creative"
         logo="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQubhAFso_7zGCtcA5a1mopHOLsPXhdtVZxqA&s"
