@@ -4,7 +4,11 @@ import CateButton from "./cateButton";
 import { SmallAvatar } from "./SmallAvatar";
 
 
-export function BlogAndReviewCard({ title, category, image, description, authorAvatar, authorName, timeToRead }) {
+export function BlogAndReviewCard({ title, category,  description
+    // , 
+    // image,authorAvatar, authorName
+    ,
+     timeToRead }) {
     return (
         <div className="w-96 p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
             <div className="flex items-center justify-center">
