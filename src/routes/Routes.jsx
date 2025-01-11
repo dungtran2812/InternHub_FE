@@ -1,9 +1,10 @@
-import { Navigate, Route, Routes } from "react-router-dom";
+import {  Route, Routes } from "react-router-dom";
 import HomeLayout from "../containers/HomeLayout/HomeLayout";
 import Home from "@/containers/HomeLayout/Home/Home";
 import CompanyLayout from "@/containers/CompanyDashboard/CompanyLayout";
 import CompanyHome from "@/containers/CompanyDashboard/CompanyHome/CompanyHome";
 import AboutUsPage from "@/containers/AboutUs/AboutUs";
+import BlogPage from "@/containers/BlogPage/BlogPage";
 
 //luồng ruoting chính sẽ là component này
 const AppRoutes = () => {
@@ -12,6 +13,7 @@ const AppRoutes = () => {
       <Route path="/" element={<HomeLayout />}>
         <Route path="/" element={<Home />}/>
         <Route path="/about" element={<AboutUsPage />}/>
+        <Route path="/blog" element={<BlogPage />}/>
         <Route/>
         <Route/>
       </Route >
