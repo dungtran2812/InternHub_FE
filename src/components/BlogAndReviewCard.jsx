@@ -1,6 +1,6 @@
 
 import { AvatarDemo } from "./Avatar";
-import CateButton from "./CategoryButton";
+import CategoryButton from "./CategoryButton";
 import { SmallAvatar } from "./SmallAvatar";
 
 
@@ -17,7 +17,7 @@ export function BlogAndReviewCard({ title, category,  description
             <div className="flex">
                 {Array.isArray(category) && category.map((item, index) => (
                     <div key={index} className="mr-2">
-                        <CateButton category={item} />
+                        <CategoryButton category={item} />
                     </div>
                 ))}
             </div>
