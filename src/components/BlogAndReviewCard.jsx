@@ -1,6 +1,6 @@
 
 import { AvatarDemo } from "./Avatar";
-import CateButton from "./cateButton";
+import CateButton from "./CategoryButton";
 import { SmallAvatar } from "./SmallAvatar";
 
 
