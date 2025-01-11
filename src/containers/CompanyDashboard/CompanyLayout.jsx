@@ -1,6 +1,5 @@
 /* eslint-disable react/prop-types */
 import CompanySidebar from "@/components/CompanySidebar";
-import React from "react";
 import { Outlet } from "react-router-dom";
 // import Header from "./Header";
 
