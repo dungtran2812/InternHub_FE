@@ -29,7 +29,9 @@ const Home = () => {
       <JobSearchBar />
       <JobCategoryBrowse />
       <PremiumSubCard />
+      <div>
       <FreePlanCard />
+      </div>
     </>
 
   )
