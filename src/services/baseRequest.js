@@ -3,7 +3,7 @@ import axiosRetry from "axios-retry";
 import { setOnLineStatus } from "../features/app";
 
 // Axios instance setup
-const url = import.meta.env.VITE_SERVER_URL;
+const url = import.meta.env.VITE_INTERNHUB_API;
 
 export const axiosInstance = axios.create({
   baseURL: url,

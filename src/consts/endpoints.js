@@ -1,4 +1,4 @@
 const endpoints = {
-  LOGIN: '/login',
+  LOGIN: '/auth/login',
 }
 export default endpoints

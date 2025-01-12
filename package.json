@@ -21,6 +21,7 @@
     "embla-carousel-react": "^8.5.1",
     "flowbite": "^2.5.2",
     "flowbite-react": "^0.10.2",
+    "formik": "^2.4.6",
     "lucide-react": "^0.460.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
@@ -31,7 +32,8 @@
     "redux-persist": "^6.0.0",
     "tailwind-merge": "^2.5.4",
     "tailwindcss-animate": "^1.0.7",
-    "vite-plugin-svgr": "^4.3.0"
+    "vite-plugin-svgr": "^4.3.0",
+    "yup": "^1.6.1"
   },
   "devDependencies": {
     "@eslint/js": "^9.13.0",
