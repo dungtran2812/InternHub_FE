@@ -11,11 +11,11 @@ import internText from "@/assets/orgLogo/interntext.png";
 
 const Header = () => {
   const navItems = [
-    { label: "Jobs", href: "/jobs" },
-    { label: "Profile & CV", href: "/profile" },
-    { label: "Recruiters", href: "/recruiters" },
+    { label: "Việc làm", href: "/jobs" },
+    { label: "Hồ sơ & CV", href: "/profile" },
+    { label: "Nhà tuyển dụng", href: "/recruiters" },
     { label: "Blog", href: "/blog" },
-    { label: "Pages", href: "/pages" },
+    { label: "Trang", href: "/pages" },
   ];
 
   return (
@@ -25,10 +25,10 @@ const Header = () => {
         <div className="flex items-center">
           <a href="/" className="flex items-center space-x-2">
             <div className="h-14 w-12 p-1">
-              <img src={internlogoWhite} alt="Intern Logo" className="h-full w-full object-contain" />
+              <img src={internlogoWhite} alt="Logo Intern" className="h-full w-full object-contain" />
             </div>
             <div className="h-12 w-18">
-              <img src={internText} alt="Intern Text" className="h-full w-full object-contain" />
+              <img src={internText} alt="Chữ Intern" className="h-full w-full object-contain" />
             </div>
           </a>
         </div>
@@ -60,20 +60,20 @@ const Header = () => {
             className="hidden text-white hover:bg-blue-700 hover:text-white md:flex"
             style={{ fontSize: '14px', padding: '8px 16px', borderRadius: '80px', background: '#19267D' }}
           >
-            For Employer
+            Dành cho Nhà Tuyển Dụng
           </Button>
           <Button
             variant="outline"
             className="hidden bg-white text-blue-600 hover:bg-blue-50 hover:text-blue-700 md:flex"
             style={{ fontSize: '14px', padding: '8px 16px', borderRadius: '30px', background: '#6F73E9', color: 'white', borderColor: '#6F73E9' }}
           >
-            Log In
+            Đăng Nhập
           </Button>
           <Button 
             className="hidden text-white underline md:flex"
             style={{ fontSize: '14px', padding: '8px 16px', background: 'transparent' }}
           >
-            Register
+            Đăng Ký
           </Button>
 
           {/* Mobile Menu Button */}

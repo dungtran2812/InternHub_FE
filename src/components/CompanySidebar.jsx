@@ -12,12 +12,12 @@ import logoutIcon from "@/assets/logouticon.svg";
 
 const CompanySidebar = () => {
   const sidebarItems = [
-    { label: "Home", href: "/", icon: homeIcon },
-    { label: "Post internship recruitment", href: "/post-recruitment", icon: postIntern },
-    { label: "Manage applications", href: "/manage-applications", icon: applicationIcon },
-    { label: "Internship Evaluation", href: "/evaluation", icon: internEvaluate },
-    { label: "Interns Feedback", href: "/feedback", icon: feedback },
-    { label: "Buy Plan", href: "/plans", icon: salesIcon },
+    { label: "Trang chủ", href: "/", icon: homeIcon },
+    { label: "Đăng tin tuyển dụng thực tập", href: "/post-recruitment", icon: postIntern },
+    { label: "Quản lý đơn ứng tuyển", href: "/manage-applications", icon: applicationIcon },
+    { label: "Đánh giá thực tập sinh", href: "/evaluation", icon: internEvaluate },
+    { label: "Phản hồi từ thực tập sinh", href: "/feedback", icon: feedback },
+    { label: "Mua gói", href: "/plans", icon: salesIcon },
   ];
 
   return (
@@ -70,17 +70,17 @@ const CompanySidebar = () => {
           >
             <img 
               src={logoutIcon} 
-              alt="Logout" 
+              alt="Đăng xuất" 
               className="h-6 w-6 [filter:brightness(0)_invert(1)] group-hover:[filter:brightness(0)_saturate(100%)_invert(11%)_sepia(82%)_saturate(3825%)_hue-rotate(232deg)_brightness(94%)_contrast(102%)]" 
             />
-            <span>Log out</span>
+            <span>Đăng xuất</span>
           </Link>
         </div>
       </nav>
 
       {/* Copyright */}
       <div className="p-4 text-xs text-blue-200 text-center">
-        Copyright © Limited Liability Company KALOCS
+        Bản quyền © Công ty TNHH KALOCS
       </div>
     </aside>
   );

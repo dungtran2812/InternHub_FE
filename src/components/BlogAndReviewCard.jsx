@@ -29,13 +29,13 @@ export function BlogAndReviewCard({ title, category,  description
             </div>
             <div className="mt-10 grid grid-cols-6">
                 <div className="col-span-1">
-                  <SmallAvatar />
+                  <SmallAvatar url={""}/>
                 </div>
                 <div className="col-span-3 flex items-center">
                     {title}
                 </div>
                 <div className="col-span-2 flex items-center text-sm">
-                    {timeToRead} mins to read
+                    {timeToRead} phút để đọc
                 </div>
             </div>
         </div>

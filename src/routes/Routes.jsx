@@ -8,6 +8,8 @@ import BlogPage from "@/containers/BlogPage/BlogPage";
 import CompanyList from "@/containers/CompanyList/CompanyList";
 import Login from "@/containers/Authentication/Login";
 import SignUp from "@/containers/Authentication/SignUp";
+import CompanyProfile from "@/containers/CompanyProfile/CompanyProfile";
+
 
 //luồng ruoting chính sẽ là component này
 const AppRoutes = () => {
@@ -20,6 +22,7 @@ const AppRoutes = () => {
         <Route path="/about" element={<AboutUsPage />}/>
         <Route path="/blog" element={<BlogPage />}/>
         <Route path="/company-list" element={<CompanyList />}/>
+        <Route path="/company-profile" element={<CompanyProfile />}/>
         <Route/>
         <Route/>
 

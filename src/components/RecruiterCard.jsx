@@ -10,13 +10,13 @@ export default function RecruiterCard({
 }) {
   return (
     <Card className="flex w-[226px] h-[280px] p-1 flex-col justify-center items-center bg-white rounded-xl border-2 border-[#9699DB]">
-      <div className="flex flex-col items-center w-full ">
-        {/* Logo and Company Name */}
+      <div className="flex flex-col items-center w-full">
+        {/* Logo và Tên Công Ty */}
         <div className="flex flex-col items-center text-center">
           <div className="h-16 w-16 overflow-hidden bg-gray-50 flex items-center justify-center">
             {logo ? (
               <img
-                alt={`${name} logo`}
+                alt={`Logo của ${name}`}
                 className="h-full w-full object-cover"
                 src={logo}
                 onError={(e) => {
@@ -34,15 +34,15 @@ export default function RecruiterCard({
           </div>
         </div>
 
-        {/* Location and Jobs Available */}
+        {/* Địa Điểm và Số Việc Làm Có Sẵn */}
         <div className="flex items-center text-center mt-3">
           <div className="flex items-center text-sm text-muted-foreground">
-            <img src={MapPinIcon} alt="Location" className="mr-2" />
+            <img src={MapPinIcon} alt="Địa điểm" className="mr-2" />
             <span>{location}</span>
           </div>
           
           <div className="text-sm">
-            <span className="text-[#372ECE] font-medium">{jobsAvailable} jobs available</span>
+            <span className="text-[#372ECE] font-medium">{jobsAvailable} việc làm có sẵn</span>
           </div>
         </div>
       </div>

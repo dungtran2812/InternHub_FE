@@ -1,4 +1,3 @@
-import React from 'react';
 import GoogleIcon from '../../assets/loginPageIcon/GoogleIcon.png';
 import LoginSideImage from '../../assets/LoginSideImage.png';
 import InternLogo from '../../assets/orgLogo/InternLogoColored.png';
@@ -12,8 +11,8 @@ const Login = () => {
   const [login, {isLoading}] = useLoginMutation();
 
   const validationSchema = Yup.object({
-    email: Yup.string().email('Invalid email address').required('Required'),
-    password: Yup.string().required('Required')
+    email: Yup.string().email('Email không hợp lệ').required('Bắt buộc nhập'),
+    password: Yup.string().required('Bắt buộc nhập')
   });
 
   const handleGoogleLogin = () => {
@@ -22,45 +21,45 @@ const Login = () => {
 
   const handleSubmit = async (values) => {
     try {
-      console.log('data', values)
+      console.log('dữ liệu', values)
       const response = await login(values).unwrap();
-      console.log('Login successful:', response);
+      console.log('Đăng nhập thành công:', response);
     } catch (error) {
-      console.error('Login failed:', error);
+      console.error('Đăng nhập thất bại:', error);
     }
   };
 
   return (
     <div className="flex h-screen">
-      {/* Left side - Login Form */}
+      {/* Phần trái - Form đăng nhập */}
       <div className="w-1/2 p-12 flex flex-col justify-between">
         <div>
-          {/* Logo and Welcome Text moved outside max-w container */}
+          {/* Logo và Văn bản chào mừng */}
           <div className="mb-8">
             <div className="flex items-center mb-8">
-              <img src={InternLogo} alt="InternHub Logo" className="h-8" />
+              <img src={InternLogo} alt="Logo InternHub" className="h-8" />
               <span className="ml-2 text-xl font-bold text-[#19267D]">InternHub</span>
             </div>
-            <h1 className="text-3xl font-bold text-[#19267D] mb-2">Hi!</h1>
-            <h2 className="text-3xl font-bold text-[#19267D] mb-2">Welcome back</h2>
-            <p className="text-gray-500 mb-8">Get your first job here</p>
+            <h1 className="text-3xl font-bold text-[#19267D] mb-2">CHÀO!</h1>
+            <h2 className="text-3xl font-bold text-[#19267D] mb-2">Chào mừng trở lại</h2>
+            <p className="text-gray-500 mb-8">Nhận công việc đầu tiên của bạn ở đây</p>
           </div>
 
-          {/* Login Form Container - now 90% width */}
+          {/* Container form đăng nhập */}
           <div className="w-[90%]">
-            {/* Google Login Button */}
+            {/* Nút đăng nhập bằng Google */}
             <button
               onClick={handleGoogleLogin}
               disabled={isLoading}
               className="w-full flex items-center justify-center gap-2 border border-gray-300 rounded-lg p-3 mb-4 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
             >
               <img src={GoogleIcon} alt="Google" className="w-5 h-5" />
-              <span>Login by Google</span>
+              <span>Đăng nhập bằng Google</span>
             </button>
 
             <div className="w-full h-1 mb-4" style={{background: "linear-gradient(270deg, #BFB0FF 0%, #0B00B9 49%, #BFB0FF 100%)"}}></div>
 
-            {/* Login Form */}
+            {/* Form đăng nhập */}
             <Formik
               initialValues={{ email: '', password: '' }}
               validationSchema={validationSchema}
@@ -91,14 +90,14 @@ const Login = () => {
                     <div className="absolute left-3 top-1/2 transform -translate-y-1/2 flex flex-col items-center justify-center">
                       <img 
                         src={PasswordIcon} 
-                        alt="Password" 
+                        alt="Mật khẩu" 
                         className="w-5 h-5"
                       />
                     </div>
                     <Field
                       type="password"
                       name="password"
-                      placeholder="Password"
+                      placeholder="Mật khẩu"
                       disabled={isLoading}
                       className={`w-full p-3 pl-12 border ${errors.password && touched.password ? 'border-red-500' : 'border-gray-300'} rounded-lg disabled:cursor-not-allowed`}
                     />
@@ -115,7 +114,7 @@ const Login = () => {
                       {isLoading || isSubmitting ? (
                         <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white"></div>
                       ) : (
-                        'Log in'
+                        'Đăng nhập'
                       )}
                     </button>
                   </div>
@@ -123,27 +122,27 @@ const Login = () => {
               )}
             </Formik>
 
-            {/* Sign Up Link */}
+            {/* Liên kết Đăng ký */}
             <p className="text-center mt-6 text-gray-600">
-              Not registered yet?{' '}
+              Chưa có tài khoản?{' '}
               <a href="/signup" className={`text-[#1F41BB] hover:underline ${isLoading ? 'pointer-events-none opacity-50' : ''}`}>
-                Create an account
+                Tạo tài khoản
               </a>
             </p>
           </div>
         </div>
 
-        {/* Copyright text */}
+        {/* Văn bản bản quyền */}
         <div className="text-[#6C757D] text-base font-light leading-5 tracking-[-0.32px]">
-          Copyright © Limited Liability Company KALOCS
+          Bản quyền © Công ty trách nhiệm hữu hạn KALOCS
         </div>
       </div>
 
-      {/* Right side - Image */}
+      {/* Phần phải - Hình ảnh */}
       <div className="w-1/2 flex items-center justify-center">
         <img
           src={LoginSideImage}
-          alt="Login illustration"
+          alt="Minh họa đăng nhập"
           className="max-w-[80%] h-auto"
         />
       </div>
