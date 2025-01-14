@@ -3,17 +3,17 @@ import { MemberCard } from "@/components/MemberCard"
 
 const AboutUsPage = () => {
     return (
-        <div className='mt-20 container mx-auto'>
+        <div className='mt-20 mx-3'>
             <div className='text-center'>
-                <div >Our Company</div>
-                <div className='text-3xl'> About our company</div>
+                <div ></div>
+                <div className='text-3xl'>Công ty của chúng tôi</div>
                 <div>
-                    Hello world
+                Xin chào thế giới
                 </div>
             </div>
             <div className='mt-20 grid lg:grid-cols-2 grid-cols-1'>
                 <div className='container px-24'>
-                    <p className='text-center text-xl '>What we can do?</p>
+                    <p className='text-center text-xl '>Chúng ta có thể làm gì?</p>
                     <p className='mt-5 text-sm'>Aenean sollicituin, lorem quis bibendum auctor nisi elit consequat ipsum sagittis sem nibh id elit. Duis sed odio sit amet nibh vulputate cursus a sit amet maurisorbi accumsan ipsum velit. Nam nec tellus a odio tincidunt auctora ornare odio.</p>
                     <p className='mt-2 text-sm'>Aenean sollicituin, lorem quis bibendum auctor nisi elit consequat ipsum sagittis sem nibh id elit. Duis sed odio sit amet nibh vulputate cursus a sit amet maurisorbi accumsan ipsum velit. Nam nec tellus a odio tincidunt auctora ornare odio.</p>
                     <p className='mt-2 text-sm'>Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Duis non nisi purus. Integer sit nostra, per inceptos himenaeos.
