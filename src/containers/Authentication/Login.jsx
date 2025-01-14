@@ -7,6 +7,7 @@ import PasswordIcon from '../../assets/loginPageIcon/PasswordIcon.svg';
 import { useLoginMutation } from '@/services/internHubApi';
 import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
+import { Link } from 'react-router-dom';
 
 const Login = () => {
   const [login, {isLoading}] = useLoginMutation();
@@ -126,9 +127,9 @@ const Login = () => {
             {/* Sign Up Link */}
             <p className="text-center mt-6 text-gray-600">
               Not registered yet?{' '}
-              <a href="/signup" className={`text-[#1F41BB] hover:underline ${isLoading ? 'pointer-events-none opacity-50' : ''}`}>
+              <Link to="/signup" className={`text-[#1F41BB] hover:underline ${isLoading ? 'pointer-events-none opacity-50' : ''}`}>
                 Create an account
-              </a>
+              </Link>
             </p>
           </div>
         </div>

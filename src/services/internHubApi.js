@@ -13,6 +13,13 @@ const internHubApi = createApi({
         data: credentials,
       }),
     }),
+    signup: builder.mutation({
+      query: (credentials) => ({
+        url: endpoints.SIGNUP,
+        method: 'POST',
+        data: credentials,
+      }),
+    }),
   }),
 });
 
