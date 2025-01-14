@@ -7,7 +7,7 @@ const JobSearchBar = () => {
   const [searchText, setSearchText] = useState('');
 
   const handleSearch = () => {
-    console.log('Searching:', { searchText, industry, location });
+    console.log('Tìm kiếm:', { searchText, industry, location });
   };
 
   return (
@@ -20,10 +20,10 @@ const JobSearchBar = () => {
             onChange={(e) => setIndustry(e.target.value)}
             className="w-full outline-none px-2 py-3 text-base bg-transparent cursor-pointer"
           >
-            <option value="">Industry</option>
-            <option value="tech">Technology</option>
-            <option value="finance">Finance</option>
-            <option value="healthcare">Healthcare</option>
+            <option value="">Ngành nghề</option>
+            <option value="tech">Công nghệ</option>
+            <option value="finance">Tài chính</option>
+            <option value="healthcare">Chăm sóc sức khỏe</option>
           </select>
         </div>
 
@@ -39,7 +39,7 @@ const JobSearchBar = () => {
               onChange={(e) => setLocation(e.target.value)}
               className="w-full outline-none py-3 text-base bg-transparent cursor-pointer"
             >
-              <option value="">Locations</option>
+              <option value="">Địa điểm</option>
               <option value="ny">New York</option>
               <option value="sf">San Francisco</option>
               <option value="la">Los Angeles</option>
@@ -54,7 +54,7 @@ const JobSearchBar = () => {
         <div className="flex-1 px-4">
           <input
             type="text"
-            placeholder="Type here..."
+            placeholder="Nhập từ khóa tìm kiếm..."
             value={searchText}
             onChange={(e) => setSearchText(e.target.value)}
             className="w-full outline-none px-2 py-3 text-base"
@@ -66,7 +66,7 @@ const JobSearchBar = () => {
           onClick={handleSearch}
           className="bg-[#181D97] text-white px-8 py-3 ml-4 rounded-lg hover:opacity-90 transition-opacity"
         >
-          Search
+          Tìm kiếm
         </button>
       </div>
     </div>

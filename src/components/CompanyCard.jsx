@@ -19,7 +19,7 @@ export default function CompanyCard({
       <div className="relative w-1/3 min-w-[120px] p-3 bg-white">
         <div className="relative h-full w-full overflow-hidden rounded-lg">
           <img
-            alt={`${name} logo`}
+            alt={`Logo của ${name}`}
             className="absolute inset-0 h-full w-full object-cover"
             height="400"
             src={logo}
@@ -32,22 +32,22 @@ export default function CompanyCard({
           <div className="flex items-start justify-between">
             <h2 className="text-2xl font-bold">{name}</h2>
             <div className="flex gap-2">
-              <Button variant="outline" size="sm">Follow</Button>
-              <Button size="sm">See all jobs</Button>
+              <Button variant="outline" size="sm">Theo dõi</Button>
+              <Button size="sm">Xem tất cả việc làm</Button>
             </div>
           </div>
           <div className="grid gap-4 text-sm">
             <div>
-              <span className="font-medium text-muted-foreground">Address:</span>
+              <span className="font-medium text-muted-foreground">Địa chỉ:</span>
               <p>{address}</p>
             </div>
             <div className="grid grid-cols-2 gap-4">
               <div>
-                <span className="font-medium text-muted-foreground">Phone number:</span>
+                <span className="font-medium text-muted-foreground">Số điện thoại:</span>
                 <p>{phoneNumber}</p>
               </div>
               <div>
-                <span className="font-medium text-muted-foreground">Type:</span>
+                <span className="font-medium text-muted-foreground">Loại hình:</span>
                 <p>{type}</p>
               </div>
             </div>
@@ -57,7 +57,7 @@ export default function CompanyCard({
                 <p>{email}</p>
               </div>
               <div>
-                <span className="font-medium text-muted-foreground">Web:</span>
+                <span className="font-medium text-muted-foreground">Website:</span>
                 {website ? (
                   <Link
                     className="inline-flex items-center gap-1 text-primary hover:underline"
@@ -69,12 +69,12 @@ export default function CompanyCard({
                     <ExternalLink className="h-3 w-3" />
                   </Link>
                 ) : (
-                  <p>Not available</p>
+                  <p>Không có sẵn</p>
                 )}
               </div>
             </div>
             <div>
-              <span className="font-medium text-muted-foreground">Employees:</span>
+              <span className="font-medium text-muted-foreground">Số lượng nhân viên:</span>
               <p>{employees}</p>
             </div>
           </div>

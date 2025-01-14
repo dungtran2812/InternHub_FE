@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react"
+import { useState, useEffect } from "react"
 import {
   Carousel,
   CarouselContent,
@@ -12,23 +12,24 @@ import nextButton from "@/assets/nextButton.svg"
 import carouselDot from "@/assets/carouselDot.svg"
 
 const categories = [
-  { name: "Digital Marketing", icon: "/placeholder.svg?height=40&width=40", jobs: 12 },
-  { name: "International Business", icon: "/placeholder.svg?height=40&width=40", jobs: 8 },
-  { name: "Language", icon: "/placeholder.svg?height=40&width=40", jobs: 15 },
-  { name: "Public Relations", icon: "/placeholder.svg?height=40&width=40", jobs: 6 },
-  { name: "Software Engineering", icon: "/placeholder.svg?height=40&width=40", jobs: 25 },
-  { name: "Graphic Design", icon: "/placeholder.svg?height=40&width=40", jobs: 18 },
-  { name: "Hotel Management", icon: "/placeholder.svg?height=40&width=40", jobs: 10 },
-  { name: "Marketing Communication", icon: "/placeholder.svg?height=40&width=40", jobs: 9 },
-  { name: "Data Science", icon: "/placeholder.svg?height=40&width=40", jobs: 14 },
-  { name: "Human Resources", icon: "/placeholder.svg?height=40&width=40", jobs: 7 },
-  { name: "Finance", icon: "/placeholder.svg?height=40&width=40", jobs: 16 },
-  { name: "Project Management", icon: "/placeholder.svg?height=40&width=40", jobs: 11 },
-  { name: "Content Writing", icon: "/placeholder.svg?height=40&width=40", jobs: 13 },
-  { name: "UI/UX Design", icon: "/placeholder.svg?height=40&width=40", jobs: 20 },
-  { name: "Sales", icon: "/placeholder.svg?height=40&width=40", jobs: 17 },
-  { name: "Customer Service", icon: "/placeholder.svg?height=40&width=40", jobs: 22 }
+  { name: "Tiếp Thị Số", icon: "/placeholder.svg?height=40&width=40", jobs: 12 },
+  { name: "Kinh Doanh Quốc Tế", icon: "/placeholder.svg?height=40&width=40", jobs: 8 },
+  { name: "Ngôn Ngữ", icon: "/placeholder.svg?height=40&width=40", jobs: 15 },
+  { name: "Quan Hệ Công Chúng", icon: "/placeholder.svg?height=40&width=40", jobs: 6 },
+  { name: "Kỹ Thuật Phần Mềm", icon: "/placeholder.svg?height=40&width=40", jobs: 25 },
+  { name: "Thiết Kế Đồ Họa", icon: "/placeholder.svg?height=40&width=40", jobs: 18 },
+  { name: "Quản Lý Khách Sạn", icon: "/placeholder.svg?height=40&width=40", jobs: 10 },
+  { name: "Truyền Thông Tiếp Thị", icon: "/placeholder.svg?height=40&width=40", jobs: 9 },
+  { name: "Khoa Học Dữ Liệu", icon: "/placeholder.svg?height=40&width=40", jobs: 14 },
+  { name: "Nhân Sự", icon: "/placeholder.svg?height=40&width=40", jobs: 7 },
+  { name: "Tài Chính", icon: "/placeholder.svg?height=40&width=40", jobs: 16 },
+  { name: "Quản Lý Dự Án", icon: "/placeholder.svg?height=40&width=40", jobs: 11 },
+  { name: "Viết Nội Dung", icon: "/placeholder.svg?height=40&width=40", jobs: 13 },
+  { name: "Thiết Kế UI/UX", icon: "/placeholder.svg?height=40&width=40", jobs: 20 },
+  { name: "Bán Hàng", icon: "/placeholder.svg?height=40&width=40", jobs: 17 },
+  { name: "Dịch Vụ Khách Hàng", icon: "/placeholder.svg?height=40&width=40", jobs: 22 }
 ]
+
 
 export default function JobCategoryCarousel() {
   const [api, setApi] = useState(null)
@@ -60,7 +61,7 @@ export default function JobCategoryCarousel() {
                         <img src={category.icon} alt={category.name} className="w-8 h-8 mr-4" />
                         <div className="flex flex-col">
                           <span className="text-base font-semibold">{category.name}</span>
-                          <span className="text-xs text-muted-foreground">{category.jobs} jobs available</span>
+                          <span className="text-xs text-muted-foreground">{category.jobs} công việc có sẵn</span>
                         </div>
                       </CardContent>
                     </Card>
@@ -70,10 +71,10 @@ export default function JobCategoryCarousel() {
           ))}
         </CarouselContent>
         <CarouselPrevious className="absolute -left-4 top-1/2 -translate-y-1/2 hidden sm:flex">
-          <img src={backButton} alt="Previous" className="w-7 h-12" />
+          <img src={backButton} alt="Trước" className="w-7 h-12" />
         </CarouselPrevious>
         <CarouselNext className="absolute -right-4 top-1/2 -translate-y-1/2 hidden sm:flex">
-          <img src={nextButton} alt="Next" className="w-7 h-12" />
+          <img src={nextButton} alt="Tiếp" className="w-7 h-12" />
         </CarouselNext>
       </Carousel>
       <div className="flex justify-center mt-4">
@@ -81,7 +82,7 @@ export default function JobCategoryCarousel() {
           <img 
             key={index} 
             src={carouselDot} 
-            alt="Dot" 
+            alt="Chấm" 
             className={`w-[17px] h-[17px] mx-1 ${current === index ? 'opacity-100' : 'opacity-50'}`}
           />
         ))}

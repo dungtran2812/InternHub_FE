@@ -3,23 +3,23 @@ import premiumFeature from '../assets/planCard/premiumFeature.svg';
 
 const PremiumSubCard = () => {
   const features = [
-    'Access detailed information about the work environment and growth opportunities.',
-    'Advanced filtering options for salary, growth opportunities.',
-    'Create and save unlimited profiles.',
-    'View all reviews and detailed company feedback.',
-    'Daily priority notifications for relevant job postings.',
-    'Personalized career counseling from experts based on your profile and goals.',
-    'Unlimited access of study materials and CV templates'
+    'Truy cập thông tin chi tiết về môi trường làm việc và cơ hội phát triển.',
+    'Tùy chọn lọc nâng cao cho mức lương và cơ hội phát triển.',
+    'Tạo và lưu vô hạn hồ sơ cá nhân.',
+    'Xem tất cả các đánh giá và phản hồi chi tiết về công ty.',
+    'Nhận thông báo ưu tiên hàng ngày về các bài đăng việc làm phù hợp.',
+    'Tư vấn nghề nghiệp cá nhân từ các chuyên gia dựa trên hồ sơ và mục tiêu của bạn.',
+    'Truy cập không giới hạn tài liệu học tập và mẫu CV.'
   ];
 
   return (
     <div className="flex flex-col w-full max-w-lg mx-auto min-h-[500px] p-5 lg:p-10
                     justify-center items-start gap-6 md:gap-8
                     rounded-lg bg-gradient-to-b from-[#112396] to-[#3B53EC] shadow-lg">
-      <h2 className="text-2xl font-semibold text-white">Premium</h2>
+      <h2 className="text-2xl font-semibold text-white">Gói Cao Cấp</h2>
 
       <p className="text-3xl font-medium text-[#FFE492]">
-        49k/month
+        49k/tháng
       </p>
 
       <div className="flex flex-col gap-5">
@@ -40,7 +40,7 @@ const PremiumSubCard = () => {
       <Button
         className="bg-[#FFE492] text-[#112396] hover:bg-[#FFE492]/90 mt-4"
       >
-        Get's Start
+        Bắt đầu ngay
       </Button>
     </div>
   );
