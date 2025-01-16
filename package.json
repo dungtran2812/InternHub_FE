@@ -13,7 +13,7 @@
     "@amcharts/amcharts4": "^4.10.39",
     "@radix-ui/react-navigation-menu": "^1.2.1",
     "@radix-ui/react-slot": "^1.1.0",
-    "@reduxjs/toolkit": "^2.3.0",
+    "@reduxjs/toolkit": "^2.5.0",
     "axios": "^1.7.7",
     "axios-retry": "^4.5.0",
     "class-variance-authority": "^0.7.0",
@@ -32,6 +32,7 @@
     "redux-persist": "^6.0.0",
     "tailwind-merge": "^2.5.4",
     "tailwindcss-animate": "^1.0.7",
+    "tw-elements-react": "^1.0.0-alpha-end",
     "vite-plugin-svgr": "^4.3.0",
     "yup": "^1.6.1"
   },
