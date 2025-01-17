@@ -6,10 +6,14 @@ import PasswordIcon from '../../assets/loginPageIcon/PasswordIcon.svg';
 import { useLoginMutation } from '@/services/internHubApi';
 import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
+import { Link } from 'react-router-dom';
+import { setAccessToken, setEmail, setUsername } from '@/features/user';
+import { useDispatch, useSelector } from 'react-redux';
 
 const Login = () => {
+  const dispatch = useDispatch();
   const [login, {isLoading}] = useLoginMutation();
-
+  const username = useSelector((state) => state.rootReducer.user.username)
   const validationSchema = Yup.object({
     email: Yup.string().email('Email không hợp lệ').required('Bắt buộc nhập'),
     password: Yup.string().required('Bắt buộc nhập')
@@ -21,8 +25,14 @@ const Login = () => {
 
   const handleSubmit = async (values) => {
     try {
-      console.log('dữ liệu', values)
-      const response = await login(values).unwrap();
+      console.log('dữ liệu', values);
+      const response = await login(values).unwrap()
+      .then(res => {
+        dispatch(setUsername(res.username))
+        dispatch(setEmail(res.email))
+        dispatch(setEmail(res.role))
+        dispatch(setAccessToken(res.token))
+      });
       console.log('Đăng nhập thành công:', response);
     } catch (error) {
       console.error('Đăng nhập thất bại:', error);
@@ -31,6 +41,7 @@ const Login = () => {
 
   return (
     <div className="flex h-screen">
+      {console.log(username)}
       {/* Phần trái - Form đăng nhập */}
       <div className="w-1/2 p-12 flex flex-col justify-between">
         <div>
@@ -124,10 +135,10 @@ const Login = () => {
 
             {/* Liên kết Đăng ký */}
             <p className="text-center mt-6 text-gray-600">
-              Chưa có tài khoản?{' '}
-              <a href="/signup" className={`text-[#1F41BB] hover:underline ${isLoading ? 'pointer-events-none opacity-50' : ''}`}>
+            Chưa có tài khoản?{' '}
+            <Link to="/signup" className={`text-[#1F41BB] hover:underline ${isLoading ? 'pointer-events-none opacity-50' : ''}`}>
                 Tạo tài khoản
-              </a>
+              </Link>
             </p>
           </div>
         </div>
