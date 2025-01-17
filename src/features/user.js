@@ -8,6 +8,7 @@ const initialState = {
   role: "",
   avatar: "",
   accessTokenExpired: false,
+  email: "",
 };
 
 const userSlice = createSlice({
@@ -32,8 +33,8 @@ const userSlice = createSlice({
     setRole(state, action) {
       state.role = action.payload;
     },
-    setLoading(state, action) {
-      state.isLoading = action.payload;
+    setEmail(state, action) {
+      state.email = action.payload;
     },
     setAccessTokenExpired(state, action) {
       state.accessToken = action.payload;
@@ -45,17 +46,31 @@ const userSlice = createSlice({
       state.username = "";
       state.avatar = "";
       state.role = [];
+      state.email = "";
       localStorage.removeItem("user");
     },
+    setUser(state, action) {
+      const { username, avatar, role, email, accessToken, isLoggedIn, isFirstLogin, accessTokenExpired } = action.payload;
+      state.username = username;
+      state.avatar = avatar;
+      state.role = role;
+      state.email = email;
+      state.accessToken = accessToken;
+      state.isLoggedIn = isLoggedIn;
+      state.isFirstLogin = isFirstLogin;
+      state.accessTokenExpired = accessTokenExpired;
+    }
   },
 });
 
 export const {
+  setUser,
   setAvatar,
   setIsLoggedIn,
   setFirstLogin,
   setAccessToken,
   setUsername,
+  setEmail,
   setRole,
   signout,
   setAccessTokenExpired,

@@ -20,11 +20,27 @@ const internHubApi = createApi({
         data: credentials,
       }),
     }),
+    getCompanyById: builder.query({
+      query: (id) => ({
+        url: `${endpoints.COMPANY}/${id}`,
+        method: 'GET',
+        data: id,
+      }),
+    }),
+    getAllCompany: builder.query({
+      query: () => ({
+        url: endpoints.COMPANY,
+        method: 'GET',
+      }),
+    }),
   }),
 });
 
 export const {
-  useLoginMutation
+  useLoginMutation,
+  useSignupMutation,
+  useGetCompanyByIdQuery,
+  useGetAllCompanyQuery
 } = internHubApi;
 
 export default internHubApi;

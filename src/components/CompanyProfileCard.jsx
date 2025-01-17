@@ -1,8 +1,7 @@
-
 const CompanyProfileCard = ({
-    name, description,
-    image, location,
-    numberJobAvailable
+    name,
+    image, address,
+    numberJobAvailable, industry
 }) => {
     return (
         <div>
@@ -14,7 +13,7 @@ const CompanyProfileCard = ({
                     <p>{name}</p>
                 </div>
                 <div className="text-sm mt-2 px-2 text-center">
-                    {description}
+                    {industry}
                 </div>
                 <div className="mt-10 grid grid-cols-6 pb-2">
                     <div className="col-span-3 flex items-center text-xs pl-2">
@@ -23,7 +22,7 @@ const CompanyProfileCard = ({
                             <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z" />
                         </svg>
                         <div style={{color: "#b3afbe"}} className="pl-2 ">
-                        {location}
+                            {address.split(',').pop().trim()}
                         </div>
                     </div>
                     <div className="col-span-3 flex items-center justify-center text-xs text-blue-900">

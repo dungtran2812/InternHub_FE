@@ -1,6 +1,7 @@
 import axios from "axios";
 import axiosRetry from "axios-retry";
 import { setOnLineStatus } from "../features/app";
+import { setUser } from "@/features/user";
 
 // Axios instance setup
 const url = import.meta.env.VITE_INTERNHUB_API;
@@ -69,16 +70,39 @@ const setUpInterceptor = (store) => {
   axiosInstance.interceptors.request.use(
     async (config) => {
       const appState = await store.getState();
-      const accessToken = await appState?.rootReducer?.user?.accessToken;
+      const accessToken = appState?.rootReducer?.user?.accessToken;
+      const refreshToken = appState?.rootReducer?.user?.refreshToken;
+
       if (accessToken) {
         config.headers["Authorization"] = `Bearer ${accessToken}`;
       }
+
+      if (isTokenExpired(accessToken)) {
+        const newAccessToken = await refreshAccessToken(refreshToken);
+        if (newAccessToken) {
+          config.headers["Authorization"] = `Bearer ${newAccessToken}`;
+          store.dispatch(setUser({...newAccessToken, isLoggedIn: true}));
+        }
+      }
+
       return config;
     },
     (error) => {
       return Promise.reject(error);
     }
   );
+};
+
+// Function to check if the token is expired
+const isTokenExpired = (token) => {
+  // Implement your logic to check token expiration
+  // Return true if expired, false otherwise
+};
+
+// Function to refresh the access token
+const refreshAccessToken = async (refreshToken) => {
+  // Implement your logic to refresh the access token using the refresh token
+  // Return the new access token
 };
 
 export default setUpInterceptor;
