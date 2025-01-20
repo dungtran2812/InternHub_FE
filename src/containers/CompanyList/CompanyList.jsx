@@ -1,12 +1,13 @@
 import { BlogAndReviewCard } from "@/components/BlogAndReviewCard";
 import CompanyProfileCard from "@/components/CompanyProfileCard";
-import { useGetAllCompanyQuery } from '@/services/internHubApi';
+import { useGetAllCompanyQuery, useGetAllReviewQuery } from '@/services/internHubApi';
 
 const CompanyList = () => {
-    const { data: companies, error, isLoading } = useGetAllCompanyQuery();
+    const { data: companies, error: errorCompany, isLoading: isLoadingCompany } = useGetAllCompanyQuery();
+    const { data: reviews, error: errorReview, isLoading: isLoadingReview } = useGetAllReviewQuery();
 
-    if (isLoading) return <div>Loading...</div>;
-    if (error) return <div>Error loading companies</div>;
+    if (isLoadingCompany || isLoadingReview) return <div>Loading...</div>;
+    if (errorCompany || errorReview) return <div>Error loading data</div>;
 
     return (
         <div className="mx-3">
@@ -33,27 +34,16 @@ const CompanyList = () => {
             <p className="mt-10 text-3xl font-bold text-blue-900 text-center">Blog và đánh giá</p>
             <div className="overflow-x-auto mt-10">
                 <div className="w-[1280px] flex gap-4">
-                    <div className="grid grid-cols-4 gap-4 flex-shrink-0">
-                        <BlogAndReviewCard
-                            timeToRead={2}
-                            description={"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras laoreet nisi lorem, non finibus turpis blandit at. Integer rhoncus libero diam. Etiam accumsan orci sed sem ullamcorper, at feugiat leo luctus. Ut tincidunt lectus magna."}
-                            title={"Chiikawa Chiikawa"}
-                            category={["GIF", "Tips"]} />
-                    </div>
-                    <div className="grid grid-cols-4 gap-4 flex-shrink-0">
-                        <BlogAndReviewCard
-                            timeToRead={2}
-                            description={"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras laoreet nisi lorem, non finibus turpis blandit at. Integer rhoncus libero diam. Etiam accumsan orci sed sem ullamcorper, at feugiat leo luctus. Ut tincidunt lectus magna."}
-                            title={"Chiikawa Chiikawa"}
-                            category={["GIF", "Tips"]} />
-                    </div>
-                    <div className="grid grid-cols-4 gap-4 flex-shrink-0">
-                        <BlogAndReviewCard
-                            timeToRead={2}
-                            description={"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras laoreet nisi lorem, non finibus turpis blandit at. Integer rhoncus libero diam. Etiam accumsan orci sed sem ullamcorper, at feugiat leo luctus. Ut tincidunt lectus magna."}
-                            title={"Chiikawa Chiikawa"}
-                            category={["GIF", "Tips"]} />
-                    </div>
+                    {reviews.map((review) => (
+                        <div key={review.id} className="grid grid-cols-4 gap-4 flex-shrink-0">
+                            <BlogAndReviewCard
+                                timeToRead={review.timeToRead}
+                                description={review.description}
+                                title={review.title}
+                                category={review.category}
+                            />
+                        </div>
+                    ))}
                 </div>
             </div>
             <div className="my-10 text-center">
