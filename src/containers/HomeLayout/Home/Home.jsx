@@ -4,10 +4,12 @@ import JobCategoryBrowse from '@/components/JobCategoryBrowse'
 import PremiumSubCard from '@/components/PremiumSubCard'
 import FreePlanCard from '@/components/FreePlanCard'
 import RecruiterCard from '@/components/RecruiterCard'
+import HomeBanner from '@/components/HomeBanner'
 
 const Home = () => {
   return (
     <>
+    <HomeBanner />
       <RecruiterCard 
         name="Alipo Creative"
         logo="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQubhAFso_7zGCtcA5a1mopHOLsPXhdtVZxqA&s"
