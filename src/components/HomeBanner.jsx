@@ -1,7 +1,7 @@
 import JobSearchBar from './JobSearchBar'; // Import the JobSearchBar component
-import homeBannerBG from '../assets/homePage/homeBannerBG.svg'; // Import the background SVG
-import home1 from '../assets/homePage/home1.png'
-import home2 from '../assets/homePage/home2.png'
+import homeBannerBG from '@/assets/homePage/homeBannerBG.svg'; // Import the background SVG
+import home1 from '@/assets/homePage/home1.png'
+import home2 from '@/assets/homePage/home2.png'
 
 const HomeBanner = () => {
   return (
