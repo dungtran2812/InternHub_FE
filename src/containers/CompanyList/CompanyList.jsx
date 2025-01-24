@@ -54,11 +54,11 @@ const CompanyList = () => {
 
             <div className="justify-items-center grid grid-cols-10 ">
                 <div className="col-span-2 "></div>
-                <div className="col-span-6 w-full px-10 pt-10 pb-5  text-center text-white bg-blue-800 bg-white border border-gray-200 rounded-md shadow dark:bg-gray-800 dark:border-gray-700">
+                <div className="col-span-6 w-full px-10 pt-10 pb-5  text-center text-white bg-blue-800 border border-gray-200 rounded-md shadow dark:bg-gray-800 dark:border-gray-700">
                     <div className="text-2xl font-bold">
                         Những điều mới sẽ luôn cập nhật thường xuyên
                     </div>
-                    <div className="justify-items-center mt-5">
+                    <div className="justify-items-center mt-5 ">
                         <div className="relative mb-6">
                             <div className="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
                                 <svg className="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 16">
