@@ -33,6 +33,12 @@ const internHubApi = createApi({
         method: 'GET',
       }),
     }),
+    getAllReview: builder.query({
+      query: () => ({
+        url: endpoints.REVIEW,
+        method: 'GET',
+      }),
+    })
   }),
 });
 
@@ -40,7 +46,8 @@ export const {
   useLoginMutation,
   useSignupMutation,
   useGetCompanyByIdQuery,
-  useGetAllCompanyQuery
+  useGetAllCompanyQuery,
+  useGetAllReviewQuery
 } = internHubApi;
 
 export default internHubApi;
