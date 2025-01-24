@@ -5,3 +5,5 @@ const endpoints = {
   REVIEW: '/review'
 }
 export default endpoints
+
+
