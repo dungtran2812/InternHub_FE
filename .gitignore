@@ -24,4 +24,11 @@ dist-ssr
 *.sln
 *.sw?
 
+# Ignore package-lock.json
+package-lock.json
+
+# Ignore yarn.lock
+yarn.lock
+
+
 .codegpt
