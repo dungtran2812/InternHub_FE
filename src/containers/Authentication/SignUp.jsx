@@ -10,7 +10,7 @@ import * as Yup from 'yup';
 import { useSignupMutation } from '@/services/internHubApi';
 
 const SignUp = () => {
-  const [signup, {isLoading}] = useSignupMutation();
+  const [signup, { isLoading }] = useSignupMutation();
 
   const validationSchema = Yup.object({
     fullName: Yup.string().required('Required'),
@@ -45,10 +45,12 @@ const SignUp = () => {
         <div>
           {/* Logo và Văn bản Chào Mừng */}
           <div className="mb-8">
-            <div className="flex items-center mb-8">
-              <img src={InternLogo} alt="Logo InternHub" className="h-8" />
-              <span className="ml-2 text-xl font-bold text-[#19267D]">InternHub</span>
-            </div>
+            <Link to='/'>
+              <div className="flex items-center mb-8">
+                <img src={InternLogo} alt="Logo InternHub" className="h-8" />
+                <span className="ml-2 text-xl font-bold text-[#19267D]">InternHub</span>
+              </div>
+            </Link>
             <h1 className="text-3xl font-bold text-[#19267D] mb-2">Tạo tài khoản</h1>
             <p className="text-gray-500 mb-8">Bắt đầu hành trình của bạn với chúng tôi</p>
           </div>
@@ -64,16 +66,16 @@ const SignUp = () => {
               <span>Đăng nhập bằng Google</span>
             </button>
 
-            <div className="w-full h-1 mb-4" style={{background: "linear-gradient(270deg, #BFB0FF 0%, #0B00B9 49%, #BFB0FF 100%)"}}></div>
+            <div className="w-full h-1 mb-4" style={{ background: "linear-gradient(270deg, #BFB0FF 0%, #0B00B9 49%, #BFB0FF 100%)" }}></div>
 
             {/* Replace the old form with Formik form */}
             <Formik
-              initialValues={{ 
-                fullName: '', 
-                email: '', 
-                password: '', 
+              initialValues={{
+                fullName: '',
+                email: '',
+                password: '',
                 confirmPassword: '',
-                agreedToTerms: false 
+                agreedToTerms: false
               }}
               validationSchema={validationSchema}
               onSubmit={(values) => handleSubmit(values)}
@@ -81,9 +83,9 @@ const SignUp = () => {
               {({ isSubmitting, errors, touched }) => (
                 <Form className="flex flex-col">
                   <div className={`relative ${errors.fullName && touched.fullName ? 'mb-8' : 'mb-4'}`}>
-                    <img 
-                      src={EmailIcon} 
-                      alt="Full Name" 
+                    <img
+                      src={EmailIcon}
+                      alt="Full Name"
                       className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5"
                     />
                     <Field
@@ -98,9 +100,9 @@ const SignUp = () => {
                   </div>
 
                   <div className={`relative ${errors.email && touched.email ? 'mb-8' : 'mb-4'}`}>
-                    <img 
-                      src={EmailIcon} 
-                      alt="Email" 
+                    <img
+                      src={EmailIcon}
+                      alt="Email"
                       className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5"
                     />
                     <Field
@@ -116,9 +118,9 @@ const SignUp = () => {
 
                   <div className="flex gap-4 mb-6">
                     <div className={`flex-1 relative ${errors.password && touched.password ? 'mb-8' : ''}`}>
-                      <img 
-                        src={PasswordIcon} 
-                        alt="Password" 
+                      <img
+                        src={PasswordIcon}
+                        alt="Password"
                         className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5"
                       />
                       <Field
@@ -133,9 +135,9 @@ const SignUp = () => {
                     </div>
 
                     <div className={`flex-1 relative ${errors.confirmPassword && touched.confirmPassword ? 'mb-8' : ''}`}>
-                      <img 
-                        src={PasswordIcon} 
-                        alt="Confirm Password" 
+                      <img
+                        src={PasswordIcon}
+                        alt="Confirm Password"
                         className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5"
                       />
                       <Field
@@ -177,7 +179,7 @@ const SignUp = () => {
                     {isSubmitting ? (
                       <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white"></div>
                     ) : (
-                      'Sign up'
+                      'Đăng ký'
                     )}
                   </button>
                 </Form>
@@ -186,10 +188,10 @@ const SignUp = () => {
 
             {/* Liên kết Đăng Nhập */}
             <p className="text-center mt-6 text-gray-600">
-              Already have an account?{' '}
-              <a href="/login" className="text-[#1F41BB] hover:underline">
-                Log in
-              </a>
+              Chưa có tài khoản?{' '}
+              <Link to="/login" className="text-[#1F41BB] hover:underline">
+                Đăng nhập
+              </Link>
             </p>
           </div>
         </div>
