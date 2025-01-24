@@ -8,14 +8,15 @@ import {
 import { cn } from "@/lib/utils";
 import internlogoWhite from "@/assets/orgLogo/internlogoWhite.png";
 import internText from "@/assets/orgLogo/interntext.png";
+import { Link } from "react-router-dom";
 
 const Header = () => {
   const navItems = [
     { label: "Việc làm", href: "/jobs" },
     { label: "Hồ sơ & CV", href: "/profile" },
-    { label: "Nhà tuyển dụng", href: "/recruiters" },
+    { label: "Công ty", href: "/companies" },
     { label: "Blog", href: "/blog" },
-    { label: "Trang", href: "/pages" },
+    { label: "Giới thiệu", href: "/about" },
   ];
 
   return (
@@ -67,13 +68,18 @@ const Header = () => {
             className="hidden bg-white text-blue-600 hover:bg-blue-50 hover:text-blue-700 md:flex"
             style={{ fontSize: '14px', padding: '8px 16px', borderRadius: '30px', background: '#6F73E9', color: 'white', borderColor: '#6F73E9' }}
           >
-            Đăng Nhập
+            <Link to='/login'>
+              Đăng Nhập
+            </Link>
           </Button>
-          <Button 
+          <Button
             className="hidden text-white underline md:flex"
             style={{ fontSize: '14px', padding: '8px 16px', background: 'transparent' }}
           >
-            Đăng Ký
+            <Link to='/signup'>
+              Đăng Ký
+            </Link>
+
           </Button>
 
           {/* Mobile Menu Button */}

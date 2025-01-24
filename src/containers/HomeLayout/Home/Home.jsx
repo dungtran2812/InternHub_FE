@@ -1,15 +1,16 @@
 import CompanyCard from '../../../components/CompanyCard'
 import JobSearchBar from '@/components/JobSearchBar'
-import JobCategoryBrowse from '@/components/JobCategoryBrowse'
 import PremiumSubCard from '@/components/PremiumSubCard'
 import FreePlanCard from '@/components/FreePlanCard'
 import RecruiterCard from '@/components/RecruiterCard'
 import HomeBanner from '@/components/HomeBanner'
+import JobFunctionCarousel from '@/components/JobFunctionCarousel'
 
 const Home = () => {
   return (
     <>
     <HomeBanner />
+    <JobFunctionCarousel/>
       <RecruiterCard 
         name="Alipo Creative"
         logo="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQubhAFso_7zGCtcA5a1mopHOLsPXhdtVZxqA&s"
@@ -29,7 +30,6 @@ const Home = () => {
         baseColor="bg-red-500"
       />
       <JobSearchBar />
-      <JobCategoryBrowse />
       <PremiumSubCard />
       <div>
         <FreePlanCard />

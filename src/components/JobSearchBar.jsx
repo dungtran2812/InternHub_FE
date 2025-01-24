@@ -1,5 +1,7 @@
 import { useState } from 'react';
-import locationIcon from '../assets/locationIcon.svg';
+import locationIcon from '@/assets/locationIcon.svg';
+import jobIcon from '@/assets/homePage/job.svg';
+
 
 const JobSearchBar = () => {
   const [industry, setIndustry] = useState('');
@@ -15,16 +17,19 @@ const JobSearchBar = () => {
       <div className="flex items-center bg-white rounded-lg border border-gray-200 p-3">
         {/* Industry Select */}
         <div className="flex-1 px-4">
-          <select
-            value={industry}
-            onChange={(e) => setIndustry(e.target.value)}
-            className="w-full outline-none px-2 py-3 text-base bg-transparent cursor-pointer"
-          >
-            <option value="">Ngành nghề</option>
-            <option value="tech">Công nghệ</option>
-            <option value="finance">Tài chính</option>
-            <option value="healthcare">Chăm sóc sức khỏe</option>
-          </select>
+          <div className="flex items-center gap-3">
+            <img src={jobIcon} alt="Job" className="w-5 h-5" />
+            <select
+              value={industry}
+              onChange={(e) => setIndustry(e.target.value)}
+              className="w-full outline-none px-2 py-3 text-base bg-transparent cursor-pointer"
+            >
+              <option value="">Ngành nghề</option>
+              <option value="tech">Công nghệ</option>
+              <option value="finance">Tài chính</option>
+              <option value="healthcare">Chăm sóc sức khỏe</option>
+            </select>
+          </div>
         </div>
 
         {/* Vertical Divider */}

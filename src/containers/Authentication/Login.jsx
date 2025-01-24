@@ -12,7 +12,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 const Login = () => {
   const dispatch = useDispatch();
-  const [login, {isLoading}] = useLoginMutation();
+  const [login, { isLoading }] = useLoginMutation();
   const username = useSelector((state) => state.rootReducer.user.username)
   const validationSchema = Yup.object({
     email: Yup.string().email('Email không hợp lệ').required('Bắt buộc nhập'),
@@ -27,12 +27,12 @@ const Login = () => {
     try {
       console.log('dữ liệu', values);
       const response = await login(values).unwrap()
-      .then(res => {
-        dispatch(setUsername(res.username))
-        dispatch(setEmail(res.email))
-        dispatch(setEmail(res.role))
-        dispatch(setAccessToken(res.token))
-      });
+        .then(res => {
+          dispatch(setUsername(res.username))
+          dispatch(setEmail(res.email))
+          dispatch(setEmail(res.role))
+          dispatch(setAccessToken(res.token))
+        });
       console.log('Đăng nhập thành công:', response);
     } catch (error) {
       console.error('Đăng nhập thất bại:', error);
@@ -47,10 +47,12 @@ const Login = () => {
         <div>
           {/* Logo và Văn bản chào mừng */}
           <div className="mb-8">
-            <div className="flex items-center mb-8">
-              <img src={InternLogo} alt="Logo InternHub" className="h-8" />
-              <span className="ml-2 text-xl font-bold text-[#19267D]">InternHub</span>
-            </div>
+            <Link to='/'>
+              <div className="flex items-center mb-8">
+                <img src={InternLogo} alt="Logo InternHub" className="h-8" />
+                <span className="ml-2 text-xl font-bold text-[#19267D]">InternHub</span>
+              </div>
+            </Link>
             <h1 className="text-3xl font-bold text-[#19267D] mb-2">CHÀO!</h1>
             <h2 className="text-3xl font-bold text-[#19267D] mb-2">Chào mừng trở lại</h2>
             <p className="text-gray-500 mb-8">Nhận công việc đầu tiên của bạn ở đây</p>
@@ -68,7 +70,7 @@ const Login = () => {
               <span>Đăng nhập bằng Google</span>
             </button>
 
-            <div className="w-full h-1 mb-4" style={{background: "linear-gradient(270deg, #BFB0FF 0%, #0B00B9 49%, #BFB0FF 100%)"}}></div>
+            <div className="w-full h-1 mb-4" style={{ background: "linear-gradient(270deg, #BFB0FF 0%, #0B00B9 49%, #BFB0FF 100%)" }}></div>
 
             {/* Form đăng nhập */}
             <Formik
@@ -80,9 +82,9 @@ const Login = () => {
                 <Form className="flex flex-col">
                   <div className={`relative ${errors.email && touched.email ? 'mb-8' : 'mb-4'}`}>
                     <div className="absolute left-3 top-1/2 transform -translate-y-1/2 flex flex-col items-center justify-center">
-                      <img 
-                        src={EmailIcon} 
-                        alt="Email" 
+                      <img
+                        src={EmailIcon}
+                        alt="Email"
                         className="w-5 h-5"
                       />
                     </div>
@@ -99,9 +101,9 @@ const Login = () => {
                   </div>
                   <div className={`relative ${errors.password && touched.password ? 'mb-10' : 'mb-6'}`}>
                     <div className="absolute left-3 top-1/2 transform -translate-y-1/2 flex flex-col items-center justify-center">
-                      <img 
-                        src={PasswordIcon} 
-                        alt="Mật khẩu" 
+                      <img
+                        src={PasswordIcon}
+                        alt="Mật khẩu"
                         className="w-5 h-5"
                       />
                     </div>
@@ -135,8 +137,8 @@ const Login = () => {
 
             {/* Liên kết Đăng ký */}
             <p className="text-center mt-6 text-gray-600">
-            Chưa có tài khoản?{' '}
-            <Link to="/signup" className={`text-[#1F41BB] hover:underline ${isLoading ? 'pointer-events-none opacity-50' : ''}`}>
+              Chưa có tài khoản?{' '}
+              <Link to="/signup" className={`text-[#1F41BB] hover:underline ${isLoading ? 'pointer-events-none opacity-50' : ''}`}>
                 Tạo tài khoản
               </Link>
             </p>
