@@ -85,7 +85,7 @@ const jobPages = Array.from({ length: Math.ceil(SAMPLE_JOBS.length / JOBS_PER_PA
 export function JobCarousel() {
   return (
     <div className="text-2xl font-bold mb-4 text-center my-12">
-      <h2 className="text-2xl font-bold mb-4 text-center">Việc Làm Gợi Ý</h2>
+      <h2 className="text-2xl font-bold mb-4 text-center">Việc Làm Gợi Ý.</h2>
       <Carousel
         opts={{
           align: "start",
