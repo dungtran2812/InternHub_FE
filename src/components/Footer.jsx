@@ -3,6 +3,8 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { ArrowRight } from "lucide-react";
 import footerBanner from "@/assets/footer/footerBanner.png";
+import internTextLogo from "@/assets/orgLogo/interntext.png";
+
 const footerLinks = {
 	jobs: {
 		title: "Jobs",
@@ -41,7 +43,7 @@ const Footer = () => {
 					{/* Logo and Description */}
 					<div className="lg:col-span-4">
 						<img
-							src="/src/assets/orgLogo/interntext.png"
+							src={internTextLogo}
 							alt="InternHub Logo Text"
 							className="w-[150px] h-[100px] mb-3"
 						/>
