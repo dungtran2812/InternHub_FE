@@ -9,8 +9,6 @@ import CompanyList from "@/containers/CompanyList/CompanyList";
 import Login from "@/containers/Authentication/Login";
 import SignUp from "@/containers/Authentication/SignUp";
 import CompanyProfile from "@/containers/CompanyProfile/CompanyProfile";
-import JobPage from "@/containers/JobPage/JobPage";
-import JobDetail from "@/containers/JobDetail/JobDetail";
 
 
 //luồng ruoting chính sẽ là component này
@@ -25,8 +23,6 @@ const AppRoutes = () => {
         <Route path="/blog" element={<BlogPage />}/>
         <Route path="/companies" element={<CompanyList />}/>
         <Route path="/company-profile" element={<CompanyProfile />}/>
-        <Route path="/job" element={<JobPage />}/>
-        <Route path="/job-detail" element={<JobDetail />}/>
         <Route/>
         <Route/>
       </Route >
