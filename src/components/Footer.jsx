@@ -106,10 +106,10 @@ const Footer = () => {
 						<h3 className="text-white font-bold text-lg">
 							Contact
 						</h3>
-						<p className="text-white">
+						<p className="text-white text-sm">
 							Email: internhub.kalocs@gmail.com
 						</p>
-						<p className="text-white">
+						<p className="text-white text-sm">
 							Location: Lot E2a-7, Road D1, Long Thanh My, Thu Duc
 							City, Ho Chi Minh City
 						</p>
