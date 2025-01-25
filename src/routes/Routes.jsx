@@ -9,6 +9,7 @@ import CompanyList from "@/containers/CompanyList/CompanyList";
 import Login from "@/containers/Authentication/Login";
 import SignUp from "@/containers/Authentication/SignUp";
 import CompanyProfile from "@/containers/CompanyProfile/CompanyProfile";
+import RecruiterRegister from "@/containers/Authentication/RecruiterAuth/RecruiterRegister";
 
 
 //luồng ruoting chính sẽ là component này
@@ -17,6 +18,7 @@ const AppRoutes = () => {
     <Routes>
       <Route path="/login" element={<Login />}/>
       <Route path="/signup" element={<SignUp />}/>
+      <Route path="/recruiter-register" element={<RecruiterRegister />}/>
       <Route path="/" element={<HomeLayout />}>
         <Route path="/" element={<Home />}/>
         <Route path="/about" element={<AboutUsPage />}/>

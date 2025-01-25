@@ -56,13 +56,15 @@ const Header = () => {
 
         {/* Auth Buttons */}
         <div className="flex items-center gap-4">
-          <Button
-            variant="ghost"
-            className="hidden text-white hover:bg-blue-700 hover:text-white md:flex"
-            style={{ fontSize: '14px', padding: '8px 16px', borderRadius: '80px', background: '#19267D' }}
-          >
-            Dành cho Nhà Tuyển Dụng
-          </Button>
+          <Link to='/recruiter-register'>
+            <Button
+              variant="ghost"
+              className="hidden text-white hover:bg-blue-700 hover:text-white md:flex"
+              style={{ fontSize: '14px', padding: '8px 16px', borderRadius: '80px', background: '#19267D' }}
+            >
+              Dành cho Nhà Tuyển Dụng
+            </Button>
+          </Link>
           <Button
             variant="outline"
             className="hidden bg-white text-blue-600 hover:bg-blue-50 hover:text-blue-700 md:flex"
