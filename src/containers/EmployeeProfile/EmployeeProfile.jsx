@@ -1,7 +1,7 @@
 import { Avatar, Button, Form, Input, Space } from "antd";
 import { UserOutlined, CheckCircleOutlined } from '@ant-design/icons';
 import { Switch } from 'antd';
-const StudenProfile = () => {
+const EmployeeProfile = () => {
     const [form] = Form.useForm();
     const onChange = (checked) => {
         console.log(`switch to ${checked}`);
@@ -88,4 +88,4 @@ const StudenProfile = () => {
     )
 }
 
-export default StudenProfile
+export default EmployeeProfile
