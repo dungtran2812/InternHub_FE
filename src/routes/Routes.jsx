@@ -9,6 +9,7 @@ import CompanyList from "@/containers/CompanyList/CompanyList";
 import Login from "@/containers/Authentication/Login";
 import SignUp from "@/containers/Authentication/SignUp";
 import CompanyProfile from "@/containers/CompanyProfile/CompanyProfile";
+import EmployeeProfile from "@/containers/EmployeeProfile/EmployeeProfile";
 import RecruiterRegister from "@/containers/Authentication/RecruiterAuth/RecruiterRegister";
 
 
@@ -20,17 +21,18 @@ const AppRoutes = () => {
       <Route path="/signup" element={<SignUp />}/>
       <Route path="/recruiter-register" element={<RecruiterRegister />}/>
       <Route path="/" element={<HomeLayout />}>
+      <Route path="/admin" element={<Home />}/>
         <Route path="/" element={<Home />}/>
         <Route path="/about" element={<AboutUsPage />}/>
         <Route path="/blog" element={<BlogPage />}/>
         <Route path="/companies" element={<CompanyList />}/>
+        <Route path="/employee-profile" element={<EmployeeProfile />}/>
         <Route path="/company-profile" element={<CompanyProfile />}/>
         <Route/>
         <Route/>
       </Route >
       <Route path="/company" element={<CompanyLayout />}>
         <Route path="/company" element={<CompanyHome />} />
-
       </Route>
     </Routes>
   )
