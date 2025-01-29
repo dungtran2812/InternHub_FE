@@ -10,6 +10,7 @@ const AdminSidebar = () => {
   const sidebarItems = [
     { label: "Dashboard", href: "/admin", icon: homeIcon },
     { label: "Quản lý người dùng", href: "/admin/manage-users", icon: postIntern },
+
   ];
 
   return (
