@@ -14,7 +14,7 @@ const CompanySidebar = () => {
   const sidebarItems = [
     { label: "Trang chủ", href: "/", icon: homeIcon },
     { label: "Đăng tin tuyển dụng thực tập", href: "/post-recruitment", icon: postIntern },
-    { label: "Quản lý đơn ứng tuyển", href: "/manage-applications", icon: applicationIcon },
+    { label: "Quản lý đơn ứng tuyển", href: "/company/manage-applications", icon: applicationIcon },
     { label: "Đánh giá thực tập sinh", href: "/evaluation", icon: internEvaluate },
     { label: "Phản hồi từ thực tập sinh", href: "/feedback", icon: feedback },
     { label: "Mua gói", href: "/plans", icon: salesIcon },

@@ -14,7 +14,7 @@ import Dashboard from "@/containers/Admin/Dashborad/Dashboard";
 import AdminLayout from "@/containers/Admin/AdminLayout/AdminLayout";
 import ManageUserAccount from "@/containers/Admin/ManageUserAccount/ManageUserAccount";
 import RecruiterRegister from "@/containers/Authentication/RecruiterAuth/RecruiterRegister";
-
+import ManageApplication from "@/containers/CompanyDashboard/ManagaApplication/ManagaApplication";
 
 //luồng ruoting chính sẽ là component này
 const AppRoutes = () => {
@@ -42,6 +42,7 @@ const AppRoutes = () => {
       {/* Company */}
       <Route path="/company" element={<CompanyLayout />}>
         <Route path="/company" element={<CompanyHome />} />
+        <Route path="/company/manage-applications" element={<ManageApplication />} />
       </Route>
     </Routes>
   )
