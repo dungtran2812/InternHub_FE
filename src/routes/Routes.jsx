@@ -13,15 +13,16 @@ import EmployeeProfile from "@/containers/EmployeeProfile/EmployeeProfile";
 import Dashboard from "@/containers/Admin/Dashborad/Dashboard";
 import AdminLayout from "@/containers/Admin/AdminLayout/AdminLayout";
 import ManageUserAccount from "@/containers/Admin/ManageUserAccount/ManageUserAccount";
-
+import RecruiterRegister from "@/containers/Authentication/RecruiterAuth/RecruiterRegister";
 
 
 //luồng ruoting chính sẽ là component này
 const AppRoutes = () => {
   return (
     <Routes>
-      <Route path="/login" element={<Login />} />
-      <Route path="/signup" element={<SignUp />} />
+      <Route path="/login" element={<Login />}/>
+      <Route path="/signup" element={<SignUp />}/>
+      <Route path="/recruiter-register" element={<RecruiterRegister />}/>
       <Route path="/" element={<HomeLayout />}>
 
         <Route path="/" element={<Home />} />
