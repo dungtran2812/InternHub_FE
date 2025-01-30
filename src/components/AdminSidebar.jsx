@@ -3,22 +3,14 @@ import { cn } from "@/lib/utils";
 import internText from "@/assets/orgLogo/interntext.png";
 import internLogo from "@/assets/orgLogo/internlogoWhite.png";
 import homeIcon from "@/assets/sidebarIcon/homeicon.svg";
-import applicationIcon from "@/assets/sidebarIcon/appMng.svg";
-import salesIcon from "@/assets/sidebarIcon/sales.svg";
 import postIntern from "@/assets/sidebarIcon/postIntern.svg";
-import internEvaluate from "@/assets/sidebarIcon/internEvaluate.svg";
-
 import logoutIcon from "@/assets/logouticon.svg";
 
-const CompanySidebar = () => {
+const AdminSidebar = () => {
   const sidebarItems = [
-    { label: "Trang chủ", href: "/", icon: homeIcon },
-    { label: "Đăng tin tuyển dụng thực tập", href: "/post-recruitment", icon: postIntern },
-    { label: "Quản lý đơn ứng tuyển", href: "/company/manage-applications", icon: applicationIcon },
-    { label: "Đánh giá thực tập sinh", href: "/evaluation", icon: internEvaluate },
-    // { label: "Phản hồi từ thực tập sinh", href: "/feedback", icon: feedback },
-    { label: "Mua gói", href: "/plans", icon: salesIcon },
-    { label: "Quản lý phản hồi của thực tập sinh", href: "/company/manage-intern-feedbacks", icon: postIntern },
+    { label: "Dashboard", href: "/admin", icon: homeIcon },
+    { label: "Quản lý người dùng", href: "/admin/manage-users", icon: postIntern },
+
   ];
 
   return (
@@ -87,4 +79,4 @@ const CompanySidebar = () => {
   );
 };
 
-export default CompanySidebar;
+export default AdminSidebar;
