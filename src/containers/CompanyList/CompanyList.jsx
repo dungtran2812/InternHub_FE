@@ -1,6 +1,8 @@
-import { BlogAndReviewCard } from "@/components/BlogAndReviewCard";
+
 import CompanyProfileCard from "@/components/CompanyProfileCard";
+import Review from "@/components/Review";
 import { useGetAllCompanyQuery, useGetAllReviewQuery } from '@/services/internHubApi';
+
 
 const CompanyList = () => {
     const { data: companies, error: errorCompany, isLoading: isLoadingCompany } = useGetAllCompanyQuery();
@@ -9,14 +11,16 @@ const CompanyList = () => {
     if (isLoadingCompany || isLoadingReview) return <div>Loading...</div>;
     if (errorCompany || errorReview) return <div>Error loading data</div>;
 
+    console.log("reviews: ", reviews)
     return (
-        <div className="mx-3">
+        <div className="mx-3 container mx-auto">
             <div className="mt-10 text-3xl text-center font-bold">
                 DANH SÁCH CÁC CÔNG TY NỔI BẬT
             </div>
             <div className="mt-5 text-center mb-3">
                 Các công ty đã được kiểm chứng về độ uy tín
             </div>
+            
             <div className="mb-10 grid grid-cols-4 gap-10">
                 {companies.map((company) => (
                     <CompanyProfileCard
@@ -29,26 +33,24 @@ const CompanyList = () => {
                     />
                 ))}
             </div>
-
+            <p className="mt-10 text-3xl font-bold text-blue-900 text-center">Đánh giá</p>
+            <Review
+                reviews={reviews}
+            />
             {/* Blog and Review */}
-            <p className="mt-10 text-3xl font-bold text-blue-900 text-center">Blog và đánh giá</p>
-            <div className="overflow-x-auto mt-10">
+  
+            {/* <div className="overflow-x-auto mt-10">
                 <div className="w-[1280px] flex gap-4">
                     {reviews.map((review) => (
                         <div key={review.id} className="grid grid-cols-4 gap-4 flex-shrink-0">
-                            <BlogAndReviewCard
-                                timeToRead={review.timeToRead}
-                                description={review.description}
-                                title={review.title}
-                                category={review.category}
-                            />
+
                         </div>
                     ))}
                 </div>
-            </div>
+            </div> */}
             <div className="my-10 text-center">
                 <button type="button" className="text-white bg-blue-900 hover:bg-blue-900 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
-                    Thêm blog và bài viết
+                    Xem thêm
                 </button>
             </div>
 

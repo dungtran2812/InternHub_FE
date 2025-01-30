@@ -31,7 +31,7 @@ const categories = [
 ]
 
 
-export default function JobCategoryCarousel() {
+export default function JobFunctionCarousel() {
   const [api, setApi] = useState(null)
   const [current, setCurrent] = useState(0)
   const totalSlides = Math.ceil(categories.length / 8)
@@ -48,6 +48,8 @@ export default function JobCategoryCarousel() {
 
   return (
     <div className="flex flex-col items-center justify-center bg-background px-16 py-4">
+      <h2 className="text-3xl font-bold leading-normal mb-2">Ngành Nghề Trọng Điểm</h2>
+      <p className="text-lg text-muted-foreground mb-4">Rất Nhiều Cơ Hội Cho Bạn</p>
       <Carousel className="w-full max-w-[1440px]" setApi={setApi}>
         <CarouselContent>
           {[...Array(totalSlides)].map((_, slideIndex) => (
