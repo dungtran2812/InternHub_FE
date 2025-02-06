@@ -1,8 +1,12 @@
-<svg width="23" height="25" viewBox="0 0 23 25" fill="none" xmlns="http://www.w3.org/2000/svg">
-<g id="Group 411">
-<rect id="Rectangle 481" width="23" height="25" rx="1" fill="white"/>
-<path id="Line 42" d="M6 6.5H17" stroke="#1E34C0" stroke-width="2" stroke-linecap="round"/>
-<path id="Line 43" d="M6 12.5H17" stroke="#1E34C0" stroke-width="2" stroke-linecap="round"/>
-<path id="Line 44" d="M6 19.5H17" stroke="#1E34C0" stroke-width="2" stroke-linecap="round"/>
-</g>
-</svg>
+   <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+      width="1em"
+      height="1em"
+    >
+      <path fill="currentColor" d="M17 19.22H5V7h7V5H3v16h16v-9h-2z"></path>
+      <path
+        fill="currentColor"
+        d="M19 2h-2v3h-3c.01.01 0 2 0 2h3v2.99c.01.01 2 0 2 0V7h3V5h-3zM7 9h8v2H7zm0 3v2h8v-2h-3zm0 3h8v2H7z"
+      ></path>
+    </svg>
