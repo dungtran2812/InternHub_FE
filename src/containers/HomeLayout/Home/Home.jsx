@@ -6,6 +6,7 @@ import RecruiterCard from '@/components/RecruiterCard'
 import HomeBanner from '@/components/HomeBanner'
 import JobFunctionCarousel from '@/components/JobFunctionCarousel'
 import { JobCarousel } from '@/components/JobCarousel'
+import RecruiterCarousel from '@/components/RecruiterCarousel'
 
 const Home = () => {
   return (
@@ -13,6 +14,7 @@ const Home = () => {
     <HomeBanner />
     <JobFunctionCarousel/>
     <JobCarousel/>
+    <RecruiterCarousel/>
       <RecruiterCard 
         name="Alipo Creative"
         logo="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQubhAFso_7zGCtcA5a1mopHOLsPXhdtVZxqA&s"
