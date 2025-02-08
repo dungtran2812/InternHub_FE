@@ -16,6 +16,8 @@ import ManageUserAccount from "@/containers/Admin/ManageUserAccount/ManageUserAc
 import RecruiterRegister from "@/containers/Authentication/RecruiterAuth/RecruiterRegister";
 import ManageApplication from "@/containers/CompanyDashboard/ManagaApplication/ManagaApplication";
 import ManageInternFeedback from "@/containers/CompanyDashboard/ManageInternFeedback/ManageInternFeedback";
+import UniversityLayout from "@/containers/University/UniversityLayout/UniversityLayout";
+import UniversityHomePage from "@/containers/University/Home/Home";
 
 //luồng ruoting chính sẽ là component này
 const AppRoutes = () => {
@@ -46,6 +48,10 @@ const AppRoutes = () => {
         <Route path="/company" element={<CompanyHome />} />
         <Route path="/company/manage-applications" element={<ManageApplication />} />
         <Route path="/company/manage-intern-feedbacks" element={<ManageInternFeedback />} />
+      </Route>
+
+      <Route path="/university" element={<UniversityLayout />}>
+        <Route path="/university" element={<UniversityHomePage />} />
       </Route>
     </Routes>
   )
