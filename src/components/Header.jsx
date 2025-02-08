@@ -13,7 +13,7 @@ import { Link } from "react-router-dom";
 const Header = () => {
   const navItems = [
     { label: "Việc làm", href: "/jobs" },
-    { label: "Hồ sơ & CV", href: "/profile" },
+    { label: "Hồ sơ & CV", href: "/employee-profile" },
     { label: "Công ty", href: "/companies" },
     { label: "Blog", href: "/blog" },
     { label: "Giới thiệu", href: "/about" },

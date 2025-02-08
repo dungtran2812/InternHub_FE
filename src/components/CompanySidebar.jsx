@@ -7,6 +7,7 @@ import applicationIcon from "@/assets/sidebarIcon/appMng.svg";
 import salesIcon from "@/assets/sidebarIcon/sales.svg";
 import postIntern from "@/assets/sidebarIcon/postIntern.svg";
 import internEvaluate from "@/assets/sidebarIcon/internEvaluate.svg";
+import review from "@/assets/sidebarIcon/review.svg";
 
 import logoutIcon from "@/assets/logouticon.svg";
 
@@ -14,11 +15,11 @@ const CompanySidebar = () => {
   const sidebarItems = [
     { label: "Trang chủ", href: "/", icon: homeIcon },
     { label: "Đăng tin tuyển dụng thực tập", href: "/post-recruitment", icon: postIntern },
-    { label: "Quản lý đơn ứng tuyển", href: "/company/manage-applications", icon: applicationIcon },
+    { label: "Quản lý đơn ứng tuyển", href: "/recruiter/manage-applications", icon: applicationIcon },
     { label: "Đánh giá thực tập sinh", href: "/evaluation", icon: internEvaluate },
     // { label: "Phản hồi từ thực tập sinh", href: "/feedback", icon: feedback },
     { label: "Mua gói", href: "/plans", icon: salesIcon },
-    { label: "Quản lý phản hồi của thực tập sinh", href: "/company/manage-intern-feedbacks", icon: postIntern },
+    { label: "Quản lý phản hồi của thực tập sinh", href: "/recruiter/manage-intern-feedbacks", icon: review },
   ];
 
   return (
@@ -43,14 +44,14 @@ const CompanySidebar = () => {
                 "flex items-center space-x-3 rounded-md px-4 py-3",
                 "text-sm font-medium",
                 "transition-colors hover:bg-[#FFFFFF] hover:text-[#1E34C0]",
-                "focus:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400",
+                "focus:bg-[#FFFFFF] focus:text-[#1E34C0]",
                 "group"
               )}
             >
               <img 
                 src={item.icon} 
                 alt={item.label} 
-                className="h-6 w-6 [filter:brightness(0)_invert(1)] group-hover:[filter:brightness(0)_saturate(100%)_invert(11%)_sepia(82%)_saturate(3825%)_hue-rotate(232deg)_brightness(94%)_contrast(102%)]" 
+                className="h-6 w-6 [filter:brightness(0)_invert(1)] group-hover:[filter:brightness(0)_saturate(100%)_invert(11%)_sepia(82%)_saturate(3825%)_hue-rotate(232deg)_brightness(94%)_contrast(102%)] group-focus:[filter:brightness(0)_saturate(100%)_invert(11%)_sepia(82%)_saturate(3825%)_hue-rotate(232deg)_brightness(94%)_contrast(102%)]" 
               />
               <span>{item.label}</span>
             </Link>

@@ -1,8 +1,8 @@
 import { Route, Routes } from "react-router-dom";
 import HomeLayout from "../containers/HomeLayout/HomeLayout";
 import Home from "@/containers/HomeLayout/Home/Home";
-import CompanyLayout from "@/containers/CompanyDashboard/CompanyLayout";
-import CompanyHome from "@/containers/CompanyDashboard/CompanyHome/CompanyHome";
+import CompanyLayout from "@/containers/RecruiterDashboard/CompanyLayout";
+import CompanyHome from "@/containers/RecruiterDashboard/RecruiterHome/RecruiterHome";
 import AboutUsPage from "@/containers/AboutUs/AboutUs";
 import BlogPage from "@/containers/BlogPage/BlogPage";
 import CompanyList from "@/containers/CompanyList/CompanyList";
@@ -14,10 +14,12 @@ import Dashboard from "@/containers/Admin/Dashborad/Dashboard";
 import AdminLayout from "@/containers/Admin/AdminLayout/AdminLayout";
 import ManageUserAccount from "@/containers/Admin/ManageUserAccount/ManageUserAccount";
 import RecruiterRegister from "@/containers/Authentication/RecruiterAuth/RecruiterRegister";
-import ManageApplication from "@/containers/CompanyDashboard/ManagaApplication/ManagaApplication";
-import ManageInternFeedback from "@/containers/CompanyDashboard/ManageInternFeedback/ManageInternFeedback";
+// import ManageApplication from "@/containers/CompanyDashboard/ManagaApplication/ManagaApplication";
+// import ManageInternFeedback from "@/containers/CompanyDashboard/ManageInternFeedback/ManageInternFeedback";
 import UniversityLayout from "@/containers/University/UniversityLayout/UniversityLayout";
 import UniversityHomePage from "@/containers/University/Home/Home";
+import ManageApplication from "@/containers/RecruiterDashboard/ManagaApplication/ManagaApplication";
+import ManageInternFeedback from "@/containers/RecruiterDashboard/ManageInternFeedback/ManageInternFeedback";
 
 //luồng ruoting chính sẽ là component này
 const AppRoutes = () => {
@@ -39,15 +41,15 @@ const AppRoutes = () => {
       </Route >
       {/* Admin */}
       <Route path="/admin" element={<AdminLayout/>}>
-        <Route path="/admin" element={<Dashboard />} />
-        <Route path="/admin/manage-users" element={<ManageUserAccount />} />
+        <Route path="" element={<Dashboard />} />
+        <Route path="manage-users" element={<ManageUserAccount />} />
     
       </Route>
-      {/* Company */}
-      <Route path="/company" element={<CompanyLayout />}>
-        <Route path="/company" element={<CompanyHome />} />
-        <Route path="/company/manage-applications" element={<ManageApplication />} />
-        <Route path="/company/manage-intern-feedbacks" element={<ManageInternFeedback />} />
+      {/* Recruiter */}
+      <Route path="/recruiter" element={<CompanyLayout />}>
+        <Route path="/recruiter" element={<CompanyHome />} />
+        <Route path="/recruiter/manage-applications" element={<ManageApplication />} />
+        <Route path="/recruiter/manage-intern-feedbacks" element={<ManageInternFeedback />} />
       </Route>
 
       <Route path="/university" element={<UniversityLayout />}>

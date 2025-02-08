@@ -3,14 +3,19 @@ import { cn } from "@/lib/utils";
 import internText from "@/assets/orgLogo/interntext.png";
 import internLogo from "@/assets/orgLogo/internlogoWhite.png";
 import homeIcon from "@/assets/sidebarIcon/homeicon.svg";
-import postIntern from "@/assets/sidebarIcon/postIntern.svg";
+import applicationIcon from "@/assets/sidebarIcon/appMng.svg";
 import logoutIcon from "@/assets/logouticon.svg";
-
+// import review from "@/assets/sidebarIcon/review.svg";
+// import salesIcon from "@/assets/sidebarIcon/sales.svg";
+// import internEvaluate from "@/assets/sidebarIcon/internEvaluate.svg";
 const UniversitySidebar = () => {
   const sidebarItems = [
     { label: "Trang chủ", href: "/university", icon: homeIcon },
-    { label: "Quản lý tin tuyển dụng", href: "/university/manage-job-posts", icon: postIntern },
-
+    { label: "Quản lý tin tuyển dụng", href: "/university/manage-job-posts", icon: applicationIcon },
+    // { label: "Đánh giá thực tập sinh", href: "/university/evaluation", icon: internEvaluate },
+    // // { label: "Phản hồi từ thực tập sinh", href: "/feedback", icon: feedback },
+    // { label: "Mua gói", href: "/university/plans", icon: salesIcon },
+    // { label: "Quản lý phản hồi của thực tập sinh", href: "/university/manage-intern-feedbacks", icon: review },
   ];
 
   return (
