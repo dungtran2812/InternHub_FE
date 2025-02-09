@@ -21,6 +21,7 @@ import UniversityHomePage from "@/containers/University/Home/Home";
 import ManageApplication from "@/containers/RecruiterDashboard/ManagaApplication/ManagaApplication";
 import ManageInternFeedback from "@/containers/RecruiterDashboard/ManageInternFeedback/ManageInternFeedback";
 import UniversityManageJobPost from "@/containers/University/ManageJobPost/ManageJobPost";
+import InternshipEvaluation from "@/containers/University/InternshipEvaluation/InternshipEvaluation";
 
 //luồng ruoting chính sẽ là component này
 const AppRoutes = () => {
@@ -56,6 +57,7 @@ const AppRoutes = () => {
       <Route path="/university" element={<UniversityLayout />}>
         <Route path="/university" element={<UniversityHomePage />} />
         <Route path="/university/manage-job-post" element={<UniversityManageJobPost />} />
+        <Route path="/university/evaluation" element={<InternshipEvaluation />} />
       </Route>
     </Routes>
   )
