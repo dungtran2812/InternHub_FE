@@ -11,7 +11,7 @@ import logoutIcon from "@/assets/logouticon.svg";
 const UniversitySidebar = () => {
   const sidebarItems = [
     { label: "Trang chủ", href: "/university", icon: homeIcon },
-    { label: "Quản lý tin tuyển dụng", href: "/university/manage-job-posts", icon: applicationIcon },
+    { label: "Quản lý tin tuyển dụng", href: "/university/manage-job-post", icon: applicationIcon },
     // { label: "Đánh giá thực tập sinh", href: "/university/evaluation", icon: internEvaluate },
     // // { label: "Phản hồi từ thực tập sinh", href: "/feedback", icon: feedback },
     // { label: "Mua gói", href: "/university/plans", icon: salesIcon },
