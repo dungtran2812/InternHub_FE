@@ -9,7 +9,7 @@ const JobPostDetail = () => {
                 Job Post Detail
             </div>
             <div className='grid grid-cols-12 gap-8 mt-10'>
-                <div className='col-span-9 border border-solid rounded-xl p-5 grid grid-cols-12 p-20'>
+                <div className='col-span-9 border border-solid rounded-xl p-5 grid grid-cols-12 '>
                     <div className='col-span-4 flex justify-center'>
                         <img src={VARIABLE.ALIPO_IMAGE} alt="logo" />
                     </div>
@@ -40,15 +40,15 @@ const JobPostDetail = () => {
                         </div>
                         <div className='text-blue-900'>
                             <div className='mt-5'>
-                                <span className='font-bold  font-bold'>Quantity:</span> 5
+                                <span className='font-bold'>Quantity:</span> 5
                             </div>
                             <div className='mt-5'>
-                                <span className='font-bold  font-bold'>Suitable majors:</span> Graphic Design
+                                <span className='font-bold  '>Suitable majors:</span> Graphic Design
                                 , Digital Art Design
                             </div>
                             {/* Job Description */}
                             <div className='mt-5'>
-                                <span className='font-bold  font-bold'>Job Description:
+                                <span className='font-bold '>Job Description:
                                     :</span>
                                 <div>
                                     {
@@ -62,7 +62,7 @@ const JobPostDetail = () => {
                             </div>
                             {/* Requirements */}
                             <div className='mt-5'>
-                                <span className='font-bold  font-bold'>Requirements:
+                                <span className='font-bold '>Requirements:
                                     :</span>
                                 <div>
                                     {
@@ -76,7 +76,7 @@ const JobPostDetail = () => {
                             </div>
                             {/* Benefits */}
                             <div className='mt-5'>
-                                <span className='font-bold  font-bold'>Benefits:
+                                <span className='font-bold'>Benefits:
                                     :</span>
                                 <div>
                                     {
