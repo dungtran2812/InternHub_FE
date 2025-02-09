@@ -5,6 +5,7 @@ import internLogo from "@/assets/orgLogo/internlogoWhite.png";
 import homeIcon from "@/assets/sidebarIcon/homeicon.svg";
 import applicationIcon from "@/assets/sidebarIcon/appMng.svg";
 import logoutIcon from "@/assets/logouticon.svg";
+import feedback from "@/assets/sidebarIcon/feedback.svg";
 // import review from "@/assets/sidebarIcon/review.svg";
 // import salesIcon from "@/assets/sidebarIcon/sales.svg";
 import internEvaluate from "@/assets/sidebarIcon/internEvaluate.svg";
@@ -13,7 +14,7 @@ const UniversitySidebar = () => {
     { label: "Trang chủ", href: "/university", icon: homeIcon },
     { label: "Quản lý tin tuyển dụng", href: "/university/manage-job-post", icon: applicationIcon },
     { label: "Đánh giá thực tập sinh", href: "/university/evaluation", icon: internEvaluate },
-    // // { label: "Phản hồi từ thực tập sinh", href: "/feedback", icon: feedback },
+    { label: "Phản hồi từ thực tập sinh", href: "/university/feedback", icon: feedback },
     // { label: "Mua gói", href: "/university/plans", icon: salesIcon },
     // { label: "Quản lý phản hồi của thực tập sinh", href: "/university/manage-intern-feedbacks", icon: review },
   ];
