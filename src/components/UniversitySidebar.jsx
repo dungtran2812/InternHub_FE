@@ -7,7 +7,6 @@ import applicationIcon from "@/assets/sidebarIcon/appMng.svg";
 import logoutIcon from "@/assets/logouticon.svg";
 import feedback from "@/assets/sidebarIcon/feedback.svg";
 import review from "@/assets/sidebarIcon/review.svg";
-import salesIcon from "@/assets/sidebarIcon/sales.svg";
 import internEvaluate from "@/assets/sidebarIcon/internEvaluate.svg";
 const UniversitySidebar = () => {
   const sidebarItems = [
