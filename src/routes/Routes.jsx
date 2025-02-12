@@ -25,17 +25,18 @@ import InternshipEvaluation from "@/containers/University/InternshipEvaluation/I
 import JobPostDetail from "@/containers/University/JobPostDetail/JobPostDetail";
 import UniversityInternFeedback from "@/containers/University/InternFeedback/InternFeedback";
 import ManageIntern from "@/containers/University/ManageIntern/ManageIntern";
+import JobSearchPage from "@/containers/JobSearchPage/JobSearchPage";
 
 //luồng ruoting chính sẽ là component này
 const AppRoutes = () => {
   return (
     <Routes>
-      <Route path="/login" element={<Login />}/>
-      <Route path="/signup" element={<SignUp />}/>
-      <Route path="/recruiter-register" element={<RecruiterRegister />}/>
+      <Route path="/login" element={<Login />} />
+      <Route path="/signup" element={<SignUp />} />
+      <Route path="/recruiter-register" element={<RecruiterRegister />} />
       <Route path="/" element={<HomeLayout />}>
-
         <Route path="/" element={<Home />} />
+        <Route path="/job-search" element={<JobSearchPage />}/>
         <Route path="/about" element={<AboutUsPage />} />
         <Route path="/blog" element={<BlogPage />} />
         <Route path="/companies" element={<CompanyList />} />
@@ -45,10 +46,10 @@ const AppRoutes = () => {
         <Route />
       </Route >
       {/* Admin */}
-      <Route path="/admin" element={<AdminLayout/>}>
+      <Route path="/admin" element={<AdminLayout />}>
         <Route path="" element={<Dashboard />} />
         <Route path="manage-users" element={<ManageUserAccount />} />
-    
+
       </Route>
       {/* Recruiter */}
       <Route path="/recruiter" element={<CompanyLayout />}>

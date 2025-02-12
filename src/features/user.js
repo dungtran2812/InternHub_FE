@@ -9,6 +9,12 @@ const initialState = {
   avatar: "",
   accessTokenExpired: false,
   email: "",
+  search: {
+    industry: null,
+    jobFunction: null,
+    location: null,
+    searchText: null
+  },
 };
 
 const userSlice = createSlice({
@@ -39,6 +45,9 @@ const userSlice = createSlice({
     setAccessTokenExpired(state, action) {
       state.accessToken = action.payload;
     },
+    setSearch(state, action) {
+      state.search = action.payload
+    },
     signout(state) {
       state.isLoggedIn = false;
       state.isFirstLogin = false;
@@ -50,7 +59,7 @@ const userSlice = createSlice({
       localStorage.removeItem("user");
     },
     setUser(state, action) {
-      const { username, avatar, role, email, accessToken, isLoggedIn, isFirstLogin, accessTokenExpired } = action.payload;
+      const { username, avatar, role, email, accessToken, isLoggedIn, isFirstLogin, accessTokenExpired, search } = action.payload;
       state.username = username;
       state.avatar = avatar;
       state.role = role;
@@ -59,6 +68,7 @@ const userSlice = createSlice({
       state.isLoggedIn = isLoggedIn;
       state.isFirstLogin = isFirstLogin;
       state.accessTokenExpired = accessTokenExpired;
+      state.search = search;
     }
   },
 });
@@ -74,6 +84,7 @@ export const {
   setRole,
   signout,
   setAccessTokenExpired,
+  setSearch
 } = userSlice.actions;
 
 export default userSlice.reducer;

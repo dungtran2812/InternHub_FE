@@ -4,7 +4,6 @@ import {
   CarouselContent,
   CarouselItem,
 } from "@/components/ui/carousel"
-import { Card, CardContent } from "@/components/ui/card"
 import carouselDot from "@/assets/carouselDot.svg"
 
 // Define your recruiters data
@@ -30,7 +29,6 @@ const recruiters = [
 export default function RecruiterCarousel() {
   const [api, setApi] = useState(null)
   const [current, setCurrent] = useState(0)
-  const totalSlides = recruiters.length // One card per slide
 
   useEffect(() => {
     if (!api) {

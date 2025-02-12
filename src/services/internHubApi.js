@@ -38,7 +38,34 @@ const internHubApi = createApi({
         url: endpoints.REVIEW,
         method: 'GET',
       }),
-    })
+    }),
+    getJobFunction: builder.query({
+      query: () => ({
+        url: endpoints.JOB_FUNCTION,
+        method: 'GET',
+      }),
+    }),
+    getJobFunctionById: builder.query({
+      query: (id) => ({
+        url: `${endpoints.JOB_FUNCTION}/${id}`,
+        method: 'GET',
+        data: id,
+      }),
+    }),
+    getIndustry: builder.query({
+      query: () => ({
+        url: endpoints.INDUSTRY,
+        method: 'GET',
+      }),
+    }),
+    getIndustryById: builder.query({
+      query: (id) => ({
+        url: `${endpoints.INDUSTRY}/${id}`,
+        method: 'GET',
+        data: id,
+      }),
+
+    }),
   }),
 });
 
@@ -47,7 +74,11 @@ export const {
   useSignupMutation,
   useGetCompanyByIdQuery,
   useGetAllCompanyQuery,
-  useGetAllReviewQuery
+  useGetAllReviewQuery,
+  useGetJobFunctionQuery,
+  useGetIndustryQuery,
+  useGetJobFunctionByIdQuery,
+  useGetIndustryByIdQuery,
 } = internHubApi;
 
 export default internHubApi;
