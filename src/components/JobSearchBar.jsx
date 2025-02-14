@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button"
 import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from "@/components/ui/command"
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
 import { Input } from "@/components/ui/input"
-import { useGetIndustryQuery, useGetJobFunctionQuery } from "@/services/internHubApi"
+import { useGetIndustryQuery, useGetJobFilterQuery, useGetJobFunctionQuery } from "@/services/internHubApi"
 import { useNavigate } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux"
 import { setSearch } from "@/features/user"
@@ -24,27 +24,31 @@ export default function JobSearchBar() {
   const { data: industries, isLoading: isLoadingIndustry, error: industryError } = useGetIndustryQuery();
   const [industryOpen, setIndustryOpen] = React.useState(false);
   const [industryValue, setIndustryValue] = React.useState(search.industry);
-
+  
   const [jobFunctionOpen, setJobFunctionOpen] = React.useState(false);
   const [jobFunctionValue, setJobFunctionValue] = React.useState(search.jobFunction);
-
+  
   const [locationOpen, setLocationOpen] = React.useState(false);
   const [locationValue, setLocationValue] = React.useState(search.location);
   
   const [searchTextValue, setSearchTextValue] = React.useState(search.searchText)
   React.useEffect(() => {
+    setIndustryValue(industryValue)
+    setJobFunctionValue(jobFunctionValue)
+    setLocationValue(locationValue)
+    setSearchTextValue(searchTextValue)
+  }, [locationValue, jobFunctionValue, industryValue, dispatch, searchTextValue])
+
+  const handleSearch = () => {
     dispatch(setSearch({
       industry: industryValue,
       jobFunction: jobFunctionValue,
       location: locationValue,
       searchText: searchTextValue
     }))
-  }, [locationValue, jobFunctionValue, industryValue, dispatch, searchTextValue])
-
-  const handleSearch = () => {
     navigation(`/job-search`)
-    console.log("first")
   };
+
   console.log(search)
   return (
     <div className="max-w-4xl p-4">

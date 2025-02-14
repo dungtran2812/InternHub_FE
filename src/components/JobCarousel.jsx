@@ -1,5 +1,5 @@
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel"
-import { JobCard } from "./JobCard"
+import JobCard from "./JobCard"
 
 const SAMPLE_JOBS = [
   {
