@@ -6,12 +6,18 @@ import PasswordIcon from '../../assets/loginPageIcon/PasswordIcon.svg';
 import { useLoginMutation } from '@/services/internHubApi';
 import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
-import { Link } from 'react-router-dom';
-import { setAccessToken, setEmail, setUsername } from '@/features/user';
+import { Link, useNavigate } from 'react-router-dom';
+import { setAccessToken, setEmail, setFullname, setUsername } from '@/features/user';
 import { useDispatch, useSelector } from 'react-redux';
+import { useToast } from '@/hooks/use-toast';
+import { useEffect, useState } from 'react';
 
 const Login = () => {
   const dispatch = useDispatch();
+  const { toast } = useToast();
+  const navigate = useNavigate()
+  const [loginSuccess, SetLoginSuccess] = useState(false)
+  const fullname = useSelector((state) => state.rootReducer.user.fullname)
   const [login, { isLoading }] = useLoginMutation();
   const username = useSelector((state) => state.rootReducer.user.username)
   const validationSchema = Yup.object({
@@ -32,16 +38,31 @@ const Login = () => {
           dispatch(setEmail(res.email))
           dispatch(setEmail(res.role))
           dispatch(setAccessToken(res.token))
+          SetLoginSuccess(true)
         });
       console.log('Đăng nhập thành công:', response);
     } catch (error) {
       console.error('Đăng nhập thất bại:', error);
+      toast({
+        variant: "destructive",
+        title: "Đăng nhập thất bại",
+        description: `Error: ${error.message || 'Có lỗi xảy ra'}`,
+      });
     }
   };
 
+  useEffect(() => {
+    if (loginSuccess) {
+      toast({
+        title: "Đăng Nhập Thành Công",
+        description: `Xin chào ${username}, cảm ơn đã sử dụng dịch vụ của internhub`,
+      })
+      navigate("/")
+    }
+  }, [username, navigate, loginSuccess, toast])
+
   return (
     <div className="flex h-screen">
-      {console.log(username)}
       {/* Phần trái - Form đăng nhập */}
       <div className="w-1/2 p-12 flex flex-col justify-between">
         <div>
