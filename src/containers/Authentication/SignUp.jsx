@@ -29,6 +29,7 @@ const SignUp = () => {
       .oneOf([Yup.ref("password"), null], "Passwords must match")
       .required("Required"),
     agreedToTerms: Yup.boolean().oneOf([true], "You must accept the terms and conditions"),
+    gender: Yup.string().required("Required"),
   })
 
   const handleGoogleSignUp = () => {
@@ -43,10 +44,11 @@ const SignUp = () => {
         setSignupSucess(true)
         dispatch(setFullname(values.fullName))
       }).catch ((error) => {
+        console.log(error)
       toast({
         variant: "destructive",
         title: "Đăng ký thất bại",
-        description: `Error: ${error}`,
+        description: `Error: ${error.data.message}`,
       })
     })
   }
@@ -103,6 +105,7 @@ const SignUp = () => {
                 password: "",
                 confirmPassword: "",
                 agreedToTerms: false,
+                gender: "",
               }}
               validationSchema={validationSchema}
               onSubmit={(values) => handleSubmit(values)}
@@ -140,6 +143,20 @@ const SignUp = () => {
                     />
                     {errors.email && touched.email && (
                       <div className="text-red-500 text-sm mt-1 absolute">{errors.email}</div>
+                    )}
+                  </div>
+
+                  <div className="flex gap-4 mb-6">
+                    <div className="flex items-center">
+                      <Field type="radio" name="gender" value="true" className="mr-2" />
+                      <label className="text-sm text-gray-600">Male</label>
+                    </div>
+                    <div className="flex items-center">
+                      <Field type="radio" name="gender" value="false" className="mr-2" />
+                      <label className="text-sm text-gray-600">Female</label>
+                    </div>
+                    {errors.gender && touched.gender && (
+                      <div className="text-red-500 text-sm mt-1">{errors.gender}</div>
                     )}
                   </div>
 

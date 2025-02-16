@@ -46,7 +46,7 @@ const Login = () => {
       toast({
         variant: "destructive",
         title: "Đăng nhập thất bại",
-        description: `Error: ${error.message || 'Có lỗi xảy ra'}`,
+        description: `Error: ${error.data.message || 'Có lỗi xảy ra'}`,
       });
     }
   };

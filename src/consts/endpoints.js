@@ -1,6 +1,6 @@
 const endpoints = {
   LOGIN: '/auth/login',
-  SIGNUP: '/auth/signup',
+  SIGNUP: '/auth/student/signup',
   COMPANY: '/company',
   REVIEW: '/review',
   JOB_FUNCTION: '/job-function',
