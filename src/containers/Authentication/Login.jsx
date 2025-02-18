@@ -6,11 +6,12 @@ import PasswordIcon from '../../assets/loginPageIcon/PasswordIcon.svg';
 import { useLoginMutation } from '@/services/internHubApi';
 import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, redirect, useNavigate } from 'react-router-dom';
 import { setAccessToken, setEmail, setFullname, setUsername } from '@/features/user';
 import { useDispatch, useSelector } from 'react-redux';
 import { useToast } from '@/hooks/use-toast';
 import { useEffect, useState } from 'react';
+import { GOOGLE_AUTH_URL } from '@/consts/urlconst';
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -26,7 +27,7 @@ const Login = () => {
   });
 
   const handleGoogleLogin = () => {
-    // Implement Google login logic
+    window.location.href = GOOGLE_AUTH_URL
   };
 
   const handleSubmit = async (values) => {
