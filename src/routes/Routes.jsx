@@ -28,11 +28,13 @@ import ManageIntern from "@/containers/University/ManageIntern/ManageIntern";
 import JobSearchPage from "@/containers/JobSearchPage/JobSearchPage";
 import CompanyDetail from "@/containers/CompanyDetail/CompanyDetail";
 import RecruiterDetail from "@/containers/RecruiterDashboard/RecruiterDetail/RecruiterDetail";
+import OAuth2RedirectHandler from "@/components/OAuth2RedirectHandler";
 //luồng ruoting chính sẽ là component này
 const AppRoutes = () => {
   return (
     <Routes>
       <Route path="/login" element={<Login />} />
+      <Route path="/oauth2/redirect" element={<OAuth2RedirectHandler/>}/>
       <Route path="/signup" element={<SignUp />} />
       <Route path="/recruiter-register" element={<RecruiterRegister />} />
       <Route path="/" element={<HomeLayout />}>
