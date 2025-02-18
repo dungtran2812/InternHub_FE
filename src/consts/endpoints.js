@@ -5,7 +5,9 @@ const endpoints = {
   REVIEW: '/review',
   JOB_FUNCTION: '/job-function',
   INDUSTRY: '/industry',
-  SEARCH_JOB: '/job/search'
+  JOB: '/job',
+  SEARCH_JOB: '/job/search',
+  RECRUITER: '/recruiter'
 }
 export default endpoints
 

@@ -65,6 +65,12 @@ const internHubApi = createApi({
         data: id,
       }),
     }),
+    getAllJob: builder.query({
+      query: () => ({
+        url: endpoints.JOB,
+        method: 'GET',
+      }),
+    }),
     getJobFilter: builder.query({
       query: ({ searchText, jobFunctionId, industryId, page, pageSize }) => {
         const params = new URLSearchParams();
@@ -80,6 +86,12 @@ const internHubApi = createApi({
         };
       },
     }),
+    getAllRecruiter: builder.query({
+      query: () => ({
+        url: endpoints.RECRUITER,
+        method: 'GET',
+      }),
+    }),
   }),
 })
 
@@ -93,7 +105,9 @@ export const {
   useGetIndustryQuery,
   useGetJobFunctionByIdQuery,
   useGetIndustryByIdQuery,
-  useGetJobFilterQuery
+  useGetJobFilterQuery,
+  useGetAllJobQuery,
+  useGetAllRecruiterQuery
 } = internHubApi;
 
 export default internHubApi;
