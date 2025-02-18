@@ -5,9 +5,9 @@ import FreePlanCard from '@/components/FreePlanCard'
 import RecruiterCard from '@/components/RecruiterCard'
 import HomeBanner from '@/components/HomeBanner'
 import JobFunctionCarousel from '@/components/JobFunctionCarousel'
-import { JobCarousel } from '@/components/JobCarousel'
 import RecruiterCarousel from '@/components/RecruiterCarousel'
 import CareerConsultingCard from '@/components/CareerConsultingCard'
+import JobCarousel from '@/components/JobCarousel'
 
 const Home = () => {
   return (
