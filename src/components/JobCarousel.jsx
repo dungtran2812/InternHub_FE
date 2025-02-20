@@ -4,6 +4,7 @@ import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious
 import { useGetAllJobQuery } from "@/services/internHubApi"
 import JobCard from "./JobCard"
 import { Card, CardContent } from "./ui/card"
+import { Link } from "react-router-dom"
 
 const JOBS_PER_PAGE = 9
 
@@ -67,9 +68,9 @@ export default function JobCarousel() {
               <CarouselItem key={pageIndex} className="w-full">
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 p-1">
                   {pageJobs.map((job) => (
-                    <div key={job.id} className="animate-in fade-in">
+                    <Link to={"job-detail"} key={job.id} className="animate-in fade-in">
                       <JobCard job={job} />
-                    </div>
+                    </Link>
                   ))}
                 </div>
               </CarouselItem>
