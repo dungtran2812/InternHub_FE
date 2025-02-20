@@ -29,6 +29,7 @@ import JobSearchPage from "@/containers/JobSearchPage/JobSearchPage";
 import CompanyDetail from "@/containers/CompanyDetail/CompanyDetail";
 import RecruiterDetail from "@/containers/RecruiterDashboard/RecruiterDetail/RecruiterDetail";
 import OAuth2RedirectHandler from "@/components/OAuth2RedirectHandler";
+import CreateCV from "@/containers/CreateCV";
 //luồng ruoting chính sẽ là component này
 const AppRoutes = () => {
   return (
@@ -44,9 +45,10 @@ const AppRoutes = () => {
         <Route path="/blog" element={<BlogPage />} />
         <Route path="/companies" element={<CompanyList />} />
         <Route path="/employee-profile" element={<EmployeeProfile />} />
-        <Route path="/job-detail" element={<CompanyProfile />} />
+        {/* <Route path="/job-detail" element={<CompanyProfile />} /> */}
         <Route path="/company-detail" element={<CompanyDetail />} />
-        <Route path="/recruiter-detail" element={<RecruiterDetail />} />
+        <Route path="/job-detail" element={<RecruiterDetail />} />
+        <Route path="/create-cv" element={<CreateCV />} />
         <Route />
         <Route />
       </Route >
