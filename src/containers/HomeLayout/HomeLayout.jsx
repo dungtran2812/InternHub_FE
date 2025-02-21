@@ -7,7 +7,9 @@ const HomeLayout = () => {
 		<>
 			<Header />
 			<Outlet />
-			<Footer />
+			{
+				!location.pathname.includes('create-cv') && <Footer />
+			}
 		</>
 	);
 };
