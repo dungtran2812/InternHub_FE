@@ -8,7 +8,8 @@ const EmployeeProfile = () => {
     };
 
     return (
-        <div className="container mx-auto mt-10">
+       <div className="mx-5">
+         <div className="container mx-auto mt-10">
             <div className="grid grid-cols-12 gap-4">
                 <div className="col-span-8 border border-solid p-5 rounded-lg">
                     <div className="font-bold text-xl">
@@ -85,6 +86,7 @@ const EmployeeProfile = () => {
                 </div>
             </div>
         </div>
+       </div>
     )
 }
 
