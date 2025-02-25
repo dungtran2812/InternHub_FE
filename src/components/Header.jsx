@@ -6,11 +6,18 @@ import {
   NavigationMenuList,
 } from "@/components/ui/navigation-menu";
 import { cn } from "@/lib/utils";
+import avt_default from "@/assets/avt_default.png"
 import internlogoWhite from "@/assets/orgLogo/internlogoWhite.png";
 import internText from "@/assets/orgLogo/interntext.png";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { signout } from "@/features/user";
 
 const Header = () => {
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
+  const accessToken = useSelector((state) => state.rootReducer.user.accessToken)
+  const avatar = useSelector((state) => state.rootReducer.user.avatar)
   const navItems = [
     { label: "Việc làm", href: "/jobs" },
     { label: "Hồ sơ & CV", href: "/employee-profile" },
@@ -18,6 +25,11 @@ const Header = () => {
     { label: "Blog", href: "/blog" },
     { label: "Giới thiệu", href: "/about" },
   ];
+
+  const handleLogout = () => {
+    dispatch(signout());
+    navigate('/login')
+  };
 
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-[#1E34C0] text-white">
@@ -65,24 +77,42 @@ const Header = () => {
               Dành cho Nhà Tuyển Dụng
             </Button>
           </Link>
-          <Button
-            variant="outline"
-            className="hidden bg-white text-blue-600 hover:bg-blue-50 hover:text-blue-700 md:flex"
-            style={{ fontSize: '14px', padding: '8px 16px', borderRadius: '30px', background: '#6F73E9', color: 'white', borderColor: '#6F73E9' }}
-          >
-            <Link to='/login'>
-              Đăng Nhập
-            </Link>
-          </Button>
-          <Button
-            className="hidden text-white underline md:flex"
-            style={{ fontSize: '14px', padding: '8px 16px', background: 'transparent' }}
-          >
-            <Link to='/signup'>
-              Đăng Ký
-            </Link>
-
-          </Button>
+          {accessToken ? (
+            <div className="flex items-center">
+              <img
+                src={avatar ? avatar : avt_default}
+                alt="User Avatar"
+                className="h-10 w-10 rounded-full"
+              />
+              <Button
+                className="ml-4 text-white underline"
+                onClick={handleLogout}
+                style={{ fontSize: '14px', padding: '8px 16px', background: 'transparent', border: 'none' }}
+              >
+                Đăng Xuất
+              </Button>
+            </div>
+          ) : (
+            <>
+              <Button
+                variant="outline"
+                className="hidden bg-white text-blue-600 hover:bg-blue-50 hover:text-blue-700 md:flex"
+                style={{ fontSize: '14px', padding: '8px 16px', borderRadius: '30px', background: '#6F73E9', color: 'white', borderColor: '#6F73E9' }}
+              >
+                <Link to='/login'>
+                  Đăng Nhập
+                </Link>
+              </Button>
+              <Button
+                className="hidden text-white underline md:flex"
+                style={{ fontSize: '14px', padding: '8px 16px', background: 'transparent' }}
+              >
+                <Link to='/signup'>
+                  Đăng Ký
+                </Link>
+              </Button>
+            </>
+          )}
 
           {/* Mobile Menu Button */}
           <Button

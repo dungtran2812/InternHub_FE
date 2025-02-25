@@ -6,8 +6,8 @@ import PasswordIcon from '../../assets/loginPageIcon/PasswordIcon.svg';
 import { useLoginMutation } from '@/services/internHubApi';
 import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
-import { Link, redirect, useNavigate } from 'react-router-dom';
-import { setAccessToken, setEmail, setFullname, setUsername } from '@/features/user';
+import { Link, useNavigate } from 'react-router-dom';
+import { setAccessToken, setAvatar, setEmail, setFullname, setRole, setUserId, setUsername } from '@/features/user';
 import { useDispatch, useSelector } from 'react-redux';
 import { useToast } from '@/hooks/use-toast';
 import { useEffect, useState } from 'react';
@@ -20,7 +20,6 @@ const Login = () => {
   const [loginSuccess, SetLoginSuccess] = useState(false)
   const fullname = useSelector((state) => state.rootReducer.user.fullname)
   const [login, { isLoading }] = useLoginMutation();
-  const username = useSelector((state) => state.rootReducer.user.username)
   const validationSchema = Yup.object({
     email: Yup.string().email('Email không hợp lệ').required('Bắt buộc nhập'),
     password: Yup.string().required('Bắt buộc nhập')
@@ -35,10 +34,12 @@ const Login = () => {
       console.log('dữ liệu', values);
       const response = await login(values).unwrap()
         .then(res => {
-          dispatch(setUsername(res.username))
-          dispatch(setEmail(res.email))
-          dispatch(setEmail(res.role))
+          dispatch(setEmail(res.user.email))
+          dispatch(setAvatar(res.user.avtUrl))
+          dispatch(setRole(res.user.role))
           dispatch(setAccessToken(res.token))
+          dispatch(setUserId(res.user.id))
+          dispatch(setFullname(res.user.fullName))
           SetLoginSuccess(true)
         });
       console.log('Đăng nhập thành công:', response);
@@ -56,11 +57,11 @@ const Login = () => {
     if (loginSuccess) {
       toast({
         title: "Đăng Nhập Thành Công",
-        description: `Xin chào ${username}, cảm ơn đã sử dụng dịch vụ của internhub`,
+        description: `Xin chào ${fullname}, cảm ơn đã sử dụng dịch vụ của internhub`,
       })
       navigate("/")
     }
-  }, [username, navigate, loginSuccess, toast])
+  }, [fullname, navigate, loginSuccess, toast])
 
   return (
     <div className="flex h-screen">
