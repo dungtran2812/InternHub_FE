@@ -24,13 +24,13 @@ export default function JobSearchBar() {
   const { data: industries, isLoading: isLoadingIndustry, error: industryError } = useGetIndustryQuery();
   const [industryOpen, setIndustryOpen] = React.useState(false);
   const [industryValue, setIndustryValue] = React.useState(search.industry);
-  
+
   const [jobFunctionOpen, setJobFunctionOpen] = React.useState(false);
   const [jobFunctionValue, setJobFunctionValue] = React.useState(search.jobFunction);
-  
+
   const [locationOpen, setLocationOpen] = React.useState(false);
   const [locationValue, setLocationValue] = React.useState(search.location);
-  
+
   const [searchTextValue, setSearchTextValue] = React.useState(search.searchText)
   React.useEffect(() => {
     setIndustryValue(industryValue)
