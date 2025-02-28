@@ -68,7 +68,7 @@ export default function JobCarousel() {
               <CarouselItem key={pageIndex} className="w-full">
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 p-1">
                   {pageJobs.map((job) => (
-                    <Link to={"job-detail"} key={job.id} className="animate-in fade-in">
+                    <Link to={`job-detail/${job.id}`} key={job.id} className="animate-in fade-in">
                       <JobCard job={job} />
                     </Link>
                   ))}

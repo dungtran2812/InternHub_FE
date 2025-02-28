@@ -1,10 +1,16 @@
 
 import CompanyJobCard from '@/components/CompanyDetail/CompanyJobCard';
+import { useGetJobByIdQuery } from '@/services/internHubApi';
 import {
   FlagOutlined, ShareAltOutlined, MoneyCollectOutlined, HeartOutlined, ScheduleOutlined
 } from '@ant-design/icons';
 import { Carousel } from "flowbite-react";
+import { useParams } from 'react-router-dom';
 const RecruiterDetail = () => {
+  const {id} = useParams();
+  const {data:job , isLoading, isError } = useGetJobByIdQuery(id)
+  console.log("job: ", job)
+  console.log("isError: ", isError)
   return (
     <div className="mx-5">
       <div className="container mx-auto justify-items-center mt-5">
@@ -14,12 +20,12 @@ const RecruiterDetail = () => {
           </div>
           <div className="mt-10 grid grid-cols-12 gap-5">
             <div className="col-span-2">
-              <img src={recruiter_detail.company_avatar} alt="" />
+              <img src={job?.company?.backgroundCompany} alt="" />
             </div>
             <div className="col-span-7 flex items-center">
               <div>
                 <div className="text-xl font-semibold">
-                  {recruiter_detail.name} - {recruiter_detail.link}
+                  {job?.company?.name} - {job?.company?.website}
                 </div>
                 <div className="mt-2">
                   {recruiter_detail.followers}
@@ -43,7 +49,7 @@ const RecruiterDetail = () => {
             </div>
             <div className="mt-10">
               <span className="font-semibold">Lĩnh vực: </span>
-              {recruiter_detail.field}
+              {/* {job.industry.name} */}
             </div>
             <div className="mt-2">
               <span className="font-semibold">Liên hệ: </span>
@@ -51,7 +57,7 @@ const RecruiterDetail = () => {
             </div>
             <div className="mt-2">
               <span className="font-semibold">Địa chỉ: </span>
-              {recruiter_detail.address}
+              {job?.company?.address}
             </div>
           </div>
           {/*Mô tả */}
