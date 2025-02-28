@@ -2,14 +2,12 @@ import CompanyJobCard from "@/components/CompanyDetail/CompanyJobCard";
 import VARIABLE from "@/consts/variable";
 import { useGetAllJobQuery, useGetJobByIdQuery } from "@/services/internHubApi";
 import { CheckOutlined, FieldTimeOutlined, HeartOutlined, DollarOutlined, ScanOutlined, UsergroupAddOutlined } from "@ant-design/icons";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 const JobDetail = () => {
   const { id } = useParams();
   const { data: job, isLoading, isError } = useGetJobByIdQuery(id)
   const { data: jobs } = useGetAllJobQuery("", "", job?.industry?.id, "", "")
-  console.log("job: ", job)
-  console.log("jobs: ", jobs?.filter(item => item?.industry?.id === job?.industry?.id))
   const jobFilterByIndustry = jobs?.filter(item => item?.industry?.id === job?.industry?.id);
   return (
     <div className="mx-">
@@ -143,6 +141,9 @@ const JobDetail = () => {
                 </div>
                 {/* Việc làm liên quan */}
                 <div>
+                  <div className="my-5 text-xl font-semibold">
+                  Việc làm liên quan
+                  </div>
                   {
                     jobFilterByIndustry?.map((item) => (
                       <div key={item.id}>
@@ -195,7 +196,11 @@ const JobDetail = () => {
                     job?.company?.address
                   }
                 </div>
-
+              </div>
+              <div className="text-center mt-5">
+              <Link to={`/company/${job?.company?.id}`} className="  text-blue-600 ">
+              Xem trang công ty
+              </Link>
               </div>
             </div>
             {/* Thông tin chung */}
