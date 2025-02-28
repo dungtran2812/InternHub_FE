@@ -7,7 +7,7 @@ import { useLoginMutation } from '@/services/internHubApi';
 import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
 import { Link, useNavigate } from 'react-router-dom';
-import { setAccessToken, setAvatar, setEmail, setFullname, setRole, setUserId, setUsername } from '@/features/user';
+import { setAccessToken, setAvatar, setEmail, setFullname, setGender, setRole, setUserId, setUsername } from '@/features/user';
 import { useDispatch, useSelector } from 'react-redux';
 import { useToast } from '@/hooks/use-toast';
 import { useEffect, useState } from 'react';
@@ -40,6 +40,7 @@ const Login = () => {
           dispatch(setAccessToken(res.token))
           dispatch(setUserId(res.user.id))
           dispatch(setFullname(res.user.fullName))
+          dispatch(setGender(res.gender))
           SetLoginSuccess(true)
         });
       console.log('Đăng nhập thành công:', response);

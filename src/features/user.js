@@ -11,6 +11,7 @@ const initialState = {
   avatar: "",
   accessTokenExpired: false,
   email: "",
+  gender: "", // Thêm field gender
   search: {
     industry: null,
     jobFunction: null,
@@ -50,11 +51,14 @@ const userSlice = createSlice({
     setEmail(state, action) {
       state.email = action.payload;
     },
+    setGender(state, action) {
+      state.gender = action.payload;
+    },
     setAccessTokenExpired(state, action) {
       state.accessToken = action.payload;
     },
     setSearch(state, action) {
-      state.search = action.payload
+      state.search = action.payload;
     },
     signout(state) {
       state.isLoggedIn = false;
@@ -62,12 +66,13 @@ const userSlice = createSlice({
       state.accessToken = "";
       state.username = "";
       state.avatar = "";
-      state.role = [];
+      state.role = "";
       state.email = "";
+      state.gender = ""; // Reset gender khi đăng xuất
       localStorage.removeItem("user");
     },
     setUser(state, action) {
-      const { username, avatar, role, email, accessToken, isLoggedIn, isFirstLogin, accessTokenExpired, search } = action.payload;
+      const { username, avatar, role, email, accessToken, isLoggedIn, isFirstLogin, accessTokenExpired, gender, search } = action.payload;
       state.username = username;
       state.avatar = avatar;
       state.role = role;
@@ -76,6 +81,7 @@ const userSlice = createSlice({
       state.isLoggedIn = isLoggedIn;
       state.isFirstLogin = isFirstLogin;
       state.accessTokenExpired = accessTokenExpired;
+      state.gender = gender; // Cập nhật gender
       state.search = search;
     }
   },
@@ -92,6 +98,7 @@ export const {
   setUsername,
   setEmail,
   setRole,
+  setGender, // Export action mới
   signout,
   setAccessTokenExpired,
   setSearch

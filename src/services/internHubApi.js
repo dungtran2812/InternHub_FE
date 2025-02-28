@@ -92,6 +92,13 @@ const internHubApi = createApi({
         method: 'GET',
       }),
     }),
+    getJobById: builder.query({
+      query: (id) => ({
+        url: `${endpoints.JOB}/${id}`,
+        method: 'GET',
+        data: id,
+      }),
+    }),
   }),
 })
 
@@ -107,7 +114,8 @@ export const {
   useGetIndustryByIdQuery,
   useGetJobFilterQuery,
   useGetAllJobQuery,
-  useGetAllRecruiterQuery
+  useGetAllRecruiterQuery,
+  useGetJobByIdQuery
 } = internHubApi;
 
 export default internHubApi;
