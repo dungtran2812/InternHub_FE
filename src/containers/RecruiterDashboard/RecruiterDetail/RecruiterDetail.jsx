@@ -1,31 +1,31 @@
 
 import CompanyJobCard from '@/components/CompanyDetail/CompanyJobCard';
-import { useGetJobByIdQuery } from '@/services/internHubApi';
+import { useGetAllJobQuery, useGetCompanyByIdQuery } from '@/services/internHubApi';
 import {
   FlagOutlined, ShareAltOutlined, MoneyCollectOutlined, HeartOutlined, ScheduleOutlined
 } from '@ant-design/icons';
 import { Carousel } from "flowbite-react";
 import { useParams } from 'react-router-dom';
 const RecruiterDetail = () => {
-  const {id} = useParams();
-  const {data:job , isLoading, isError } = useGetJobByIdQuery(id)
-  console.log("job: ", job)
-  console.log("isError: ", isError)
+  const { id } = useParams();
+  const { data: company, isLoading, isError } = useGetCompanyByIdQuery(id)
+  const { data: jobs } = useGetAllJobQuery()
+  const jobsFilter = jobs?.filter(item => item?.company?.id === id)
   return (
     <div className="mx-5">
       <div className="container mx-auto justify-items-center mt-5">
         <div className="border border-solid p-5 rounded-xl w-[1180px]">
           <div className="">
-            <img src="https://www.vietnamworks.com/_next/image?url=https%3A%2F%2Fimages02.vietnamworks.com%2Fcompanyprofile%2Fbanner-default-company.png&w=3840&q=75" alt="" />
+            <img src={company?.backgroundCompany} className='w-[1138px] h-[350px]' alt="" />
           </div>
           <div className="mt-10 grid grid-cols-12 gap-5">
             <div className="col-span-2">
-              <img src={job?.company?.backgroundCompany} alt="" />
+              <img src={company?.logoCompany} alt="" />
             </div>
             <div className="col-span-7 flex items-center">
               <div>
                 <div className="text-xl font-semibold">
-                  {job?.company?.name} - {job?.company?.website}
+                  {company?.name} - {company?.website}
                 </div>
                 <div className="mt-2">
                   {recruiter_detail.followers}
@@ -47,9 +47,15 @@ const RecruiterDetail = () => {
             <div className="text-3xl font-semibold mt-10">
               Về chúng tôi
             </div>
-            <div className="mt-10">
+            <div className="mt-10 flex gap-2">
               <span className="font-semibold">Lĩnh vực: </span>
-              {/* {job.industry.name} */}
+              {
+                company?.industries?.map((item) => (
+                  <div key={item?.id} className="mr-2">
+                    {item?.name}
+                  </div>
+                ))
+              }
             </div>
             <div className="mt-2">
               <span className="font-semibold">Liên hệ: </span>
@@ -57,17 +63,13 @@ const RecruiterDetail = () => {
             </div>
             <div className="mt-2">
               <span className="font-semibold">Địa chỉ: </span>
-              {job?.company?.address}
+              {company?.address}
             </div>
           </div>
           {/*Mô tả */}
           <div className="mt-10">
             {
-              recruiter_detail.descriptons.map((item, index) => (
-                <div className="mt-10" key={index}>
-                  {item}
-                </div>
-              ))
+              company?.description
             }
           </div>
           <div className="mt-10 justify-items-center">
@@ -134,53 +136,23 @@ const RecruiterDetail = () => {
           </div>
           {/* Vị trí đang tuyển dụng */}
           <div className='font-semibold text-3xl my-10'>
-          Vị trí đang tuyển dụng
+            Vị trí đang tuyển dụng
           </div>
-          <CompanyJobCard
-            img={"https://images.vietnamworks.com/pictureofcompany/89/11125541.png"}
-            job_title={"PM Dự Án (Hệ Thống Quản Lý Hồ Sơ Cứng) - Khối Vận Hành"}
-            link={"Https://tuyendung.vpbank.com.vn/"}
-            company_name={"VPBank"}
-            salary={0}
-            location={"Ha Noi"}
-            updatedAt={"20/11/2024"}
-          />
-          <CompanyJobCard
-            img={"https://images.vietnamworks.com/pictureofcompany/89/11125541.png"}
-            job_title={"PM Dự Án (Hệ Thống Quản Lý Hồ Sơ Cứng) - Khối Vận Hành"}
-            link={"Https://tuyendung.vpbank.com.vn/"}
-            company_name={"VPBank"}
-            salary={0}
-            location={"Ha Noi"}
-            updatedAt={"20/11/2024"}
-          />
-          <CompanyJobCard
-            img={"https://images.vietnamworks.com/pictureofcompany/89/11125541.png"}
-            job_title={"PM Dự Án (Hệ Thống Quản Lý Hồ Sơ Cứng) - Khối Vận Hành"}
-            link={"Https://tuyendung.vpbank.com.vn/"}
-            company_name={"VPBank"}
-            salary={0}
-            location={"Ha Noi"}
-            updatedAt={"20/11/2024"}
-          />
-          <CompanyJobCard
-            img={"https://images.vietnamworks.com/pictureofcompany/89/11125541.png"}
-            job_title={"PM Dự Án (Hệ Thống Quản Lý Hồ Sơ Cứng) - Khối Vận Hành"}
-            link={"Https://tuyendung.vpbank.com.vn/"}
-            company_name={"VPBank"}
-            salary={0}
-            location={"Ha Noi"}
-            updatedAt={"20/11/2024"}
-          />
-          <CompanyJobCard
-            img={"https://images.vietnamworks.com/pictureofcompany/89/11125541.png"}
-            job_title={"PM Dự Án (Hệ Thống Quản Lý Hồ Sơ Cứng) - Khối Vận Hành"}
-            link={"Https://tuyendung.vpbank.com.vn/"}
-            company_name={"VPBank"}
-            salary={0}
-            location={"Ha Noi"}
-            updatedAt={"20/11/2024"}
-          />
+          {
+            jobsFilter?.map((item) => (
+              <div key={item.id}>
+                <CompanyJobCard
+                  company_name={item?.company?.name}
+                  link={item?.company?.website}
+                  location={item?.location}
+                  salary={item?.salary === "0" ? <div className="text-blue-600">Thoả thuận</div> : ""}
+                  img={item?.company?.logoCompany}
+                  job_title={item?.jobTitle}
+                  updatedAt={"Cập nhật 5 giờ trước"}
+                />
+              </div>
+            ))
+          }
         </div>
       </div>
     </div>
