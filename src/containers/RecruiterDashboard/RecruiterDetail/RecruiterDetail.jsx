@@ -47,15 +47,19 @@ const RecruiterDetail = () => {
             <div className="text-3xl font-semibold mt-10">
               Về chúng tôi
             </div>
-            <div className="mt-10 flex gap-2">
+            <div className="mt-10 flex ">
               <span className="font-semibold">Lĩnh vực: </span>
-              {
-                company?.industries?.map((item) => (
-                  <div key={item?.id} className="mr-2">
-                    {item?.name}
+              {company?.industries?.length > 0
+                ? company.industries.map((item, index) => (
+                  <div key={item?.id} className="">
+                    {index === 0 ? <div className="ml-1"> {item?.name}</div> : <>, {item?.name}</>}
                   </div>
                 ))
-              }
+                : company?.industry?.name && (
+                  <div className="ml-1">
+                    {industry?.name}
+                  </div>
+                )}
             </div>
             <div className="mt-2">
               <span className="font-semibold">Liên hệ: </span>
