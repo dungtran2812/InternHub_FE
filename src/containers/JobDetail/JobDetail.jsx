@@ -9,6 +9,7 @@ const JobDetail = () => {
   const { data: job, isLoading, isError } = useGetJobByIdQuery(id)
   const { data: jobs } = useGetAllJobQuery("", "", job?.industry?.id, "", "")
   const jobFilterByIndustry = jobs?.filter(item => item?.industry?.id === job?.industry?.id);
+  console.log("job: ", job)
   return (
     <div className="mx-">
       <div className="container mx-auto mt-10 justify-items-center">
@@ -142,19 +143,19 @@ const JobDetail = () => {
                 {/* Việc làm liên quan */}
                 <div>
                   <div className="my-5 text-xl font-semibold">
-                  Việc làm liên quan
+                    Việc làm liên quan
                   </div>
                   {
                     jobFilterByIndustry?.map((item) => (
                       <div key={item.id}>
                         <CompanyJobCard
-                        company_name={item?.company?.name}
-                        link={item?.company?.website}
-                        location={item?.location}
-                        salary={item?.salary === "0" ?<div className="text-blue-600">Thoả thuận</div> :""}
-                        img={item?.company?.logoCompany}
-                        job_title={item?.jobTitle}
-                        updatedAt={"Cập nhật 5 giờ trước"}
+                          company_name={item?.company?.name}
+                          link={item?.company?.website}
+                          location={item?.location}
+                          salary={item?.salary === "0" ? <div className="text-blue-600">Thoả thuận</div> : ""}
+                          img={item?.company?.logoCompany}
+                          job_title={item?.jobTitle}
+                          updatedAt={"Cập nhật 5 giờ trước"}
                         />
                       </div>
                     ))
@@ -178,15 +179,20 @@ const JobDetail = () => {
               </div>
               {/* Lĩnh vực */}
               <div className="mt-2.5">
-                <div className="flex gap-2">
+                <div className="flex ">
                   <span>Lĩnh vực: </span>
-                  {
-                    job?.company?.industries?.map((item) => (
-                      <div key={item?.id} className="mr-2">
-                        {item?.name}
+                  {job?.company?.industries?.length > 0
+                    ? job.company.industries.map((item, index) => (
+                      <div key={item?.id} className="">
+                        {index === 0 ? <div className="ml-2"> {item?.name}</div> : <>, {item?.name}</>}
                       </div>
                     ))
-                  }
+                    : job?.industry?.name && (
+                      <div className="ml-1">
+                        {job?.industry?.name}
+                      </div>
+                    )}
+
                 </div>
               </div>
               <div className="mt-2">
@@ -198,9 +204,9 @@ const JobDetail = () => {
                 </div>
               </div>
               <div className="text-center mt-5">
-              <Link to={`/company/${job?.company?.id}`} className="  text-blue-600 ">
-              Xem trang công ty
-              </Link>
+                <Link to={`/company/${job?.company?.id}`} className="  text-blue-600 ">
+                  Xem trang công ty
+                </Link>
               </div>
             </div>
             {/* Thông tin chung */}
