@@ -67,7 +67,7 @@ const Login = () => {
   }, [tokenValid, refetch]);
 
   useEffect(() => {
-    if (userInfo) {
+    if (userInfo || tokenValid) {
       dispatch(setEmail(userInfo.email));
       dispatch(setAvatar(userInfo.avtUrl));
       dispatch(setRole(userInfo.role));
