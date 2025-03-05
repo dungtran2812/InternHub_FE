@@ -36,14 +36,14 @@ const Header = () => {
       <div className="container flex h-16 items-center justify-between px-16">
         {/* Logo */}
         <div className="flex items-center">
-          <a href="/" className="flex items-center space-x-2">
+          <Link href="/" className="flex items-center space-x-2">
             <div className="h-14 w-12 p-1">
               <img src={internlogoWhite} alt="Logo Intern" className="h-full w-full object-contain" />
             </div>
             <div className="h-12 w-18">
               <img src={internText} alt="Chữ Intern" className="h-full w-full object-contain" />
             </div>
-          </a>
+          </Link>
         </div>
 
         {/* Main Navigation */}
@@ -51,8 +51,8 @@ const Header = () => {
           <NavigationMenuList className="flex gap-6">
             {navItems.map((item) => (
               <NavigationMenuItem key={item.label}>
-                <NavigationMenuLink
-                  href={item.href}
+                <Link
+                  to={item.href}
                   className={cn(
                     "text-sm font-medium transition-colors hover:text-blue-200",
                     "focus:bg-blue-700 focus:text-blue-50 focus:outline-none focus:ring-2 focus:ring-blue-400",
@@ -60,7 +60,7 @@ const Header = () => {
                   )}
                 >
                   {item.label}
-                </NavigationMenuLink>
+                </Link>
               </NavigationMenuItem>
             ))}
           </NavigationMenuList>
