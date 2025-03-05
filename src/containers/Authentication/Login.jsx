@@ -40,6 +40,7 @@ const Login = () => {
           dispatch(setAccessToken(res.token))
           dispatch(setUserId(res.user.id))
           dispatch(setFullname(res.user.fullName))
+          dispatch(setGender(res.gender))
           SetLoginSuccess(true)
         });
       console.log('Đăng nhập thành công:', response);
