@@ -9,9 +9,7 @@ import { toast } from "@/hooks/use-toast";
 
 const HomeLayout = () => {
 	const dispatch = useDispatch()
-	const { data: userInfo } = useGetUserInfoQuery(undefined, {
-    skip: true, // Fetch only if tokenValid is true
-  });
+	const { data: userInfo } = useGetUserInfoQuery();
 	useEffect(() => {
     if (userInfo) {
       dispatch(setEmail(userInfo.email));
