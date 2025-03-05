@@ -16,7 +16,7 @@ const Home = () => {
       <JobFunctionCarousel />
       <JobCarousel />
       <RecruiterCarousel />
-      <RecruiterCard
+      {/* <RecruiterCard
         name="Alipo Creative"
         logo="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQubhAFso_7zGCtcA5a1mopHOLsPXhdtVZxqA&s"
         location="Thành phố Hồ Chí Minh"
@@ -38,7 +38,7 @@ const Home = () => {
       <PremiumSubCard />
       <div>
         <FreePlanCard />
-      </div>
+      </div> */}
       <div className='mx-3'>
         <div className='mt-10 container mx-auto '>
           <div className='text-3xl flex justify-between'>
