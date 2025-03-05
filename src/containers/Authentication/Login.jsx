@@ -3,7 +3,7 @@ import LoginSideImage from '../../assets/LoginSideImage.png';
 import InternLogo from '../../assets/orgLogo/InternLogoColored.png';
 import EmailIcon from '../../assets/loginPageIcon/Email_Icon.svg';
 import PasswordIcon from '../../assets/loginPageIcon/PasswordIcon.svg';
-import { useLoginMutation } from '@/services/internHubApi';
+import { useGetUserInfoQuery, useLoginMutation } from '@/services/internHubApi';
 import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
 import { Link, useNavigate } from 'react-router-dom';
@@ -17,9 +17,11 @@ const Login = () => {
   const dispatch = useDispatch();
   const { toast } = useToast();
   const navigate = useNavigate()
-  const [loginSuccess, SetLoginSuccess] = useState(false)
+  const [tokenValid, setTokenValid] = useState(false)
   const fullname = useSelector((state) => state.rootReducer.user.fullname)
-  const [login, { isLoading }] = useLoginMutation();
+  const role = useSelector((state) => state.rootReducer.user.role)
+  const [login, { isLoading: isLoginLoading }] = useLoginMutation();
+  const { data: userInfo, isLoading: isUserInfoLoading, refetch } = useGetUserInfoQuery(undefined, { skip: true})
   const validationSchema = Yup.object({
     email: Yup.string().email('Email không hợp lệ').required('Bắt buộc nhập'),
     password: Yup.string().required('Bắt buộc nhập')
@@ -27,12 +29,12 @@ const Login = () => {
 
   const handleGoogleLogin = () => {
     window.location.href = GOOGLE_AUTH_URL
+    refetch()
   };
 
   const handleSubmit = async (values) => {
     try {
-      console.log('dữ liệu', values);
-      const response = await login(values).unwrap()
+      await login(values).unwrap()
         .then(res => {
           dispatch(setEmail(res.user.email))
           dispatch(setAvatar(res.user.avtUrl))
@@ -40,10 +42,8 @@ const Login = () => {
           dispatch(setAccessToken(res.token))
           dispatch(setUserId(res.user.id))
           dispatch(setFullname(res.user.fullName))
-          dispatch(setGender(res.gender))
-          SetLoginSuccess(true)
+          setTokenValid(true)
         });
-      console.log('Đăng nhập thành công:', response);
     } catch (error) {
       console.error('Đăng nhập thất bại:', error);
       toast({
@@ -55,14 +55,28 @@ const Login = () => {
   };
 
   useEffect(() => {
-    if (loginSuccess) {
+    if (tokenValid && fullname) {
       toast({
         title: "Đăng Nhập Thành Công",
         description: `Xin chào ${fullname}, cảm ơn đã sử dụng dịch vụ của internhub`,
       })
-      navigate("/")
+      
+      switch(role) {
+        case "STUDENT":
+          navigate("/");
+          break;
+        case "RECRUITER":
+          navigate("/recruiter");
+          break;
+        case "UNIVERSITY":
+          navigate("/university");
+          break;
+        case "ADMIN":
+          navigate("/admin");
+          break;
+      }
     }
-  }, [fullname, navigate, loginSuccess, toast])
+  }, [fullname, role, tokenValid, navigate, toast]);
 
   return (
     <div className="flex h-screen">
@@ -87,7 +101,7 @@ const Login = () => {
             {/* Nút đăng nhập bằng Google */}
             <button
               onClick={handleGoogleLogin}
-              disabled={isLoading}
+              disabled={isLoginLoading || isUserInfoLoading}
               className="w-full flex items-center justify-center gap-2 border border-gray-300 rounded-lg p-3 mb-4 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
             >
               <img src={GoogleIcon} alt="Google" className="w-5 h-5" />
@@ -116,7 +130,7 @@ const Login = () => {
                       type="email"
                       name="email"
                       placeholder="Email"
-                      disabled={isLoading}
+                      disabled={isLoginLoading || isUserInfoLoading}
                       className={`w-full p-3 pl-12 border ${errors.email && touched.email ? 'border-red-500' : 'border-gray-300'} rounded-lg disabled:cursor-not-allowed`}
                     />
                     {errors.email && touched.email && (
@@ -135,7 +149,7 @@ const Login = () => {
                       type="password"
                       name="password"
                       placeholder="Mật khẩu"
-                      disabled={isLoading}
+                      disabled={isLoginLoading || isUserInfoLoading}
                       className={`w-full p-3 pl-12 border ${errors.password && touched.password ? 'border-red-500' : 'border-gray-300'} rounded-lg disabled:cursor-not-allowed`}
                     />
                     {errors.password && touched.password && (
@@ -146,9 +160,9 @@ const Login = () => {
                     <button
                       type="submit"
                       className="w-full bg-[#1F41BB] text-white rounded-lg p-3 hover:bg-[#1a379d] flex items-center justify-center disabled:opacity-50 disabled:cursor-not-allowed"
-                      disabled={isLoading || isSubmitting}
+                      disabled={isLoginLoading || isUserInfoLoading || isSubmitting}
                     >
-                      {isLoading || isSubmitting ? (
+                      {isLoginLoading || isSubmitting ? (
                         <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white"></div>
                       ) : (
                         'Đăng nhập'
@@ -162,7 +176,7 @@ const Login = () => {
             {/* Liên kết Đăng ký */}
             <p className="text-center mt-6 text-gray-600">
               Chưa có tài khoản?{' '}
-              <Link to="/signup" className={`text-[#1F41BB] hover:underline ${isLoading ? 'pointer-events-none opacity-50' : ''}`}>
+              <Link to="/signup" className={`text-[#1F41BB] hover:underline ${isLoginLoading || isUserInfoLoading ? 'pointer-events-none opacity-50' : ''}`}>
                 Tạo tài khoản
               </Link>
             </p>

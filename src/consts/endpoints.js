@@ -1,5 +1,6 @@
 const endpoints = {
   LOGIN: '/auth/login',
+  GET_USERINFO: 'auth/get-info-by-token',
   SIGNUP: '/auth/student/signup',
   COMPANY: '/company',
   REVIEW: '/review',
