@@ -31,7 +31,18 @@ const Login = () => {
 
   const handleGoogleLogin = async () => {
     window.location.href = GOOGLE_AUTH_URL;
-    setTokenValid(true);
+    await refetch()
+    if (userInfo) {
+      dispatch(setEmail(userInfo.email));
+      dispatch(setAvatar(userInfo.avtUrl));
+      dispatch(setRole(userInfo.role));
+      dispatch(setUserId(userInfo.id));
+      dispatch(setFullname(userInfo.fullName));
+
+      toast({
+        title: 'Đăng Nhập Thành Công',
+        description: `Xin chào ${userInfo.fullName}, cảm ơn đã sử dụng dịch vụ của internhub`,
+      });
   };
 
   const handleSubmit = async (values) => {
