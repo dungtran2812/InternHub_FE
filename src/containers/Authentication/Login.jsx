@@ -71,7 +71,7 @@ const Login = () => {
   };
 
   const handleGoogleLogin = async () => {
-    navigate(GOOGLE_AUTH_URL, { replace: true });
+    window.location.href = GOOGLE_AUTH_URL;
     // Then fetch user info
     await fetchUser().unwrap();
     dispatch(setEmail(userInfo.email));
