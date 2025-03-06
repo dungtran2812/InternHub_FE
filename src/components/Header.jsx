@@ -21,6 +21,7 @@ const Header = () => {
   const navItems = [
     { label: "Việc làm", href: "/jobs" },
     { label: "Hồ sơ & CV", href: "/employee-profile" },
+    { label: "Tạo CV", href: "/create-cv" },
     { label: "Công ty", href: "/companies" },
     { label: "Blog", href: "/blog" },
     { label: "Giới thiệu", href: "/about" },
@@ -36,7 +37,7 @@ const Header = () => {
       <div className="container flex h-16 items-center justify-between px-16">
         {/* Logo */}
         <div className="flex items-center">
-          <Link href="/" className="flex items-center space-x-2">
+          <Link to="/" className="flex items-center space-x-2">
             <div className="h-14 w-12 p-1">
               <img src={internlogoWhite} alt="Logo Intern" className="h-full w-full object-contain" />
             </div>
