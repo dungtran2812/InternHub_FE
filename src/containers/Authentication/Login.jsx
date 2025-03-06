@@ -52,13 +52,11 @@ const Login = () => {
     try {
       // First, attempt login
       const res = await login(values).unwrap();
-
       // If login successful, set token
       dispatch(setAccessToken(res.token));
 
       // Then fetch user info
       await fetchUser().unwrap();
-
       // Mark login as successful to trigger navigation
       setLoginSuccess(true);
     } catch (error) {
