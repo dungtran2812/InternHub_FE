@@ -13,9 +13,6 @@ const OAuth2RedirectHandler = () => {
         if (token) {
             console.log(token)
             dispatch(setAccessToken(token))
-            navigate("/", { replace: true });
-        } else {
-            navigate("/login", { replace: true });
 
     }}, [token, navigate, dispatch]);
     return <div>Loading</div>};

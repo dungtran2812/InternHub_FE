@@ -111,7 +111,7 @@ const internHubApi = createApi({
 export const {
   useLoginMutation,
   useSignupMutation,
-  useGetUserInfoQuery,
+  useLazyGetUserInfoQuery,
   useGetCompanyByIdQuery,
   useGetAllCompanyQuery,
   useGetAllReviewQuery,
