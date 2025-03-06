@@ -1,6 +1,6 @@
 const endpoints = {
   LOGIN: '/auth/login',
-  GET_USERINFO: 'auth/get-info-by-token',
+  GET_USERINFO: '/auth/get-info-by-token',
   SIGNUP: '/auth/student/signup',
   COMPANY: '/company',
   REVIEW: '/review',
@@ -8,7 +8,8 @@ const endpoints = {
   INDUSTRY: '/industry',
   JOB: '/job',
   SEARCH_JOB: '/job/search',
-  RECRUITER: '/recruiter'
+  RECRUITER: '/recruiter',
+  STUDENT: "/student"
 }
 export default endpoints
 

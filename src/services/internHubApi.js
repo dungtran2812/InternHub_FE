@@ -1,6 +1,7 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
 import { axiosBaseQuery } from './baseRequest';
 import endpoints from '../consts/endpoints';
+import { update } from 'lodash';
 
 const internHubApi = createApi({
   reducerPath: 'internHubApi',
@@ -105,6 +106,13 @@ const internHubApi = createApi({
         data: id,
       }),
     }),
+    putStudentProfile: builder.mutation({
+      query: ({ id, credentials }) => ({
+        url: `${endpoints.STUDENT}/${id}`,
+        method: 'PUT',
+        data: credentials, id
+      }),
+    }),
   }),
 })
 
@@ -122,7 +130,8 @@ export const {
   useGetJobFilterQuery,
   useGetAllJobQuery,
   useGetAllRecruiterQuery,
-  useGetJobByIdQuery
+  useGetJobByIdQuery,
+  usePutStudentProfileMutation,
 } = internHubApi;
 
 export default internHubApi;
