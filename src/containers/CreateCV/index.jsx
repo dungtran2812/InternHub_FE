@@ -56,10 +56,8 @@ const CreateCV = () => {
     const generatePDF = async () => {
         const pdfDoc = await PDFDocument.create();
         pdfDoc.registerFontkit(fontkit);
-        const fontUrl = "src/assets/Roboto-Italic-VariableFont_wdth,wght.ttf"
-        const fontBoldUrl = "src/assets/Roboto-Bold.ttf"
-        const fontBytes = await fetch(fontUrl).then(res => res.arrayBuffer())
-        const fontBoldBytes = await fetch(fontBoldUrl).then(res => res.arrayBuffer())
+        const fontBytes = await fetch('src/assets/Roboto-Regular.ttf').then(res => res.arrayBuffer())
+        const fontBoldBytes = await fetch('src/assets/Roboto-Bold.ttf').then(res => res.arrayBuffer())
         pdfDoc.registerFontkit(fontkit)
         const regularFont = await pdfDoc.embedFont(fontBytes)
         const boldFont = await pdfDoc.embedFont(fontBoldBytes)
