@@ -52,13 +52,11 @@ const Login = () => {
     try {
       // First, attempt login
       const res = await login(values).unwrap();
-      
       // If login successful, set token
       dispatch(setAccessToken(res.token));
-      
+
       // Then fetch user info
       await fetchUser().unwrap();
-      
       // Mark login as successful to trigger navigation
       setLoginSuccess(true);
     } catch (error) {
@@ -72,8 +70,13 @@ const Login = () => {
     }
   };
 
-  const handleGoogleLogin = () => {
+  const handleGoogleLogin = async () => {
     window.location.href = GOOGLE_AUTH_URL;
+    // Then fetch user info
+    await fetchUser().unwrap();
+
+    // Mark login as successful to trigger navigation
+    setLoginSuccess(true);
   };
 
   return (
@@ -126,9 +129,8 @@ const Login = () => {
                     name="email"
                     placeholder="Email"
                     disabled={loginLoading || userInfoLoading}
-                    className={`w-full p-3 pl-12 border rounded-lg ${
-                      errors.email && touched.email ? 'border-red-500' : 'border-gray-300'
-                    } disabled:opacity-50 disabled:cursor-not-allowed`}
+                    className={`w-full p-3 pl-12 border rounded-lg ${errors.email && touched.email ? 'border-red-500' : 'border-gray-300'
+                      } disabled:opacity-50 disabled:cursor-not-allowed`}
                   />
                   {errors.email && touched.email && <div className="text-red-500 text-sm mt-1">{errors.email}</div>}
                 </div>
@@ -140,9 +142,8 @@ const Login = () => {
                     name="password"
                     placeholder="Mật khẩu"
                     disabled={loginLoading || userInfoLoading}
-                    className={`w-full p-3 pl-12 border rounded-lg ${
-                      errors.password && touched.password ? 'border-red-500' : 'border-gray-300'
-                    } disabled:opacity-50 disabled:cursor-not-allowed`}
+                    className={`w-full p-3 pl-12 border rounded-lg ${errors.password && touched.password ? 'border-red-500' : 'border-gray-300'
+                      } disabled:opacity-50 disabled:cursor-not-allowed`}
                   />
                   {errors.password && touched.password && <div className="text-red-500 text-sm mt-1">{errors.password}</div>}
                 </div>
