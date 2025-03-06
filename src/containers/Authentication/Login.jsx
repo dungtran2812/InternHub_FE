@@ -72,19 +72,6 @@ const Login = () => {
 
   const handleGoogleLogin = async () => {
     window.location.href = GOOGLE_AUTH_URL;
-    // Then fetch user info
-    await fetchUser().unwrap();
-    dispatch(setEmail(userInfo.email));
-    dispatch(setAvatar(userInfo.avtUrl));
-    dispatch(setRole(userInfo.role));
-    dispatch(setUserId(userInfo.id));
-    dispatch(setFullname(userInfo.fullName));
-
-    // Show success toast
-    toast({
-      title: 'Đăng Nhập Thành Công',
-      description: `Xin chào ${userInfo.fullName}, cảm ơn đã sử dụng dịch vụ của InternHub`,
-    });
   };
 
   return (
