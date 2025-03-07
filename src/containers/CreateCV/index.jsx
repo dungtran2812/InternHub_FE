@@ -16,7 +16,7 @@ const CreateCV = () => {
     
     // Get user data from Redux store
     const {
-        fullname,
+        fullName,
         email,
         avatar,
         gender
@@ -44,7 +44,7 @@ const CreateCV = () => {
     const onFinish = (values) => {
         // Update all CV data at once if needed
         dispatch(updatePersonalInfo({
-            fullName: values.fullName || fullname,
+            fullName: values.fullName || fullName,
             email: values.email || email,
             gender: values.gender || gender,
             phone: values.phone,
@@ -134,7 +134,7 @@ const CreateCV = () => {
         }
 
         // Header Section
-        drawText(personalInfo.fullName || fullname, 170, 60, { size: 20, isBold: true });
+        drawText(personalInfo.fullName || fullName, 170, 60, { size: 20, isBold: true });
         drawText(jobTitle || "Front-end developer", 170, 85, { size: 13 });
 
         // Contact Information
@@ -227,7 +227,7 @@ const CreateCV = () => {
                             labelCol={{ span: 8 }}
                             wrapperCol={{ span: 16 }}
                             initialValues={{
-                                fullName: fullname,
+                                fullName: fullName,
                                 email: email,
                                 gender: gender,
                                 ...personalInfo
@@ -244,7 +244,7 @@ const CreateCV = () => {
                                 </div>
                                 <div className="col-span-8">
                                     <div className="text-2xl text-green-600 font-semibold my-5">
-                                        {fullname || "Your Name"}
+                                        {fullName || "Your Name"}
                                     </div>
                                     <Form.Item
                                         name="jobTitle"
@@ -266,7 +266,7 @@ const CreateCV = () => {
                                     title="Personal Information"
                                     email={email}
                                     gender={gender}
-                                    fullname={fullname}
+                                    fullName={fullName}
                                     onFieldChange={handlePersonalInfoChange}
                                     personalInfo={personalInfo}
                                 />
