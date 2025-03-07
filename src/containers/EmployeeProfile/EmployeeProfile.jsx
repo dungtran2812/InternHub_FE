@@ -1,13 +1,30 @@
 import { Avatar, Button, Form, Input, Radio, Switch } from "antd";
 import { UserOutlined, CheckCircleOutlined } from '@ant-design/icons';
-import { useSelector } from "react-redux";
-import { usePutStudentProfileMutation } from "@/services/internHubApi";
+import { useDispatch, useSelector } from "react-redux";
+import { useLazyGetUserInfoQuery, usePutStudentProfileMutation } from "@/services/internHubApi";
+import { useEffect } from "react";
+import { setAccessToken, setAvatar, setEmail, setFullName, setGender, setMajor, setPhone, setRole, setUserId } from '@/features/user';
 
 const EmployeeProfile = () => {
     const [form] = Form.useForm();
+    const dispatch = useDispatch();
     const user = useSelector((state) => state.rootReducer.user);
     const [putStudentProfile, { isLoading, isSuccess, isError }] = usePutStudentProfileMutation();
+    const [fetchUser, { data: userInfo, isLoading: userInfoLoading }] = useLazyGetUserInfoQuery();
     console.log("user: ", user);
+    useEffect(() => {
+        if (userInfo && !userInfoLoading) {
+            // Dispatch all user data
+            dispatch(setEmail(userInfo.email));
+            dispatch(setAvatar(userInfo.avtUrl));
+            dispatch(setRole(userInfo.role));
+            dispatch(setUserId(userInfo.id));
+            dispatch(setFullName(userInfo.fullName));
+            dispatch(setGender(userInfo.gender));
+            dispatch(setMajor(userInfo.major));
+            dispatch(setPhone(userInfo.phone));
+        }
+    }, [userInfo, userInfoLoading, dispatch]);
 
     const onFinish = async (values) => {
         console.log('Success:', values);
@@ -15,6 +32,7 @@ const EmployeeProfile = () => {
             const response = await putStudentProfile({ id: user.userId, credentials: values }).unwrap();
             console.log("response: ", response)
             console.log('Cập nhật thành công!');
+            await fetchUser().unwrap();
         } catch (error) {
             console.error('Cập nhật thất bại:', error);
         }
