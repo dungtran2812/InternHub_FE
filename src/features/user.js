@@ -6,9 +6,11 @@ const initialState = {
   accessToken: "",
   userId: "",
   username: "",
-  fullname: "",
+  fullName: "",
   role: "",
   avatar: "",
+  major: "",
+  phone: "",
   accessTokenExpired: false,
   email: "",
   gender: "", // Thêm field gender
@@ -24,6 +26,12 @@ const userSlice = createSlice({
   name: "user",
   initialState,
   reducers: {
+    setPhone(state, action) {
+      state.phone = action.payload;
+    },
+    setMajor(state, action) {
+      state.major = action.payload;
+    },
     setIsLoggedIn(state, action) {
       state.isLoggedIn = action.payload;
     },
@@ -39,8 +47,8 @@ const userSlice = createSlice({
     setUsername(state, action) {
       state.username = action.payload;
     },
-    setFullname(state, action) {
-      state.fullname = action.payload;
+    setFullName(state, action) {
+      state.fullName = action.payload;
     },
     setAvatar(state, action) {
       state.avatar = action.payload;
@@ -68,12 +76,18 @@ const userSlice = createSlice({
       state.avatar = "";
       state.role = "";
       state.email = "";
+      state.major ="";
+      state.phone = "";
+      state.fullName = ""
       state.gender = ""; // Reset gender khi đăng xuất
       localStorage.removeItem("user");
     },
     setUser(state, action) {
-      const { username, avatar, role, email, accessToken, isLoggedIn, isFirstLogin, accessTokenExpired, gender, search } = action.payload;
+      const { username, avatar, role, email, accessToken, isLoggedIn, isFirstLogin, accessTokenExpired, gender, search, major, phone, fullName } = action.payload;
       state.username = username;
+      state.phone = phone;
+      state.fullName = fullName;
+      state.major = major;
       state.avatar = avatar;
       state.role = role;
       state.email = email;
@@ -89,7 +103,9 @@ const userSlice = createSlice({
 
 export const {
   setUser,
-  setFullname,
+  setMajor,
+  setPhone,
+  setFullName,
   setAvatar,
   setIsLoggedIn,
   setUserId,

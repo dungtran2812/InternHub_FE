@@ -8,7 +8,7 @@ import { Formik, Form, Field } from "formik"
 import * as Yup from "yup"
 import { useSignupMutation } from "@/services/internHubApi"
 import { useDispatch, useSelector } from "react-redux"
-import { setFullname } from "@/features/user"
+import { setFullName } from "@/features/user"
 import { useToast } from "@/hooks/use-toast"
 import { useEffect, useState } from "react"
 // Toaster is moved to the root layout file
@@ -17,7 +17,7 @@ import { useEffect, useState } from "react"
 const SignUp = () => {
   const dispatch = useDispatch()
   const { toast } = useToast() // Updated toast import
-  const fullname = useSelector((state) => state.rootReducer.user.fullname)
+  const fullName = useSelector((state) => state.rootReducer.user.fullName)
   const [signup, { isLoading }] = useSignupMutation()
   const [signupSucess, setSignupSucess] = useState(false)
   const navigate = useNavigate()
@@ -42,7 +42,7 @@ const SignUp = () => {
       .then((payload) => {
         console.log(payload)
         setSignupSucess(true)
-        dispatch(setFullname(values.fullName))
+        dispatch(setFullName(values.fullName))
       }).catch ((error) => {
         console.log(error)
       toast({
@@ -55,14 +55,14 @@ const SignUp = () => {
 
   useEffect(() => {
     if (signupSucess) {
-      console.log(fullname)
+      console.log(fullName)
       toast({
         title: "Đăng ký thành công",
-        description: `Xin chào ${fullname}, cảm ơn đã sử dụng dịch vụ của internhub`,
+        description: `Xin chào ${fullName}, cảm ơn đã sử dụng dịch vụ của internhub`,
       })
       navigate("/login")
     }
-  }, [fullname, navigate, signupSucess, toast])
+  }, [fullName, navigate, signupSucess, toast])
 
   return (
     <div className="flex h-screen">

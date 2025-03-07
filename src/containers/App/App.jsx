@@ -2,6 +2,7 @@ import { useSelector } from 'react-redux';
 import setUpInterceptor from '../../services/baseRequest';
 import { store } from '../../store/store';
 import './App.css'
+// import '@ant-design/v5-patch-for-react-19';
 import { ToastContainer, toast } from 'react-toastify';
   import 'react-toastify/dist/ReactToastify.css';
 import { useEffect } from 'react';
