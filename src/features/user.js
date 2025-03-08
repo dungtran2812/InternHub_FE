@@ -32,6 +32,9 @@ const userSlice = createSlice({
     setMajor(state, action) {
       state.major = action.payload;
     },
+    setAvatar(state, action) {
+      state.avtUrl = action.payload;
+    },
     setResume(state, action) {
       state.resume = action.payload;
     },
