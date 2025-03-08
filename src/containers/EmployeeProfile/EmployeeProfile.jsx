@@ -1,9 +1,12 @@
-import { Avatar, Button, Form, Input, Radio, Switch } from "antd";
-import { UserOutlined, CheckCircleOutlined } from '@ant-design/icons';
+import { Avatar, Button, Form, Input, message, Radio, Switch, Upload } from "antd";
+import { UserOutlined, CheckCircleOutlined, PlusOutlined } from '@ant-design/icons';
 import { useDispatch, useSelector } from "react-redux";
 import { useLazyGetUserInfoQuery, usePutStudentProfileMutation } from "@/services/internHubApi";
-import { useEffect } from "react";
-import { setAccessToken, setAvatar, setEmail, setFullName, setGender, setMajor, setPhone, setRole, setUserId } from '@/features/user';
+import { useEffect, useState } from "react";
+import { setEmail, setFullName, setGender, setMajor, setPhone, setRole, setUserId, setGpa, setAvtUrl } from '@/features/user';
+import PdfPreview from "@/components/PdfPreview";
+import { Link } from "react-router-dom";
+import { uploadToCloudinary } from "@/function";
 
 const EmployeeProfile = () => {
     const [form] = Form.useForm();
@@ -11,25 +14,54 @@ const EmployeeProfile = () => {
     const user = useSelector((state) => state.rootReducer.user);
     const [putStudentProfile, { isLoading, isSuccess, isError }] = usePutStudentProfileMutation();
     const [fetchUser, { data: userInfo, isLoading: userInfoLoading }] = useLazyGetUserInfoQuery();
-    console.log("user: ", user);
+    const [file, setFile] = useState(null);
+    console.log("user: ", user)
     useEffect(() => {
         if (userInfo && !userInfoLoading) {
             // Dispatch all user data
             dispatch(setEmail(userInfo.email));
-            dispatch(setAvatar(userInfo.avtUrl));
+            dispatch(setAvtUrl(userInfo.avtUrl));
             dispatch(setRole(userInfo.role));
             dispatch(setUserId(userInfo.id));
             dispatch(setFullName(userInfo.fullName));
             dispatch(setGender(userInfo.gender));
             dispatch(setMajor(userInfo.major));
             dispatch(setPhone(userInfo.phone));
+            dispatch(setGpa(userInfo.gpa));
         }
     }, [userInfo, userInfoLoading, dispatch]);
-
+    const handleUpload = async ({ file, onSuccess, onError }) => {
+        try {
+            message.loading({ content: "Uploading...", key: "upload" });
+            const url = await uploadToCloudinary(file);
+            if (url) {
+                setFile(url);
+                message.success({ content: "Upload thành công!", key: "upload" });
+                onSuccess("ok");
+            } else {
+                message.error({ content: "Upload thất bại!", key: "upload" });
+                onError(new Error("Upload failed"));
+            }
+        } catch (error) {
+            message.error("Đã xảy ra lỗi khi upload!");
+            onError(error);
+        }
+    };
     const onFinish = async (values) => {
         console.log('Success:', values);
+        const valuesSubmit = {
+            email: values.email,
+            avtUrl: file ? file : values.avtUrl,
+            fullName: values.fullName,
+            gender: values.gender,
+            gpa: values.gpa,
+            major: values.major,
+            phone: values.phone,
+        };
+        console.log('file:', file);
+        console.log('valuesSubmit:', valuesSubmit);
         try {
-            const response = await putStudentProfile({ id: user.userId, credentials: values }).unwrap();
+            const response = await putStudentProfile({ id: user.userId, credentials: valuesSubmit }).unwrap();
             console.log("response: ", response)
             console.log('Cập nhật thành công!');
             await fetchUser().unwrap();
@@ -59,7 +91,8 @@ const EmployeeProfile = () => {
                                     email: user?.email,
                                     gender: user?.gender,
                                     major: user?.major,
-                                    phone: user?.phone,
+                                    gpa: user?.gpa,
+                                    avtUrl: user?.avtUrl,
                                 }}
                                 onFinish={onFinish}
                                 name="validateOnly"
@@ -88,22 +121,47 @@ const EmployeeProfile = () => {
                                     <Input placeholder="Nhập chuyên ngành" className="rounded-lg" />
                                 </Form.Item>
                                 <Form.Item
+                                    name="gpa"
+                                    label={<>GPA</>}
+                                    rules={[{ required: true }]}
+                                >
+                                    <Input placeholder="Nhập gpa" className="rounded-lg" />
+                                </Form.Item>
+                                <Form.Item
                                     name="email"
                                     label={<>Email</>}
                                     rules={[{ required: true }]}
                                 >
                                     <Input disabled className="rounded-lg" />
                                 </Form.Item>
-                                <Form.Item
-                                    name="gender"
-                                    label={<>Giới tính</>}
-                                    rules={[{ required: true }]}
-                                >
-                                    <Radio.Group>
-                                        <Radio value={true}>Nam</Radio>
-                                        <Radio value={false}>Nữ</Radio>
-                                    </Radio.Group>
-                                </Form.Item>
+                                <div className="grid grid-cols-2">
+                                    <Form.Item
+                                        name="gender"
+                                        label={<>Giới tính</>}
+                                        rules={[{ required: true }]}
+                                    >
+                                        <Radio.Group>
+                                            <Radio value={true}>Nam</Radio>
+                                            <Radio value={false}>Nữ</Radio>
+                                        </Radio.Group>
+                                    </Form.Item>
+                                    <Form.Item label="Upload" valuePropName="fileList">
+                                        <Upload
+                                            listType="picture-card"
+                                            customRequest={handleUpload}
+                                            fileList={file ? [file] : []}
+                                            onPreview={() => window.open(file?.url, "_blank")}
+                                            showUploadList={{ showRemoveIcon: false }}
+                                        >
+                                            {!file && (
+                                                <div className="flex flex-col items-center">
+                                                    <PlusOutlined className="text-xl" />
+                                                    <div style={{ marginTop: 8 }}>Upload</div>
+                                                </div>
+                                            )}
+                                        </Upload>
+                                    </Form.Item>
+                                </div>
                                 <Form.Item>
                                     <Button type="primary" htmlType="submit" loading={isLoading}>
                                         Submit
@@ -111,11 +169,21 @@ const EmployeeProfile = () => {
                                 </Form.Item>
                             </Form>
                         </div>
+                        <div>
+                            <div className="text-xl font-bold">
+                                CV đã tạo
+                            </div>
+                            <div className="mt-5 w-[350px]">
+                                <Link to={user?.resume} className="">
+                                    <PdfPreview pdfUrl={user?.resume} />
+                                </Link>
+                            </div>
+                        </div>
                     </div>
                     <div className="col-span-4 border border-solid p-5 rounded-lg">
                         <div className="grid grid-cols-12 gap-2">
                             <div className="col-span-4">
-                                <Avatar size={96} icon={<UserOutlined />} />
+                                <Avatar size={96} src={user?.avtUrl} />
                             </div>
                             <div className="col-span-8">
                                 <div>

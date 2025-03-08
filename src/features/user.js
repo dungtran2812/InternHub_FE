@@ -8,12 +8,13 @@ const initialState = {
   username: "",
   fullName: "",
   role: "",
-  avatar: "",
+  avtUrl: "",
   major: "",
   phone: "",
   accessTokenExpired: false,
   email: "",
   gender: "", // Thêm field gender
+  gpa: null, 
   search: {
     industry: null,
     jobFunction: null,
@@ -21,7 +22,6 @@ const initialState = {
     searchText: null
   },
 };
-
 const userSlice = createSlice({
   name: "user",
   initialState,
@@ -31,6 +31,12 @@ const userSlice = createSlice({
     },
     setMajor(state, action) {
       state.major = action.payload;
+    },
+    setResume(state, action) {
+      state.resume = action.payload;
+    },
+    setGpa(state, action) { // ➜ Thêm reducer cho gpa
+      state.gpa = action.payload;
     },
     setIsLoggedIn(state, action) {
       state.isLoggedIn = action.payload;
@@ -50,8 +56,8 @@ const userSlice = createSlice({
     setFullName(state, action) {
       state.fullName = action.payload;
     },
-    setAvatar(state, action) {
-      state.avatar = action.payload;
+    setAvtUrl(state, action) {
+      state.avtUrl = action.payload;
     },
     setRole(state, action) {
       state.role = action.payload;
@@ -63,7 +69,7 @@ const userSlice = createSlice({
       state.gender = action.payload;
     },
     setAccessTokenExpired(state, action) {
-      state.accessToken = action.payload;
+      state.accessTokenExpired = action.payload;
     },
     setSearch(state, action) {
       state.search = action.payload;
@@ -73,30 +79,34 @@ const userSlice = createSlice({
       state.isFirstLogin = false;
       state.accessToken = "";
       state.username = "";
-      state.avatar = "";
+      state.avtUrl = "";
       state.role = "";
       state.email = "";
-      state.major ="";
+      state.major = "";
       state.phone = "";
-      state.fullName = ""
-      state.gender = ""; // Reset gender khi đăng xuất
+      state.fullName = "";
+      state.gender = ""; 
+      state.resume = ""; 
+      state.gpa = null; // Reset gpa khi đăng xuất
       localStorage.removeItem("user");
     },
-    setUser(state, action) {
-      const { username, avatar, role, email, accessToken, isLoggedIn, isFirstLogin, accessTokenExpired, gender, search, major, phone, fullName } = action.payload;
+    setUser (state, action) {
+      const { username, avtUrl, role, email, accessToken, isLoggedIn, isFirstLogin, accessTokenExpired, gender, search, major, phone, fullName, resume, gpa } = action.payload;
       state.username = username;
       state.phone = phone;
       state.fullName = fullName;
       state.major = major;
-      state.avatar = avatar;
+      state.avtUrl = avtUrl;
       state.role = role;
       state.email = email;
       state.accessToken = accessToken;
       state.isLoggedIn = isLoggedIn;
       state.isFirstLogin = isFirstLogin;
       state.accessTokenExpired = accessTokenExpired;
-      state.gender = gender; // Cập nhật gender
+      state.gender = gender; 
+      state.resume = resume; 
       state.search = search;
+      state.gpa = gpa; // Cập nhật gpa
     }
   },
 });
@@ -114,10 +124,15 @@ export const {
   setUsername,
   setEmail,
   setRole,
-  setGender, // Export action mới
+  setGender,
+  setResume,
+  setAvtUrl,
+  setGpa, // ➜ Export action mới
   signout,
   setAccessTokenExpired,
   setSearch
 } = userSlice.actions;
 
 export default userSlice.reducer;
+
+

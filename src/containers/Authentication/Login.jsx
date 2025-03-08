@@ -11,7 +11,7 @@ import { useDispatch } from 'react-redux';
 import { useToast } from '@/hooks/use-toast';
 import { useEffect, useState } from 'react';
 import { GOOGLE_AUTH_URL } from '@/consts/urlconst';
-import { setAccessToken, setAvatar, setEmail, setFullName, setGender, setMajor, setPhone, setRole, setUserId } from '@/features/user';
+import { setAccessToken, setEmail, setFullName, setGender, setMajor, setPhone, setRole, setUserId, setResume, setGpa, setAvtUrl } from '@/features/user';
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -24,15 +24,18 @@ const Login = () => {
   // Handle user info changes and navigation
   useEffect(() => {
     if (userInfo && loginSuccess && !userInfoLoading) {
+      
       // Dispatch all user data
       dispatch(setEmail(userInfo.email));
-      dispatch(setAvatar(userInfo.avtUrl));
+      dispatch(setAvtUrl(userInfo.avtUrl));
       dispatch(setRole(userInfo.role));
       dispatch(setUserId(userInfo.id));
       dispatch(setFullName(userInfo.fullName));
       dispatch(setGender(userInfo.gender));
       dispatch(setMajor(userInfo.major));
       dispatch(setPhone(userInfo.phone));
+      dispatch(setResume(userInfo.resume));
+      dispatch(setGpa(userInfo.gpa));
       // Show success toast
       toast({
         title: 'Đăng Nhập Thành Công',
