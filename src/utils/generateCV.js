@@ -2,6 +2,36 @@ import { degrees, PDFDocument, rgb } from 'pdf-lib';
 import fontkit from '@pdf-lib/fontkit';
 import { saveAs } from 'file-saver';
 
+// Convert image URL to PNG using canvas
+const urlToPng = async (imageUrl) => {
+  return new Promise((resolve, reject) => {
+    const img = new Image();
+    img.src = imageUrl;
+    img.crossOrigin = "*";  // Enable CORS for the image
+
+    img.onload = () => {
+      // Create canvas
+      const canvas = document.createElement('canvas');
+      canvas.width = img.width;
+      canvas.height = img.height;
+      
+      // Draw image to canvas
+      const ctx = canvas.getContext('2d');
+      ctx.drawImage(img, 0, 0);
+      
+      // Convert to PNG blob
+      canvas.toBlob((pngBlob) => {
+        resolve(pngBlob);
+      }, 'image/png');
+    };
+
+    img.onerror = (error) => {
+      reject(new Error(`Failed to load image: ${error.message}`));
+    };
+
+  });
+};
+
 // Convert SVG to PNG using canvas
 const svgToPng = async (svgPath, color = '#006400', size = 24) => {
   return new Promise((resolve, reject) => {
@@ -170,21 +200,22 @@ export const generatePDF = async (cv, combinedData) => {
   };
 
   // Add profile photo
-  if (combinedData.avatar) {
-      try {
-        
-          const imageBytes = await fetch(combinedData.avatar).then(res => res.arrayBuffer());
-          const image = await pdfDoc.embedJpg(imageBytes);
-          const scale = 100 / image.width; // Scale to 100pt width
-          page.drawImage(image, {
-              x: 40,
-              y: height - 180,
-              width: 100,
-              height: image.height * scale
-          });
-      } catch (error) {
-          console.error('Error loading avatar:', error);
-      }
+  if (combinedData.avtUrl) {
+    try {
+      const pngBlob = await urlToPng(combinedData.avtUrl);
+      const imageBytes = await pngBlob.arrayBuffer();
+      const image = await pdfDoc.embedPng(imageBytes);
+      const scale = 100 / image.width; // Scale to 100pt width
+      
+      page.drawImage(image, {
+        x: 40,
+        y: height - 150,
+        width: 100,
+        height: image.height * scale
+      });
+    } catch (error) {
+      console.error('Error loading avatar:', error);
+    }
   }
 
   // Header Section with decoration

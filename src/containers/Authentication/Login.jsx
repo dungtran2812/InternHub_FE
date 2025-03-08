@@ -36,6 +36,7 @@ const Login = () => {
       dispatch(setPhone(userInfo.phone));
       dispatch(setResume(userInfo.resume));
       dispatch(setGpa(userInfo.gpa));
+      setLoginSuccess(false)
       // Show success toast
       toast({
         title: 'Đăng Nhập Thành Công',

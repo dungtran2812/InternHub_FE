@@ -11,13 +11,13 @@ import internlogoWhite from "@/assets/orgLogo/internlogoWhite.png";
 import internText from "@/assets/orgLogo/interntext.png";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { signout } from "@/features/user";
+import { signout } from "@/features/auth.action";
 
 const Header = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const accessToken = useSelector((state) => state.rootReducer.user.accessToken)
-  const avatar = useSelector((state) => state.rootReducer.user.avatar)
+  const avtUrl = useSelector((state) => state.rootReducer.user.avtUrl)
   const navItems = [
     { label: "Việc làm", href: "/jobs" },
     { label: "Hồ sơ & CV", href: "/employee-profile" },
@@ -81,7 +81,7 @@ const Header = () => {
           {accessToken ? (
             <div className="flex items-center">
               <img
-                src={avatar ? avatar : avt_default}
+                src={avtUrl ? avtUrl : avt_default}
                 alt="User Avatar"
                 className="h-10 w-10 rounded-full"
               />

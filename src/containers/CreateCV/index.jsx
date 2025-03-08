@@ -16,15 +16,14 @@ const CreateCV = () => {
     // Get user data from Redux store
     const userProfile = useSelector((state) => state.rootReducer.user);
     const cv = useSelector((state) => state.rootReducer.cv);
-    console.log(cv)
     // Combine data cv with user base info
     const combinedData = {
-        fullname: cv.personalInfo.fullName || userProfile.fullname,
+        avtUrl: cv.avtUrl || userProfile.avtUrl,
+        fullname: cv.personalInfo.fullName || userProfile.fullName,
         email: cv.personalInfo.email || userProfile.email,
         phone: cv.personalInfo.phone,
         gender: cv.personalInfo.gender || userProfile.gender,
-        avatar: cv.avtUrl || userProfile.avatar,
-        major: cv.education.major,
+        major: cv.education.major || userProfile.major,
     };
 
     useEffect(() => {
@@ -80,7 +79,7 @@ const CreateCV = () => {
                             <div className="grid grid-cols-12 gap-10">
                                 <div className="col-span-4">
                                     <img 
-                                        src={combinedData.avatar || "https://static.topcv.vn/cv-builder/assets/default-avatar.fc9c40ba.png"} 
+                                        src={combinedData.avtUrl || "https://static.topcv.vn/cv-builder/assets/default-avatar.fc9c40ba.png"} 
                                         alt="Avatar" 
                                     />
                                 </div>

@@ -1,4 +1,4 @@
-import { setAccessToken, setAvatar, setEmail, setFullName, setGender, setRole, setUserId } from "@/features/user";
+import { setAccessToken, setAvtUrl, setEmail, setFullName, setGender, setRole, setUserId } from "@/features/user";
 import { useLazyGetUserInfoQuery } from "@/services/internHubApi";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
@@ -26,7 +26,7 @@ const OAuth2RedirectHandler = () => {
                     if (userInfo) {
                         // Dispatch user data
                         dispatch(setEmail(userInfo.email));
-                        dispatch(setAvatar(userInfo.avtUrl));
+                        dispatch(setAvtUrl(userInfo.avtUrl));
                         dispatch(setRole(userInfo.role));
                         dispatch(setUserId(userInfo.id));
                         dispatch(setFullName(userInfo.fullName));

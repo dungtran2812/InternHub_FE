@@ -32,9 +32,6 @@ const userSlice = createSlice({
     setMajor(state, action) {
       state.major = action.payload;
     },
-    setAvatar(state, action) {
-      state.avtUrl = action.payload;
-    },
     setResume(state, action) {
       state.resume = action.payload;
     },
@@ -77,7 +74,7 @@ const userSlice = createSlice({
     setSearch(state, action) {
       state.search = action.payload;
     },
-    signout(state) {
+    clearUserInfo(state) {
       state.isLoggedIn = false;
       state.isFirstLogin = false;
       state.accessToken = "";
@@ -91,7 +88,6 @@ const userSlice = createSlice({
       state.gender = ""; 
       state.resume = ""; 
       state.gpa = null; // Reset gpa khi đăng xuất
-      localStorage.removeItem("user");
     },
     setUser (state, action) {
       const { username, avtUrl, role, email, accessToken, isLoggedIn, isFirstLogin, accessTokenExpired, gender, search, major, phone, fullName, resume, gpa } = action.payload;
@@ -119,7 +115,6 @@ export const {
   setMajor,
   setPhone,
   setFullName,
-  setAvatar,
   setIsLoggedIn,
   setUserId,
   setFirstLogin,
@@ -131,7 +126,7 @@ export const {
   setResume,
   setAvtUrl,
   setGpa, // ➜ Export action mới
-  signout,
+  clearUserInfo,
   setAccessTokenExpired,
   setSearch
 } = userSlice.actions;

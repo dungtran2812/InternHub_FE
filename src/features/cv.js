@@ -55,10 +55,10 @@ const cvSlice = createSlice({
   initialState,
   reducers: {
     setAvt: (state, action) => {
-        state.avtUrl = action.payload;;
+      state.avtUrl = action.payload;;
     },
     setJobTitle: (state, action) => {
-        state.jobTitle = action.payload;;
+      state.jobTitle = action.payload;;
     },
     // Personal Information
     updatePersonalInfo: (state, action) => {
@@ -144,29 +144,45 @@ const cvSlice = createSlice({
       state.honorsAndAwards.items = state.honorsAndAwards.items.filter(
         (_, index) => index !== action.payload
       );
+    },
+
+    // Add reset reducer for CV state
+    resetCV: (state) => {
+      state.avtUrl = "";
+      state.jobTitle = "";
+      state.personalInfo = {
+        fullName: "",
+        gender: "",
+        email: "",
+        phone: "",
+        socialLink: "",
+        location: "",
+      };
     }
   }
 });
+
 export const {
-  setAvt, 
+  setAvt,
   setJobTitle,
   addExperience,
   updateEducation,
   updatePersonalInfo,
-  updateExperience, 
-  removeExperience, 
-  addCertificate, 
-  updateCertificate, 
-  removeCertificate, 
-  addHonorAward, 
-  updateHonorAward, 
+  updateExperience,
+  removeExperience,
+  addCertificate,
+  updateCertificate,
+  removeCertificate,
+  addHonorAward,
+  updateHonorAward,
   removeHonorAward,
   addPrimarySkill,
   updatePrimarySkill,
   removePrimarySkill,
   addSecondarySkill,
   updateSecondarySkill,
-  removeSecondarySkill
+  removeSecondarySkill,
+  resetCV
 } = cvSlice.actions;
 
 export default cvSlice.reducer;
