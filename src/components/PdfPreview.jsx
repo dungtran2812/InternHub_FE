@@ -7,7 +7,7 @@ pdfjs.GlobalWorkerOptions.workerSrc = `https://cdnjs.cloudflare.com/ajax/libs/pd
 
 const PdfPreview = ({ pdfUrl }) => {
   return (
-    <div className="relative w-[350px] h-[500px] rounded-lg overflow-hidden shadow-lg">
+    pdfUrl ? <div className="relative w-[350px] h-[500px] rounded-lg overflow-hidden shadow-lg">
       <Worker workerUrl="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf.worker.min.js">
         <Viewer fileUrl={pdfUrl} />
       </Worker>
@@ -30,6 +30,10 @@ const PdfPreview = ({ pdfUrl }) => {
         </div>
       </div>
     </div>
+      :
+      <div className="flex items-center justify-center h-full text-gray-500">
+        <p>Không có tài liệu PDF để hiển thị.</p>
+      </div>
   );
 };
 
