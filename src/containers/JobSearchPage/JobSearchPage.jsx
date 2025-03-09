@@ -10,6 +10,7 @@ import JobCard from "@/components/JobCard"
 import JobSearchBar from "@/components/JobSearchBar"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Button } from "@/components/ui/button"
+import { Link } from "react-router-dom"
 
 export default function JobSearchPage() {
   const { industry, jobFunction, location, searchText } = useSelector((state) => state.rootReducer.user.search)
@@ -104,7 +105,9 @@ export default function JobSearchPage() {
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
               {jobData?.content.map((job) => (
+               <Link to={`/job-detail/${job.id}`}>
                 <JobCard key={job.id} job={job} />
+               </Link>
               ))}
             </div>
           )}
