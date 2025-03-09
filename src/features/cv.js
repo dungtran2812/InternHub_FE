@@ -146,18 +146,8 @@ const cvSlice = createSlice({
       );
     },
 
-    // Add reset reducer for CV state
-    resetCV: (state) => {
-      state.avtUrl = "";
-      state.jobTitle = "";
-      state.personalInfo = {
-        fullName: "",
-        gender: "",
-        email: "",
-        phone: "",
-        socialLink: "",
-        location: "",
-      };
+    resetCV: () => {
+      return initialState;
     }
   }
 });
