@@ -2,7 +2,6 @@ import { Button } from "@/components/ui/button";
 import {
   NavigationMenu,
   NavigationMenuItem,
-  NavigationMenuLink,
   NavigationMenuList,
 } from "@/components/ui/navigation-menu";
 import { cn } from "@/lib/utils";
@@ -83,7 +82,7 @@ const Header = () => {
               <img
                 src={avtUrl ? avtUrl : avt_default}
                 alt="User Avatar"
-                className="h-10 w-10 rounded-full"
+                className="h-10 w-10 rounded-full object-cover"
               />
               <Button
                 className="ml-4 text-white underline"

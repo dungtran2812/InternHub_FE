@@ -3,9 +3,10 @@ import TextArea from 'antd/es/input/TextArea';
 import { useDispatch, useSelector } from 'react-redux';
 import { updateEducation } from '@/features/cv';
 
-const EducationCard = () => {
+const EducationCard = ({combinedData}) => {
     const dispatch = useDispatch();
     const education = useSelector(state => state.rootReducer.cv.education);
+    const userProfile = useSelector(state => state.rootReducer.user);
 
     return (
         <div className="p-2 hover:border-2 hover:boder-solid rounded-md">
@@ -34,11 +35,12 @@ const EducationCard = () => {
                     className='w-full m-0'
                     rules={[{ required: true, message: 'Please input your major!' }]}
                 >
+                    {console.log(combinedData.major)}
                     <div className='flex gap-4 w-[230px]'>
                         <Input 
                             placeholder='Ngành học / Môn học' 
                             className='rounded-lg p-1 text-xs'
-                            defaultValue={education.major}
+                            value={combinedData.major}
                             onChange={(e) => dispatch(updateEducation({ major: e.target.value }))}
                         />
                     </div>
@@ -76,7 +78,7 @@ const EducationCard = () => {
                     <div className='flex gap-4 w-[230px]'>
                         <TextArea 
                             placeholder='Mô tả quá trình học tập hoặc thành tích của bạn'
-                            defaultValue={education.description}
+                            defaultValue={`GPA: ${userProfile.gpa},... ${education.description}`}
                             onChange={(e) => dispatch(updateEducation({ description: e.target.value }))}
                         />
                     </div>

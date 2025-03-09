@@ -289,7 +289,7 @@ export const generatePDF = async (cv, combinedData) => {
   });
 
   // Projects Section
-  drawSectionHeader(leftX, secondSectionY, "PROJECTS");
+  drawSectionHeader(leftX, secondSectionY, "EXPERIENCE");
   let projectY = secondSectionY + 40;
   experience.items.forEach((exp, index) => {
     drawText(exp.position, leftX, projectY, { size: 12, isBold: true });

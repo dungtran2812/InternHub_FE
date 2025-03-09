@@ -110,7 +110,7 @@ const CreateCV = () => {
                                     fullname={combinedData.fullname}
                                     onFieldChange={handlePersonalInfoChange}
                                 />
-                                <EducationCard />
+                                <EducationCard combinedData={combinedData}/>
                                 <Skills />
                             </div>
                             <ExperienceCard />
