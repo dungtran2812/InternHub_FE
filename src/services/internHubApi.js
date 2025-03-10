@@ -1,7 +1,6 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
 import { axiosBaseQuery } from './baseRequest';
 import endpoints from '../consts/endpoints';
-import { update } from 'lodash';
 
 const internHubApi = createApi({
   reducerPath: 'internHubApi',
