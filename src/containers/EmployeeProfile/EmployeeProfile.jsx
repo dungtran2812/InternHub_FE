@@ -13,6 +13,7 @@ const EmployeeProfile = () => {
     const [form] = Form.useForm();
     const dispatch = useDispatch();
     const user = useSelector((state) => state.rootReducer.user);
+    console.log("user: ", user)
     const [putStudentProfile, { isLoading }] = usePutStudentProfileMutation();
     const [fetchUser , { data: userInfo, isLoading: userInfoLoading }] = useLazyGetUserInfoQuery();
     const [file, setFile] = useState(null);
@@ -149,7 +150,7 @@ const EmployeeProfile = () => {
                                         <Radio value={false}>Nữ</Radio>
                                     </Radio.Group>
                                 </Form.Item>
-                                <Form.Item label="Upload" valuePropName="fileList">
+                                <Form.Item label="Upload Avatar" valuePropName="fileList">
                                     <Upload
                                         listType="picture-card"
                                         customRequest={handleUpload}
