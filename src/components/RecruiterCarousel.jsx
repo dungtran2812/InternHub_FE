@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react"
 import { Carousel, CarouselContent, CarouselItem } from "@/components/ui/carousel"
-import { useGetAllRecruiterQuery } from "@/services/internHubApi"
+import { useGetAllCompanyQuery } from "@/services/internHubApi"
 
 export default function RecruiterCarousel() {
-  const { data: recruiters, isLoading, isError } = useGetAllRecruiterQuery()
+  const { data: companies, isLoading, isError } = useGetAllCompanyQuery()
   const [api, setApi] = useState(null)
   const [current, setCurrent] = useState(0)
 
@@ -71,52 +71,56 @@ export default function RecruiterCarousel() {
 
       <Carousel className="w-full max-w-[1440px]" setApi={setApi}>
         <CarouselContent>
-          {recruiters?.map((recruiter) => (
-            <CarouselItem key={recruiter.id} className="relative">
+          {companies?.map((company) => (
+            <CarouselItem key={company.id} className="relative">
               <div className="flex h-[300px] items-end rounded-lg overflow-hidden">
                 {/* Background Image */}
                 <div
                   className="absolute inset-0 bg-cover bg-center transition-transform duration-300 hover:scale-105"
                   role="img"
-                  aria-label={`${recruiter.company.name} background`}
-                  style={{ backgroundImage: `url(${recruiter.backgroundUrl || recruiter.company.backgroundCompany})` }}
+                  aria-label={`${company.name} background`}
+                  style={{ backgroundImage: `url(${company.backgroundCompany})` }}
                 />
 
                 {/* Content Overlay */}
                 <div className="relative z-10 flex flex-col md:flex-row items-center gap-4 w-full bg-gradient-to-t from-black/80 via-black/60 to-transparent p-6">
                   {/* Company Logo */}
                   <a
-                    href={recruiter.company.website}
+                    href={company.website}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex-shrink-0 w-24 h-24 md:w-32 md:h-32 bg-white rounded-lg p-2 hover:scale-105 transition-transform duration-300"
                   >
                     <img
-                      alt={`${recruiter.company.name} logo`}
-                      src={recruiter.company.logoCompany || "/placeholder.svg"}
+                      alt={`${company.name} logo`}
+                      src={company.logoCompany || "/placeholder.svg"}
                       className="w-full h-full object-contain"
                     />
                   </a>
 
                   {/* Company Info */}
                   <div className="text-white text-center md:text-left">
-                    <h3 className="text-xl font-bold mb-2">{recruiter.company.name}</h3>
+                    <h3 className="text-xl font-bold mb-2">{company.name}</h3>
                     <div className="flex flex-wrap gap-2 mb-2 justify-center md:justify-start">
-                      {recruiter.company.industries.map((industry) => (
+                      {company.industries.map((industry) => (
                         <span key={industry.id} className="px-2 py-0.5 bg-white/20 rounded-full text-xs">
                           {industry.name}
                         </span>
                       ))}
                     </div>
-                    <p className="text-sm line-clamp-2 mb-2">{recruiter.company.description}</p>
-                    <a
-                      href={recruiter.company.website}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-block text-sm text-blue-400 hover:text-blue-300 transition-colors"
-                    >
-                      Xem thêm
-                    </a>
+                    <p className="text-sm line-clamp-2 mb-2">{company.description}</p>
+                    <div className="flex gap-2 items-center justify-center md:justify-start text-sm">
+                      <a
+                        href={company.website}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-block text-blue-400 hover:text-blue-300 transition-colors"
+                      >
+                        Xem thêm
+                      </a>
+                      <span className="text-white/60">•</span>
+                      <span className="text-white/60">{company.address}</span>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -127,7 +131,7 @@ export default function RecruiterCarousel() {
 
       {/* Navigation Dots */}
       <div className="flex justify-center gap-2 mt-4">
-        {recruiters?.map((_, index) => (
+        {companies?.map((_, index) => (
           <button
             key={index}
             onClick={() => api?.scrollTo(index)}
