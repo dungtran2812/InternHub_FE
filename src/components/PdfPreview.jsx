@@ -1,14 +1,16 @@
 import { Worker, Viewer } from '@react-pdf-viewer/core';
 import '@react-pdf-viewer/core/lib/styles/index.css';
-import * as pdfjs from 'pdfjs-dist';
 
-// Đặt workerSrc cho pdfjs-dist
-pdfjs.GlobalWorkerOptions.workerSrc = `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf.worker.min.js`;
+// Chỉ import GlobalWorkerOptions thay vì toàn bộ pdfjs-dist
+import { GlobalWorkerOptions } from 'pdfjs-dist';
+
+// Đặt workerSrc cho pdfjs-dist (phiên bản 3.11.174)
+GlobalWorkerOptions.workerSrc = `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js`;
 
 const PdfPreview = ({ pdfUrl }) => {
   return (
     pdfUrl ? <div className="relative w-[350px] h-[500px] rounded-lg overflow-hidden shadow-lg">
-      <Worker workerUrl="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf.worker.min.js">
+      <Worker workerUrl="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js">
         <Viewer fileUrl={pdfUrl} />
       </Worker>
 
