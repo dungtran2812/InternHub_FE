@@ -13,7 +13,7 @@ import { Button } from "@/components/ui/button"
 import { Link } from "react-router-dom"
 
 export default function JobSearchPage() {
-  const { industry, jobFunction, location, searchText } = useSelector((state) => state.rootReducer.user.search)
+  const { industry, jobFunction, searchText } = useSelector((state) => state.rootReducer.user.search)
   const [page, setPage] = useState(0)
   const [pageSize, setPageSize] = useState(12)
 
@@ -105,7 +105,7 @@ export default function JobSearchPage() {
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
               {jobData?.content.map((job) => (
-               <Link to={`/job-detail/${job.id}`}>
+               <Link key={job.id} to={`/job-detail/${job.id}`}>
                 <JobCard key={job.id} job={job} />
                </Link>
               ))}
