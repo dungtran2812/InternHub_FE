@@ -1,6 +1,8 @@
 import { degrees, PDFDocument, rgb } from 'pdf-lib';
 import fontkit from '@pdf-lib/fontkit';
 import { saveAs } from 'file-saver';
+import { saveCV } from './saveCV';
+import { toast } from '@/hooks/use-toast';
 
 // Convert image URL to PNG using canvas
 const urlToPng = async (imageUrl) => {
@@ -75,7 +77,7 @@ const ICONS = {
   location: 'M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z'
 };
 
-export const generatePDF = async (cv, combinedData) => {
+export const generatePDF = async (cv, combinedData, saveOption, accessToken) => {
   const {
     certificates,
     education,
@@ -347,5 +349,30 @@ export const generatePDF = async (cv, combinedData) => {
   const pdfBytes = await pdfDoc.save();
   const blob = new Blob([pdfBytes], { type: 'application/pdf' });
   const fileName = `${personalInfo.fullName || 'CV'}.pdf`;
-  saveAs(blob, fileName);
+
+  if (saveOption === 'download') {
+    // Download the PDF
+    saveAs(blob, fileName);
+    toast({
+      title: 'Đã Tải CV Xuống',
+  });
+  } else if (saveOption === 'profile') {
+    // Convert blob to File object
+    const file = new File([blob], fileName, { type: 'application/pdf' });
+
+    // Create FormData and append the file
+    const formData = new FormData();
+    formData.append('file', file);
+
+    console.log('File to upload:', file); // Log the file object
+
+    // Call the mutation to save the file to the user's profile
+    await saveCV(formData, accessToken);
+    toast({
+      title: 'Đã Lưu CV vào Hồ Sơ',
+      description: `CV sẽ được gửi cho nhà tuyển dụng khi ứng tuyển vào các vị trí`,
+  });
+  } else {
+    console.error('Invalid save option. Use "download" or "profile".');
+  }
 }

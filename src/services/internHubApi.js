@@ -119,6 +119,13 @@ const internHubApi = createApi({
         data: credentials, id
       }),
     }),
+    uploadCV: builder.mutation({
+      query: (formData) => ({
+        url: `${endpoints.STUDENT}/upload-cv`,
+        method: 'POST',
+        body: formData,
+      }),
+    }),
   }),
 })
 
@@ -139,6 +146,7 @@ export const {
   useGetAllRecruiterQuery,
   useGetJobByIdQuery,
   usePutStudentProfileMutation,
+  useUploadCVMutation,
 } = internHubApi;
 
 export default internHubApi;
