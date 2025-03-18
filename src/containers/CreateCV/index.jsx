@@ -11,6 +11,7 @@ import { generatePDF } from '@/utils/generateCV';
 import { useEffect } from 'react';
 
 const CreateCV = () => {
+    const accessToken = useSelector((state) => state.rootReducer.user.accessToken);
     const dispatch = useDispatch();
     
     // Get user data from Redux store
@@ -74,7 +75,6 @@ const CreateCV = () => {
                                 ...cv.personalInfo
                             }}
                             onFinish={onFinish}
-                            autoComplete="off"
                         >
                             <div className="grid grid-cols-12 gap-10">
                                 <div className="col-span-4">
@@ -120,11 +120,13 @@ const CreateCV = () => {
                             </div>
 
                             <div className="flex justify-center mt-5">
-                                <Button type="primary" htmlType="submit">Save</Button>
+                                <Button
+                                onClick={() => generatePDF(cv, combinedData, 'profile',accessToken)}
+                                type="primary" htmlType="default">Save</Button>
                                 <Button 
                                     className="ml-2" 
                                     type="default" 
-                                    onClick={() => generatePDF(cv, combinedData)}
+                                    onClick={() => generatePDF(cv, combinedData, 'download')}
                                 >
                                     Download PDF
                                 </Button>

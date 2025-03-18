@@ -16,6 +16,7 @@ export const axiosInstance = axios.create({
   timeoutErrorMessage: "Connection is timeout exceeded",
 });
 
+
 export const axiosBaseQuery =
   ({ baseUrl } = { baseUrl: "" }) =>
   async ({ url, method, data, params }) => {

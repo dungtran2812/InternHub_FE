@@ -10,7 +10,7 @@ const endpoints = {
   JOB: '/job',
   SEARCH_JOB: '/job/search',
   RECRUITER: '/recruiter',
-  STUDENT: "/student"
+  STUDENT: "/student",
 }
 export default endpoints
 

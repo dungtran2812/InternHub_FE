@@ -1,5 +1,3 @@
-"use client"
-
 import { useState } from "react"
 import JobPostStep from "./JobPostStep"
 import BasicJobInfoStep from "./BasicJobInfoStep"
