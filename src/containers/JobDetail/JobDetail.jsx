@@ -1,19 +1,39 @@
 import CompanyJobCard from "@/components/CompanyDetail/CompanyJobCard";
 import VARIABLE from "@/consts/variable";
-import { useGetAllJobQuery, useGetJobByIdQuery } from "@/services/internHubApi";
+import { useApplyJobMutation, useGetAllJobQuery, useGetJobByIdQuery } from "@/services/internHubApi";
 import { CheckOutlined, FieldTimeOutlined, HeartOutlined, DollarOutlined, ScanOutlined, UsergroupAddOutlined } from "@ant-design/icons";
 import { useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
+import CVMenuPopover from "@/components/CVMenuPopover";
+import { useSelector } from "react-redux";
+import { toast } from "@/hooks/use-toast";
 
 const JobDetail = () => {
   const { id } = useParams();
+  const resume = useSelector((state) => state.rootReducer.user.resume);
   const { data: job, isLoading, isError } = useGetJobByIdQuery(id)
+  const [ applyJob, { isLoading: isApplying, isSuccess: isApplySuccess, isError: isApplyError } ] = useApplyJobMutation()
   const { data: jobs } = useGetAllJobQuery("", "", job?.industry?.id, "", "")
   const jobFilterByIndustry = jobs?.filter(item => item?.industry?.id === job?.industry?.id);
   console.log("job: ", job)
   useEffect(() => {
     window.scrollTo(0, 0)
   }, [])
+
+  const handleJobApplication = async (id) => {
+    applyJob({ jobId: id, resume: resume, coverLetter: "Cover Letter" }).unwrap()
+    if (isApplySuccess) {
+      toast({
+        title: 'Ứng Tuyển Thành Công',
+    });
+    } else {
+      toast({
+        variant: 'destructive',
+        title: 'Ứng Tuyển Thất Bại',
+    });
+    }
+  };
+
   if (isLoading) return (
     <div className="flex justify-center items-center h-screen">
       <div className="animate-spin rounded-full h-32 w-32 border-t-4 border-blue-600"></div>
@@ -71,9 +91,13 @@ const JobDetail = () => {
                 </div>
               </div>
               {/* Ứng tuyển ngay */}
+                  <CVMenuPopover />
               <div className="grid grid-cols-12 gap-5 mt-5 ">
                 <div className="col-span-8">
-                  <button className="text-white bg-blue-500 text-lg text-center p-1 w-full rounded-xl">
+                  <button 
+                    className={`text-white bg-blue-500 text-lg text-center p-1 w-full rounded-xl ${isApplying ? 'animate-pulse' : ''}`}
+                    onClick={() => handleJobApplication(job.id)}
+                  >
                     Ứng tuyển ngay
                   </button>
                 </div>
@@ -139,7 +163,7 @@ const JobDetail = () => {
                 </div>
                 <div className="grid grid-cols-2 gap-3 w-[350px] mt-5">
                   <div className="">
-                    <button className="text-white bg-blue-500 text-lg text-center p-1 w-full rounded-lg">
+                    <button onClick={() => handleJobApplication(job.id)} className="text-white bg-blue-500 text-lg text-center p-1 w-full rounded-lg">
                       Ứng tuyển ngay
                     </button>
                   </div>

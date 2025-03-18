@@ -11,6 +11,7 @@ const endpoints = {
   SEARCH_JOB: '/job/search',
   RECRUITER: '/recruiter',
   STUDENT: "/student",
+  APPLICATION: "/application",
 }
 export default endpoints
 
