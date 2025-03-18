@@ -6,16 +6,11 @@ import { Button } from "@/components/ui/button"
 import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from "@/components/ui/command"
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
 import { Input } from "@/components/ui/input"
-import { useGetIndustryQuery, useGetJobFilterQuery, useGetJobFunctionQuery } from "@/services/internHubApi"
+import { useGetIndustryQuery, useGetJobFunctionQuery } from "@/services/internHubApi"
 import { useNavigate } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux"
 import { setSearch } from "@/features/user"
 
-const locations = [
-  { id: 1, name: "New York" },
-  { id: 2, name: "San Francisco" },
-  { id: 3, name: "Los Angeles" },
-]
 export default function JobSearchBar() {
   const navigation = useNavigate()
   const dispatch = useDispatch()
@@ -24,27 +19,28 @@ export default function JobSearchBar() {
   const { data: industries, isLoading: isLoadingIndustry } = useGetIndustryQuery();
 
   const [industryOpen, setIndustryOpen] = React.useState(false);
-  const [industryValue, setIndustryValue] = React.useState("");
+  const [selectedIndustry, setSelectedIndustry] = React.useState({ id: null, name: '' });
   const [jobFunctionOpen, setJobFunctionOpen] = React.useState(false);
-  const [jobFunctionValue, setJobFunctionValue] = React.useState("");
+  const [selectedJobFunction, setSelectedJobFunction] = React.useState({ id: null, name: '' });
   const [searchTextValue, setSearchTextValue] = React.useState(search.searchText);
 
   // Set initial values from search state
   React.useEffect(() => {
     if (industries && search.industry) {
       const industry = industries.find(i => i.id === search.industry);
-      setIndustryValue(industry?.name || "");
+      console.log(search)
+      setSelectedIndustry(industry ? { id: industry.id, name: industry.name } : { id: null, name: '' });
     }
     if (jobFunctions && search.jobFunction) {
       const jobFunction = jobFunctions.find(j => j.id === search.jobFunction);
-      setJobFunctionValue(jobFunction?.name || "");
+      setSelectedJobFunction(jobFunction ? { id: jobFunction.id, name: jobFunction.name } : { id: null, name: '' });
     }
   }, [search, industries, jobFunctions]);
 
   const handleSearch = () => {
     dispatch(setSearch({
-      industry: industryValue,
-      jobFunction: jobFunctionValue,
+      industry: selectedIndustry.id,
+      jobFunction: selectedJobFunction.id,
       searchText: searchTextValue
     }));
     navigation(`/job-search`);
@@ -66,7 +62,7 @@ export default function JobSearchBar() {
                   aria-expanded={industryOpen}
                   className="w-[200px] justify-between"
                 >
-                  <p className="truncate">{industryValue || 'Lĩnh Vực'}</p>
+                  <p className="truncate">{selectedIndustry.name || 'Lĩnh Vực'}</p>
                   <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
                 </Button>
               </PopoverTrigger>
@@ -81,7 +77,11 @@ export default function JobSearchBar() {
                           key={industry.id}
                           value={industry.name}
                           onSelect={() => {
-                            setIndustryValue(industry.name);
+                            if (selectedIndustry.id === industry.id) {
+                              setSelectedIndustry({ id: null, name: '' });
+                            } else {
+                              setSelectedIndustry({ id: industry.id, name: industry.name });
+                            }
                             setIndustryOpen(false);
                           }}
                         >
@@ -89,7 +89,7 @@ export default function JobSearchBar() {
                           <Check
                             className={cn(
                               "ml-auto h-4 w-4",
-                              industryValue === industry.name ? "opacity-100" : "opacity-0"
+                              selectedIndustry.id === industry.id ? "opacity-100" : "opacity-0"
                             )}
                           />
                         </CommandItem>
@@ -113,7 +113,7 @@ export default function JobSearchBar() {
                   aria-expanded={jobFunctionOpen}
                   className="w-[200px] justify-between"
                 >
-                  <p className="truncate">{jobFunctionValue || 'Ngành Nghề'}</p>
+                  <p className="truncate">{selectedJobFunction.name || 'Ngành Nghề'}</p>
                   <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
                 </Button>
               </PopoverTrigger>
@@ -128,7 +128,11 @@ export default function JobSearchBar() {
                           key={job.id}
                           value={job.name}
                           onSelect={() => {
-                            setJobFunctionValue(job.name);
+                            if (selectedJobFunction.id === job.id) {
+                              setSelectedJobFunction({ id: null, name: '' });
+                            } else {
+                              setSelectedJobFunction({ id: job.id, name: job.name });
+                            }
                             setJobFunctionOpen(false);
                           }}
                         >
@@ -136,7 +140,7 @@ export default function JobSearchBar() {
                           <Check
                             className={cn(
                               "ml-auto h-4 w-4",
-                              jobFunctionValue === job.name ? "opacity-100" : "opacity-0"
+                              selectedJobFunction.id === job.id ? "opacity-100" : "opacity-0"
                             )}
                           />
                         </CommandItem>

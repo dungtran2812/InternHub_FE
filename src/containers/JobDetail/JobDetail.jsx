@@ -2,6 +2,7 @@ import CompanyJobCard from "@/components/CompanyDetail/CompanyJobCard";
 import VARIABLE from "@/consts/variable";
 import { useGetAllJobQuery, useGetJobByIdQuery } from "@/services/internHubApi";
 import { CheckOutlined, FieldTimeOutlined, HeartOutlined, DollarOutlined, ScanOutlined, UsergroupAddOutlined } from "@ant-design/icons";
+import { useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 
 const JobDetail = () => {
@@ -10,6 +11,14 @@ const JobDetail = () => {
   const { data: jobs } = useGetAllJobQuery("", "", job?.industry?.id, "", "")
   const jobFilterByIndustry = jobs?.filter(item => item?.industry?.id === job?.industry?.id);
   console.log("job: ", job)
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
+  if (isLoading) return (
+    <div className="flex justify-center items-center h-screen">
+      <div className="animate-spin rounded-full h-32 w-32 border-t-4 border-blue-600"></div>
+    </div>
+  );
   return (
     <div className="mx-">
       <div className="container mx-auto mt-10 justify-items-center">
