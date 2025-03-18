@@ -85,19 +85,11 @@ const internHubApi = createApi({
       }),
     }),
     getJobFilter: builder.query({
-      query: ({ searchText, jobFunctionId, industryId, page, pageSize }) => {
-        const params = new URLSearchParams();
-        if (searchText) params.append('searchText', searchText);
-        if (jobFunctionId) params.append('jobFunctionId', jobFunctionId);
-        if (industryId) params.append('industryId', industryId);
-        params.append('page', page);
-        params.append('pageSize', pageSize);
-        
-        return {
-          url: `${endpoints.SEARCH_JOB}?${params.toString()}`,
-          method: 'GET',
-        };
-      },
+      query: (param) => ({
+        url: endpoints.SEARCH_JOB,
+        method: 'GET',
+        params: param,
+      }),
     }),
     getAllRecruiter: builder.query({
       query: () => ({
@@ -126,8 +118,16 @@ const internHubApi = createApi({
         body: formData,
       }),
     }),
+    applyJob: builder.mutation({
+      query: (credentials) => ({
+        url: `${endpoints.APPLICATION}/apply-job`,
+        method: 'POST',
+        data: credentials,
+
+      }),
+    })
   }),
-})
+});
 
 export const {
   useLoginMutation,
@@ -147,6 +147,7 @@ export const {
   useGetJobByIdQuery,
   usePutStudentProfileMutation,
   useUploadCVMutation,
+  useApplyJobMutation
 } = internHubApi;
 
 export default internHubApi;

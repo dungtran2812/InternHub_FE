@@ -32,6 +32,9 @@ const EmployeeProfile = () => {
             dispatch(setGpa(userInfo.gpa));
         }
     }, [userInfo, userInfoLoading, dispatch]);
+    useEffect(() => {
+        fetchUser();
+    }, [fetchUser]);
 
     const handleUpload = async ({ file, onSuccess, onError }) => {
         try {
