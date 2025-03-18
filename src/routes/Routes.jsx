@@ -1,8 +1,6 @@
 import { Route, Routes } from "react-router-dom";
 import HomeLayout from "../containers/HomeLayout/HomeLayout";
 import Home from "@/containers/HomeLayout/Home/Home";
-import CompanyLayout from "@/containers/RecruiterDashboard/CompanyLayout";
-import CompanyHome from "@/containers/RecruiterDashboard/RecruiterHome/RecruiterHome";
 import AboutUsPage from "@/containers/AboutUs/AboutUs";
 import BlogPage from "@/containers/BlogPage/BlogPage";
 import CompanyList from "@/containers/CompanyList/CompanyList";
@@ -28,6 +26,10 @@ import OAuth2RedirectHandler from "@/components/OAuth2RedirectHandler";
 import CreateCV from "@/containers/CreateCV";
 import JobDetail from "@/containers/JobDetail/JobDetail";
 import PrivateRoleBasedRoute from "./PrivateRoleBasedRoute";
+import RecruiterHome from "@/containers/RecruiterDashboard/RecruiterHome/RecruiterHome";
+import RecruiterLayout from "@/containers/RecruiterDashboard/RecruiterLayout";
+import RecruiterProfileSetting from "@/containers/RecruiterProfileSetting/RecruiterProfileSetting";
+import JobPostPage from "@/containers/JobPostPage/JobPostPage";
 
 const AppRoutes = () => {
   return (
@@ -71,11 +73,13 @@ const AppRoutes = () => {
           <PrivateRoleBasedRoute
             path="/recruiter"
             requiredRoles={["RECRUITER"]}
-            Component={CompanyLayout}
+            Component={RecruiterLayout}
           />
         }
       >
-        <Route path="/recruiter" element={<CompanyHome />} />
+        <Route path="/recruiter" element={<RecruiterHome />} />
+        <Route path="/recruiter/create-job" element={<JobPostPage />} />
+        <Route path="/recruiter/recruiter-profile" element={<RecruiterProfileSetting />} />
         <Route path="/recruiter/manage-applications" element={<ManageApplication />} />
         <Route path="/recruiter/manage-intern-feedbacks" element={<ManageInternFeedback />} />
       </Route>

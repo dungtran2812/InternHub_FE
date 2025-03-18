@@ -2,7 +2,7 @@ import { useState, useEffect } from "react"
 import { Carousel, CarouselContent, CarouselItem } from "@/components/ui/carousel"
 import { useGetAllCompanyQuery } from "@/services/internHubApi"
 
-export default function RecruiterCarousel() {
+export default function CompanyCarousel() {
   const { data: companies, isLoading, isError } = useGetAllCompanyQuery()
   const [api, setApi] = useState(null)
   const [current, setCurrent] = useState(0)
