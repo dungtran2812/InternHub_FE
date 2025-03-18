@@ -1,5 +1,6 @@
 import React from 'react';
 import settingIcon from '@/assets/sidebarIcon/settingIcon.svg';
+import { Link } from 'react-router-dom';
 
 const CompanyProfile = ({ 
   name = "FPT Software",
@@ -17,9 +18,9 @@ const CompanyProfile = ({
         {/* Header with Settings */}
         <div className="flex items-center justify-between">
           <h2 className="text-xl font-bold text-[#1a2b6d]">Company profile</h2>
-          <button className="p-2 hover:bg-gray-100 rounded-full transition-colors">
+          <Link to={'recruiter-profile'} className="p-2 hover:bg-gray-100 rounded-full transition-colors">
             <img src={settingIcon} alt="Settings" className="w-5 h-5 text-gray-600" />
-          </button>
+          </Link>
         </div>
 
         {/* Company Logo and Name */}

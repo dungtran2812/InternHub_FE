@@ -1,12 +1,12 @@
 /* eslint-disable react/prop-types */
-import CompanySidebar from "@/components/CompanySidebar";
+import RecruiterSidebar from "@/components/RecruiterSidebar";
 import { Outlet } from "react-router-dom";
 // import Header from "./Header";
 
-const CompanyLayout = () => {
+const RecruiterLayout = () => {
   return (
     <div className="flex h-screen">
-      <CompanySidebar />
+      <RecruiterSidebar />
       <div className="flex flex-1 flex-col">
         {/* <Header /> */}
         <main className="flex-1 overflow-auto">
@@ -17,4 +17,4 @@ const CompanyLayout = () => {
   );
 };
 
-export default CompanyLayout;
+export default RecruiterLayout;

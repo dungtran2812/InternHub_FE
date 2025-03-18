@@ -11,14 +11,14 @@ import review from "@/assets/sidebarIcon/review.svg";
 
 import logoutIcon from "@/assets/logouticon.svg";
 
-const CompanySidebar = () => {
+const RecruiterSidebar = () => {
   const sidebarItems = [
-    { label: "Trang chủ", href: "/", icon: homeIcon },
-    { label: "Đăng tin tuyển dụng thực tập", href: "/post-recruitment", icon: postIntern },
+    { label: "Trang chủ", href: "/recruiter", icon: homeIcon },
+    { label: "Đăng tin tuyển dụng thực tập", href: "/recruiter/create-job", icon: postIntern },
     { label: "Quản lý đơn ứng tuyển", href: "/recruiter/manage-applications", icon: applicationIcon },
-    { label: "Đánh giá thực tập sinh", href: "/evaluation", icon: internEvaluate },
+    { label: "Đánh giá thực tập sinh", href: "/recruiter", icon: internEvaluate },
     // { label: "Phản hồi từ thực tập sinh", href: "/feedback", icon: feedback },
-    { label: "Mua gói", href: "/plans", icon: salesIcon },
+    { label: "Mua gói", href: "/recruiter", icon: salesIcon },
     { label: "Quản lý phản hồi của thực tập sinh", href: "/recruiter/manage-intern-feedbacks", icon: review },
   ];
 
@@ -87,5 +87,4 @@ const CompanySidebar = () => {
     </aside>
   );
 };
-
-export default CompanySidebar;
+export default RecruiterSidebar;

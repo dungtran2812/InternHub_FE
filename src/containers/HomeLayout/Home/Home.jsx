@@ -1,8 +1,8 @@
 import HomeBanner from '@/components/HomeBanner'
 import JobFunctionCarousel from '@/components/JobFunctionCarousel'
-import RecruiterCarousel from '@/components/RecruiterCarousel'
 import CareerConsultingCard from '@/components/CareerConsultingCard'
 import JobCarousel from '@/components/JobCarousel'
+import CompanyCarousel from '@/components/CompanyCarousel'
 
 const Home = () => {
   return (
@@ -10,7 +10,7 @@ const Home = () => {
       <HomeBanner />
       <JobFunctionCarousel />
       <JobCarousel />
-      <RecruiterCarousel />
+      <CompanyCarousel />
       {/* <RecruiterCard
         name="Alipo Creative"
         logo="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQubhAFso_7zGCtcA5a1mopHOLsPXhdtVZxqA&s"

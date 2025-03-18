@@ -5,9 +5,12 @@ import { Label } from "@/components/ui/label"
 import InternLogo from '@/assets/orgLogo/InternLogoColored.png';
 import LoginSideImage from '@/assets/LoginSideImage.png';
 import { Formik } from 'formik';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { useRecruiterSignupMutation } from '@/services/internHubApi';
 
 const RecruiterRegister = () => {
+  const navigate = useNavigate();
+  const [ recruiterSignup, { isLoading, isError } ] = useRecruiterSignupMutation();
   const validationSchema = Yup.object({
     email: Yup.string().email('Địa chỉ email không hợp lệ').required('Vui lòng nhập địa chỉ email'),
     password: Yup.string().min(6, 'Password must be at least 6 characters').required('Vui lòng nhập mật khẩu'),
@@ -16,10 +19,8 @@ const RecruiterRegister = () => {
       .required('Vui lòng nhập mật khẩu'),
     fullName: Yup.string().required('Vui lòng nhập Họ và tên'),
     phone: Yup.string().required('Vui lòng nhập Số điện thoại '),
-    company: Yup.string().required('Vui lòng nhập Giới tính'),
     location: Yup.string().required('Vui lòng nhập Địa điểm'),
-    district: Yup.string().required('Vui lòng nhập Quận/huyện'),
-    termsAccepted: Yup.boolean(),
+    termsAccepted: Yup.boolean().oneOf([true], 'Bạn cần đồng ý với điều khoản dịch vụ'),
   })
   const initialValues = {
     email: '',
@@ -35,8 +36,10 @@ const RecruiterRegister = () => {
   }
   const handleSubmit = async (values) => {
     try {
-      console.log('Signup data:', values);
-      // Handle successful signup (e.g., redirect or show a success message)
+      const response = await recruiterSignup(values).unwrap();
+      if (response.ok) {
+        navigate('/login');
+      }
     } catch (error) {
       console.error('Signup failed:', error);
       // Handle error (e.g., show an error message)
@@ -62,7 +65,7 @@ const RecruiterRegister = () => {
           <Formik
             initialValues={initialValues}
             validationSchema={validationSchema}
-            onSubmit={(values) => handleSubmit(values)}
+            onSubmit={handleSubmit}
           >
             {({ errors, touched }) => (
               <Form className="w-[90%] space-y-6">
@@ -163,20 +166,6 @@ const RecruiterRegister = () => {
                       <div className="text-red-500">{errors.phone}</div>
                     ) : null}
                   <div className="mb-2 flex items-center">
-                    <Label htmlFor="company" className="block font-medium mb-1 w-1/3">Công ty *</Label>
-                    <Field
-                      as={Input}
-                      type="text"
-                      name="company"
-                      required
-                      placeholder="Công ty *"
-                      className="w-2/3 mt-1"
-                    />
-                    </div>
-                    {touched.company && errors.company ? (
-                      <div className="text-red-500">{errors.company}</div>
-                    ) : null}
-                  <div className="mb-2 flex items-center">
                     <Label htmlFor="location" className="block font-medium mb-1 w-1/3">Địa điểm làm việc *</Label>
                     <Field
                       as={Input}
@@ -189,20 +178,6 @@ const RecruiterRegister = () => {
                     </div>
                     {touched.location && errors.location ? (
                       <div className="text-red-500">{errors.location}</div>
-                    ) : null}
-                  <div className="mb-2 flex items-center">
-                    <Label htmlFor="district" className="block font-medium mb-1 w-1/3">Quận/huyện *</Label>
-                    <Field
-                      as={Input}
-                      type="text"
-                      name="district"
-                      required
-                      placeholder="Quận/huyện *"
-                      className="w-2/3 mt-1"
-                    />
-                    </div>
-                    {touched.district && errors.district ? (
-                      <div className="text-red-500">{errors.district}</div>
                     ) : null}
                 </div>
 
