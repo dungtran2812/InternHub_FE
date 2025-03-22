@@ -33,6 +33,7 @@ import JobPostPage from "@/containers/JobPostPage/JobPostPage";
 import BecomePremium from "@/containers/BecomePremium/BecomePremium";
 import PaymentSuccess from "@/containers/PaymentSuccess/PaymentSuccess";
 import PaymentFailed from "@/containers/PaymentFailed/PaymentFailed";
+import ManageJob from "@/containers/RecruiterDashboard/ManageJob/ManageJob";
 
 const AppRoutes = () => {
   return (
@@ -90,6 +91,7 @@ const AppRoutes = () => {
         <Route path="/recruiter/recruiter-profile" element={<RecruiterProfileSetting />} />
         <Route path="/recruiter/manage-applications" element={<ManageApplication />} />
         <Route path="/recruiter/manage-intern-feedbacks" element={<ManageInternFeedback />} />
+        <Route path="/recruiter/manage-jobs" element={<ManageJob />} />
       </Route>
 
       {/* Protected University Routes */}

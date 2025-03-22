@@ -13,8 +13,11 @@ const initialState = {
   phone: "",
   accessTokenExpired: false,
   email: "",
-  gender: "", // Thêm field gender
+  gender: "",
   gpa: null, 
+  company: {
+    id: ""
+  },
   search: {
     industry: null,
     jobFunction: null,
@@ -22,6 +25,7 @@ const initialState = {
     searchText: null
   },
 };
+
 const userSlice = createSlice({
   name: "user",
   initialState,
@@ -35,7 +39,7 @@ const userSlice = createSlice({
     setResume(state, action) {
       state.resume = action.payload;
     },
-    setGpa(state, action) { // ➜ Thêm reducer cho gpa
+    setGpa(state, action) {
       state.gpa = action.payload;
     },
     setIsLoggedIn(state, action) {
@@ -74,6 +78,9 @@ const userSlice = createSlice({
     setSearch(state, action) {
       state.search = action.payload;
     },
+    setCompany(state, action) {
+      state.company = action.payload;
+    },
     clearUserInfo(state) {
       state.isLoggedIn = false;
       state.isFirstLogin = false;
@@ -87,10 +94,16 @@ const userSlice = createSlice({
       state.fullName = "";
       state.gender = ""; 
       state.resume = ""; 
-      state.gpa = null; // Reset gpa khi đăng xuất
+      state.gpa = null;
+      state.company = { id: "" }; // Reset company khi đăng xuất
     },
-    setUser (state, action) {
-      const { username, avtUrl, role, email, accessToken, isLoggedIn, isFirstLogin, accessTokenExpired, gender, search, major, phone, fullName, resume, gpa } = action.payload;
+    setUser(state, action) {
+      const { 
+        username, avtUrl, role, email, accessToken, isLoggedIn, 
+        isFirstLogin, accessTokenExpired, gender, search, major, 
+        phone, fullName, resume, gpa, company 
+      } = action.payload;
+      
       state.username = username;
       state.phone = phone;
       state.fullName = fullName;
@@ -105,7 +118,8 @@ const userSlice = createSlice({
       state.gender = gender; 
       state.resume = resume; 
       state.search = search;
-      state.gpa = gpa; // Cập nhật gpa
+      state.gpa = gpa;
+      state.company = company || { id: "" }; // Cập nhật company, nếu không có thì giữ giá trị mặc định
     }
   },
 });
@@ -125,12 +139,11 @@ export const {
   setGender,
   setResume,
   setAvtUrl,
-  setGpa, // ➜ Export action mới
+  setGpa,
+  setCompany,
   clearUserInfo,
   setAccessTokenExpired,
   setSearch
 } = userSlice.actions;
 
 export default userSlice.reducer;
-
-

@@ -18,19 +18,13 @@ import {
   SelectValue,
 } from "@/components/ui/select"
 import { ArrowRight } from 'lucide-react'
+import { useGetIndustryQuery, useGetJobFunctionQuery } from "@/services/internHubApi"
 
 export default function BasicJobInfoStep({ formData, handleInputChange, nextStep }) {
-  const jobFunctions = [
-    "Kế toán", "Hành chính", "Kinh doanh", "Chăm sóc khách hàng", 
-    "Thiết kế", "Phát triển phần mềm", "Marketing", "Nhân sự", 
-    "Sản xuất", "Quản lý dự án", "Quản lý sản phẩm", "Nghiên cứu & Phát triển"
-  ]
 
-  const industries = [
-    "Công nghệ thông tin", "Tài chính - Ngân hàng", "Giáo dục", "Y tế", 
-    "Bán lẻ", "Sản xuất", "Dịch vụ", "Bất động sản", "Du lịch", 
-    "Truyền thông", "Xây dựng", "Năng lượng"
-  ]
+  const { data: jobFunctions, isLoading: isLoadingJobFunction } = useGetJobFunctionQuery();
+  const { data: industries, isLoading: isLoadingIndustry } = useGetIndustryQuery()
+
 
   return (
     <Card>
@@ -41,47 +35,59 @@ export default function BasicJobInfoStep({ formData, handleInputChange, nextStep
         </CardDescription>
       </CardHeader>
       <CardContent className="space-y-6">
-        <div className="space-y-2">
-          <Label htmlFor="jobTitle">Tiêu đề công việc <span className="text-red-500">*</span></Label>
-          <Input 
-            id="jobTitle" 
-            placeholder="Ví dụ: Nhân viên kinh doanh, Kỹ sư phần mềm..." 
-            value={formData.jobTitle}
-            onChange={(e) => handleInputChange('jobTitle', e.target.value)}
-            required
-          />
+        <div className="grid grid-cols-2 gap-6">
+          <div className="space-y-2">
+            <Label htmlFor="jobTitle">Tiêu đề công việc <span className="text-red-500">*</span></Label>
+            <Input
+              id="jobTitle"
+              placeholder="Ví dụ: Nhân viên kinh doanh, Kỹ sư phần mềm..."
+              value={formData.jobTitle}
+              onChange={(e) => handleInputChange('jobTitle', e.target.value)}
+              required
+            />
+          </div>
+          <div className="space-y-2">
+            <Label htmlFor="salary">Tiền lương <span className="text-red-500">*</span></Label>
+            <Input
+              id="salary"
+              placeholder="10000000"
+              value={formData.salary}
+              onChange={(e) => handleInputChange('salary', e.target.value)}
+              required
+            />
+          </div>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div className="space-y-2">
-            <Label htmlFor="jobFunction">Chức năng công việc <span className="text-red-500">*</span></Label>
-            <Select 
-              onValueChange={(value) => handleInputChange('jobFunction', value)}
-              value={formData.jobFunction}
+            <Label htmlFor="jobFunctionId">Chức năng công việc <span className="text-red-500">*</span></Label>
+            <Select
+              onValueChange={(value) => handleInputChange('jobFunctionId', value)}
+              value={formData.jobFunctionId}
             >
-              <SelectTrigger id="jobFunction">
+              <SelectTrigger id="jobFunctionId">
                 <SelectValue placeholder="Chọn chức năng công việc" />
               </SelectTrigger>
               <SelectContent>
-                {jobFunctions.map((item) => (
-                  <SelectItem key={item} value={item}>{item}</SelectItem>
+                {jobFunctions?.map((item) => (
+                  <SelectItem key={item} value={item.id}>{item.name}</SelectItem>
                 ))}
               </SelectContent>
             </Select>
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="industry">Ngành nghề <span className="text-red-500">*</span></Label>
+            <Label htmlFor="industryId">Ngành nghề <span className="text-red-500">*</span></Label>
             <Select
-              onValueChange={(value) => handleInputChange('industry', value)}
-              value={formData.industry}
+              onValueChange={(value) => handleInputChange('industryId', value)}
+              value={formData.industryId}
             >
-              <SelectTrigger id="industry">
+              <SelectTrigger id="industryId">
                 <SelectValue placeholder="Chọn ngành nghề" />
               </SelectTrigger>
               <SelectContent>
-                {industries.map((item) => (
-                  <SelectItem key={item} value={item}>{item}</SelectItem>
+                {industries?.map((item) => (
+                  <SelectItem key={item} value={item.id}>{item.name}</SelectItem>
                 ))}
               </SelectContent>
             </Select>
@@ -90,9 +96,9 @@ export default function BasicJobInfoStep({ formData, handleInputChange, nextStep
 
         <div className="space-y-2">
           <Label htmlFor="description">Mô tả công việc <span className="text-red-500">*</span></Label>
-          <Textarea 
-            id="description" 
-            placeholder="Mô tả chi tiết về công việc, trách nhiệm, quyền lợi..." 
+          <Textarea
+            id="description"
+            placeholder="Mô tả chi tiết về công việc, trách nhiệm, quyền lợi..."
             className="min-h-[120px]"
             value={formData.description}
             onChange={(e) => handleInputChange('description', e.target.value)}
@@ -101,13 +107,13 @@ export default function BasicJobInfoStep({ formData, handleInputChange, nextStep
         </div>
 
         <div className="space-y-2">
-          <Label htmlFor="requirements">Yêu cầu công việc <span className="text-red-500">*</span></Label>
-          <Textarea 
-            id="requirements" 
-            placeholder="Các kỹ năng, kinh nghiệm, bằng cấp yêu cầu..." 
+          <Label htmlFor="requirement">Yêu cầu công việc <span className="text-red-500">*</span></Label>
+          <Textarea
+            id="requirement"
+            placeholder="Các kỹ năng, kinh nghiệm, bằng cấp yêu cầu..."
             className="min-h-[120px]"
-            value={formData.requirements}
-            onChange={(e) => handleInputChange('requirements', e.target.value)}
+            value={formData.requirement}
+            onChange={(e) => handleInputChange('requirement', e.target.value)}
             required
           />
         </div>
@@ -134,11 +140,11 @@ export default function BasicJobInfoStep({ formData, handleInputChange, nextStep
 
           <div className="space-y-2">
             <Label htmlFor="quantity">Số lượng tuyển <span className="text-red-500">*</span></Label>
-            <Input 
-              id="quantity" 
-              type="number" 
+            <Input
+              id="quantity"
+              type="number"
               min="1"
-              placeholder="Nhập số lượng cần tuyển" 
+              placeholder="Nhập số lượng cần tuyển"
               value={formData.quantity}
               onChange={(e) => handleInputChange('quantity', e.target.value)}
               required
@@ -148,9 +154,9 @@ export default function BasicJobInfoStep({ formData, handleInputChange, nextStep
 
         <div className="space-y-2">
           <Label htmlFor="location">Địa điểm làm việc <span className="text-red-500">*</span></Label>
-          <Input 
-            id="location" 
-            placeholder="Ví dụ: Hà Nội, Hồ Chí Minh..." 
+          <Input
+            id="location"
+            placeholder="Ví dụ: Hà Nội, Hồ Chí Minh..."
             value={formData.location}
             onChange={(e) => handleInputChange('location', e.target.value)}
             required

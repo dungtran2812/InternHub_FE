@@ -132,6 +132,15 @@ const internHubApi = createApi({
         method: 'POST',
       }),
     }),
+
+    createJob: builder.mutation({
+      query: (credentials) => ({
+        url: `${endpoints.JOB}/create`,
+        method: 'POST',
+        data: credentials,
+      }),
+    }),
+
     dashboardData: builder.query({
       query: ({ startDate, endDate }) => ({
         url: `${endpoints.ADMIN}/dashboard`,
@@ -139,8 +148,8 @@ const internHubApi = createApi({
         params: {startDate, endDate}
       }),
     })
+
   }),
-  
 });
 
 export const {
@@ -163,7 +172,11 @@ export const {
   useUploadCVMutation,
   useApplyJobMutation,
   useBecomePremiumMutation,
+
+  useCreateJobMutation,
+
   useDashboardDataQuery
+
 } = internHubApi;
 
 export default internHubApi;
