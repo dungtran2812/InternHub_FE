@@ -30,6 +30,9 @@ import RecruiterHome from "@/containers/RecruiterDashboard/RecruiterHome/Recruit
 import RecruiterLayout from "@/containers/RecruiterDashboard/RecruiterLayout";
 import RecruiterProfileSetting from "@/containers/RecruiterProfileSetting/RecruiterProfileSetting";
 import JobPostPage from "@/containers/JobPostPage/JobPostPage";
+import BecomePremium from "@/containers/BecomePremium/BecomePremium";
+import PaymentSuccess from "@/containers/PaymentSuccess/PaymentSuccess";
+import PaymentFailed from "@/containers/PaymentFailed/PaymentFailed";
 
 const AppRoutes = () => {
   return (
@@ -41,6 +44,10 @@ const AppRoutes = () => {
       <Route path="/recruiter-register" element={<RecruiterRegister />} />
 
       {/* Home Layout Routes */}
+      <Route path="/payment/" element={<HomeLayout />}>
+        <Route path="success" element={<PaymentSuccess />} />
+        <Route path="failed" element={<PaymentFailed />} />
+      </Route>
       <Route path="/" element={<HomeLayout />}>
         <Route index element={<Home />} />
         <Route path="job-search" element={<JobSearchPage />} />
@@ -51,6 +58,7 @@ const AppRoutes = () => {
         <Route path="company/:id" element={<RecruiterDetail />} />
         <Route path="job-detail/:id" element={<JobDetail />} />
         <Route path="create-cv" element={<CreateCV />} />
+        <Route path="become-premium" element={<BecomePremium />} />
       </Route>
 
       {/* Protected Admin Routes */}

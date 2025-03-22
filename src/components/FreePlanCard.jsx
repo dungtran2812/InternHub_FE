@@ -11,7 +11,7 @@ const FreePlanCard = () => {
   ];
 
   return (
-    <div className="flex flex-col w-full max-w-sm mx-auto min-h-[400px] p-5 lg:p-8
+    <div className="flex flex-col  max-w-sm mx-auto w-[500px] p-5 lg:p-8
                     justify-center items-start gap-6 md:gap-8
                     rounded-[10px] border border-[#9699DB]
                     bg-gradient-to-b from-[#EDEEFF] to-[#CACCFF]
