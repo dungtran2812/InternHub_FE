@@ -13,6 +13,7 @@ const endpoints = {
   STUDENT: "/student",
   APPLICATION: "/application",
   PREMIUM: "/premium",
+  ADMIN: "/admin"
 }
 export default endpoints
 

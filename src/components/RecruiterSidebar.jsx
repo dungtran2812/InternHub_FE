@@ -63,7 +63,7 @@ const RecruiterSidebar = () => {
         {/* Logout button with margin-top for spacing */}
         <div className="mt-8">
           <Link
-            to="/logout"
+            to="/login"
             className={cn(
               "flex items-center space-x-3 rounded-md px-4 py-3",
               "text-sm font-medium",
