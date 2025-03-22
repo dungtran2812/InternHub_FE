@@ -1,7 +1,11 @@
 import { Button } from "@/components/ui/button";
 import premiumFeature from '../assets/planCard/premiumFeature.svg';
+import { useBecomePremiumMutation } from "@/services/internHubApi";
+import { redirect, useNavigate } from "react-router-dom";
 
 const PremiumSubCard = () => {
+  const navigate = useNavigate();
+  const [becomePremium, { isLoading: isApplying, isSuccess: isApplySuccess, isError: isApplyError }] = useBecomePremiumMutation()
   const features = [
     'Truy cập thông tin chi tiết về môi trường làm việc và cơ hội phát triển.',
     'Tùy chọn lọc nâng cao cho mức lương và cơ hội phát triển.',
@@ -12,6 +16,20 @@ const PremiumSubCard = () => {
     'Truy cập không giới hạn tài liệu học tập và mẫu CV.'
   ];
 
+  const handleBecomePremium = async () => {
+    const response = await becomePremium().unwrap()
+    if (response) {
+      console.log("handleBecomePremium: ", response);
+      window.location.href = response.message
+    }
+  };
+  // if (isApplying) {
+  //   return (
+  //     <div className="flex justify-center items-center">
+  //       Loading...
+  //     </div>
+  //   )
+  // }
   return (
     <div className="flex flex-col w-full max-w-lg mx-auto min-h-[500px] p-5 lg:p-10
                     justify-center items-start gap-6 md:gap-8
@@ -37,11 +55,15 @@ const PremiumSubCard = () => {
         ))}
       </div>
 
-      <Button
-        className="bg-[#FFE492] text-[#112396] hover:bg-[#FFE492]/90 mt-4"
-      >
-        Bắt đầu ngay
-      </Button>
+      <div >
+        <Button
+          isLoading={isApplying}
+          onClick={handleBecomePremium}
+          className="bg-[#FFE492] text-[#112396] hover:bg-[#FFE492]/90 mt-4"
+        >
+          Bắt đầu ngay
+        </Button>
+      </div>
     </div>
   );
 };
