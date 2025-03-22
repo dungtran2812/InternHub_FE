@@ -9,14 +9,14 @@ export default function JobCard({ job }) {
         <div className="flex items-start gap-4">
           <div className="relative w-12 h-12 rounded-lg overflow-hidden border bg-white">
             <img
-              src={company.logoCompany || "/placeholder.svg"}
-              alt={`${company.name} logo`}
+              src={company?.logoCompany || "/placeholder.svg"}
+              alt={`${company?.name} logo`}
               className="object-contain w-full h-full p-1"
             />
           </div>
           <div className="flex-1 min-w-0">
             <h3 className="font-semibold text-lg leading-tight line-clamp-2 mb-1">{jobTitle}</h3>
-            <p className="text-sm text-muted-foreground line-clamp-1">{company.name}</p>
+            <p className="text-sm text-muted-foreground line-clamp-1">{company?.name}</p>
           </div>
         </div>
       </CardHeader>
