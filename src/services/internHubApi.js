@@ -131,6 +131,13 @@ const internHubApi = createApi({
         url: `${endpoints.PREMIUM}/buy-premium?premiumPlanId=be86dd00-a91a-4cc6-9175-cfc145173ed5`,
         method: 'POST',
       }),
+    }),
+    dashboardData: builder.query({
+      query: ({ startDate, endDate }) => ({
+        url: `${endpoints.ADMIN}/dashboard`,
+        method: 'GET',
+        params: {startDate, endDate}
+      }),
     })
   }),
   
@@ -156,6 +163,7 @@ export const {
   useUploadCVMutation,
   useApplyJobMutation,
   useBecomePremiumMutation,
+  useDashboardDataQuery
 } = internHubApi;
 
 export default internHubApi;
