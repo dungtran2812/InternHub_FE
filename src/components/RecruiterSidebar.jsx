@@ -8,6 +8,7 @@ import salesIcon from "@/assets/sidebarIcon/sales.svg";
 import postIntern from "@/assets/sidebarIcon/postIntern.svg";
 import internEvaluate from "@/assets/sidebarIcon/internEvaluate.svg";
 import review from "@/assets/sidebarIcon/review.svg";
+import feedback from "@/assets/sidebarIcon/feedback.svg";
 
 import logoutIcon from "@/assets/logouticon.svg";
 
@@ -20,6 +21,7 @@ const RecruiterSidebar = () => {
     // { label: "Phản hồi từ thực tập sinh", href: "/feedback", icon: feedback },
     { label: "Mua gói", href: "/recruiter", icon: salesIcon },
     { label: "Quản lý phản hồi của thực tập sinh", href: "/recruiter/manage-intern-feedbacks", icon: review },
+    { label: "Quản lý công việc", href: "/recruiter/manage-jobs", icon: feedback },
   ];
 
   return (

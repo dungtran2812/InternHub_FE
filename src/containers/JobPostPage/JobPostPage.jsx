@@ -3,20 +3,22 @@ import JobPostStep from "./JobPostStep"
 import BasicJobInfoStep from "./BasicJobInfoStep"
 import PremiumJobPostStep from "./PremiumJobPostStep"
 import ConfirmJobPostStep from "./ConfirmJobPostStep"
+import { number } from "yup"
 
 export default function JobPostingPage() {
   const [currentStep, setCurrentStep] = useState(1)
   const [formData, setFormData] = useState({
     jobTitle: "",
     description: "",
-    requirements: "",
+    requirement: "",
     duration: "",
     quantity: "",
     location: "",
-    jobFunction: "",
-    industry: "",
+    jobFunctionId: "",
+    industryId: "",
     premiumTags: [],
     selectedPackage: "basic",
+    salary: ""
   })
 
   const handleInputChange = (field, value) => {

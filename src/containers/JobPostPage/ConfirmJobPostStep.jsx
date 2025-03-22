@@ -5,8 +5,25 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Badge } from "@/components/ui/badge"
 import { Checkbox } from "@/components/ui/checkbox"
 import { ArrowLeft, FileCheck } from "lucide-react"
+import { useCreateJobMutation } from "@/services/internHubApi"
+import { toast } from "@/hooks/use-toast"
+import { message } from "antd"
 
 export default function ConfirmJobPostStep({ formData, prevStep }) {
+  console.log("formData: ", formData)
+  const [createJob, { isLoading: isApplying, isSuccess: isApplySuccess, isError: isApplyError }] = useCreateJobMutation()
+  const handleSubmit = async () => {
+
+    try {
+      const response = await createJob(formData)
+      if(response){
+        message.success("Tạo công việc thành công")
+      }
+    } catch (error) {
+      message.error(error)
+    }
+  }
+  
   return (
     <Card>
       <CardHeader>
@@ -18,8 +35,8 @@ export default function ConfirmJobPostStep({ formData, prevStep }) {
           <div className="space-y-1">
             <h3 className="text-xl font-bold">{formData.jobTitle || "Chưa có tiêu đề"}</h3>
             <div className="flex flex-wrap gap-2">
-              <Badge variant="secondary">{formData.jobFunction || "Chưa chọn chức năng"}</Badge>
-              <Badge variant="secondary">{formData.industry || "Chưa chọn ngành nghề"}</Badge>
+              <Badge variant="secondary">{formData.jobFunctionId || "Chưa chọn chức năng"}</Badge>
+              <Badge variant="secondary">{formData.industryId || "Chưa chọn ngành nghề"}</Badge>
               <Badge variant="secondary">{formData.location || "Chưa có địa điểm"}</Badge>
             </div>
           </div>
@@ -40,7 +57,7 @@ export default function ConfirmJobPostStep({ formData, prevStep }) {
 
           <div className="space-y-2">
             <h4 className="font-medium">Yêu cầu công việc:</h4>
-            <p className="text-sm whitespace-pre-line">{formData.requirements || "Chưa có yêu cầu"}</p>
+            <p className="text-sm whitespace-pre-line">{formData.requirement || "Chưa có yêu cầu"}</p>
           </div>
 
           {formData.premiumTags.length > 0 && (
@@ -99,7 +116,7 @@ export default function ConfirmJobPostStep({ formData, prevStep }) {
           <ArrowLeft className="mr-2 h-4 w-4" />
           Quay lại
         </Button>
-        <Button>
+        <Button onClick={handleSubmit}>
           <FileCheck className="mr-2 h-4 w-4" />
           Đăng tin tuyển dụng
         </Button>

@@ -131,9 +131,15 @@ const internHubApi = createApi({
         url: `${endpoints.PREMIUM}/buy-premium?premiumPlanId=be86dd00-a91a-4cc6-9175-cfc145173ed5`,
         method: 'POST',
       }),
-    })
+    }),
+    createJob: builder.mutation({
+      query: (credentials) => ({
+        url: `${endpoints.JOB}/create`,
+        method: 'POST',
+        data: credentials,
+      }),
+    }),
   }),
-  
 });
 
 export const {
@@ -156,6 +162,7 @@ export const {
   useUploadCVMutation,
   useApplyJobMutation,
   useBecomePremiumMutation,
+  useCreateJobMutation,
 } = internHubApi;
 
 export default internHubApi;

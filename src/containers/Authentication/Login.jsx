@@ -11,7 +11,7 @@ import { useDispatch } from 'react-redux';
 import { useToast } from '@/hooks/use-toast';
 import { useEffect, useState } from 'react';
 import { GOOGLE_AUTH_URL } from '@/consts/urlconst';
-import { setAccessToken, setEmail, setFullName, setGender, setMajor, setPhone, setRole, setUserId, setResume, setGpa, setAvtUrl } from '@/features/user';
+import { setAccessToken, setEmail, setFullName, setGender, setMajor, setPhone, setRole, setUserId, setResume, setGpa, setAvtUrl, setCompany } from '@/features/user';
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -36,6 +36,7 @@ const Login = () => {
       dispatch(setPhone(userInfo.phone));
       dispatch(setResume(userInfo.resume));
       dispatch(setGpa(userInfo.gpa));
+      dispatch(setCompany(userInfo.company));
       setLoginSuccess(false)
       // Show success toast
       toast({
