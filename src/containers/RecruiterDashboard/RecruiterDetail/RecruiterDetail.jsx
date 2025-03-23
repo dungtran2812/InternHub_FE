@@ -5,7 +5,7 @@ import {
   FlagOutlined, ShareAltOutlined, MoneyCollectOutlined, HeartOutlined, ScheduleOutlined
 } from '@ant-design/icons';
 import { Carousel } from "flowbite-react";
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 const RecruiterDetail = () => {
   const { id } = useParams();
   const { data: company, isLoading, isError } = useGetCompanyByIdQuery(id)
@@ -152,15 +152,17 @@ const RecruiterDetail = () => {
           {
             jobsFilter?.map((item) => (
               <div key={item.id}>
-                <CompanyJobCard
-                  company_name={item?.company?.name}
-                  link={item?.company?.website}
-                  location={item?.location}
-                  salary={item?.salary === "0" ? <div className="text-blue-600">Thoả thuận</div> : ""}
-                  img={item?.company?.logoCompany}
-                  job_title={item?.jobTitle}
-                  updatedAt={"Cập nhật 5 giờ trước"}
-                />
+                <Link to={`/job-detail/${item.id}`}>
+                  <CompanyJobCard
+                    company_name={item?.company?.name}
+                    link={item?.company?.website}
+                    location={item?.location}
+                    salary={item?.salary === "0" ? <div className="text-blue-600">Thoả thuận</div> : ""}
+                    img={item?.company?.logoCompany}
+                    job_title={item?.jobTitle}
+                    updatedAt={"Cập nhật 5 giờ trước"}
+                  />
+                </Link>
               </div>
             ))
           }
