@@ -23,7 +23,7 @@ const BecomePremium = () => {
           </div>
           <div className='text-center mt-10'>
             <p><span className='font-semibold'>Lưu ý:</span> Sau khi hết thời hạn sử dụng, bạn vẫn có thể chỉnh sửa mẫu CV đã tạo như bình thường.</p>
-            <p className='mt-5'>Nếu có vấn đề về thanh toán và nâng cấp tài khoản vui lòng liên hệ: <span className='font-semibold'>hotro@topcv.vn</span> hoặc hotline: <span  className='font-semibold'>(024) 6680 5588</span> (Giờ hành chính)</p>
+            <p className='mt-5'>Nếu có vấn đề về thanh toán và nâng cấp tài khoản vui lòng liên hệ: <span className='font-semibold'>kalocs@gmail.com</span></p>
           </div>
         </div>
       </div>
