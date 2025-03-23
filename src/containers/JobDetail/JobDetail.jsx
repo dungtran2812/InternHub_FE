@@ -12,7 +12,7 @@ const JobDetail = () => {
   const { id } = useParams();
   const resume = useSelector((state) => state.rootReducer.user.resume);
   const { data: job, isLoading, isError } = useGetJobByIdQuery(id)
-  const [ applyJob, { isLoading: isApplying, isSuccess: isApplySuccess, isError: isApplyError } ] = useApplyJobMutation()
+  const [applyJob, { isLoading: isApplying, isSuccess: isApplySuccess, isError: isApplyError }] = useApplyJobMutation()
   const { data: jobs } = useGetAllJobQuery("", "", job?.industry?.id, "", "")
   const jobFilterByIndustry = jobs?.filter(item => item?.industry?.id === job?.industry?.id);
   console.log("job: ", job)
@@ -21,18 +21,21 @@ const JobDetail = () => {
   }, [])
 
   const handleJobApplication = async (id) => {
-    applyJob({ jobId: id, resume: resume, coverLetter: "Cover Letter" }).unwrap()
+    await applyJob({ jobId: id, resume: resume, coverLetter: "Cover Letter" }).unwrap()
+  };
+  useEffect(() => {
     if (isApplySuccess) {
       toast({
         title: 'Ứng Tuyển Thành Công',
-    });
-    } else {
+      });
+    }
+    if (isApplyError) {
       toast({
         variant: 'destructive',
         title: 'Ứng Tuyển Thất Bại',
-    });
+      });
     }
-  };
+  }, [isApplyError, isApplySuccess])
 
   if (isLoading) return (
     <div className="flex justify-center items-center h-screen">
@@ -91,10 +94,10 @@ const JobDetail = () => {
                 </div>
               </div>
               {/* Ứng tuyển ngay */}
-                  <CVMenuPopover />
+              <CVMenuPopover />
               <div className="grid grid-cols-12 gap-5 mt-5 ">
                 <div className="col-span-8">
-                  <button 
+                  <button
                     className={`text-white bg-blue-500 text-lg text-center p-1 w-full rounded-xl ${isApplying ? 'animate-pulse' : ''}`}
                     onClick={() => handleJobApplication(job.id)}
                   >

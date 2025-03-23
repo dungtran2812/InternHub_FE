@@ -3,7 +3,7 @@ import { UserOutlined, CheckCircleOutlined, PlusOutlined } from '@ant-design/ico
 import { useDispatch, useSelector } from "react-redux";
 import { useLazyGetUserInfoQuery, usePutStudentProfileMutation } from "@/services/internHubApi";
 import { useEffect, useState } from "react";
-import { setEmail, setFullName, setGender, setMajor, setPhone, setRole, setUserId, setGpa, setAvtUrl } from '@/features/user';
+import { setEmail, setFullName, setGender, setMajor, setPhone, setRole, setUserId, setGpa, setAvtUrl, setResume } from '@/features/user';
 import PdfPreview from "@/components/PdfPreview";
 import { Link } from "react-router-dom";
 import { uploadToCloudinary } from "@/function";
@@ -26,6 +26,7 @@ const EmployeeProfile = () => {
             dispatch(setRole(userInfo.role));
             dispatch(setUserId(userInfo.id));
             dispatch(setFullName(userInfo.fullName));
+            dispatch(setResume(userInfo.resume));
             dispatch(setGender(userInfo.gender));
             dispatch(setMajor(userInfo.major));
             dispatch(setPhone(userInfo.phone));
