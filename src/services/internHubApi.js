@@ -140,15 +140,26 @@ const internHubApi = createApi({
         data: credentials,
       }),
     }),
-
     dashboardData: builder.query({
       query: ({ startDate, endDate }) => ({
         url: `${endpoints.ADMIN}/dashboard`,
         method: 'GET',
         params: {startDate, endDate}
       }),
-    })
-
+    }),
+    getAppilcation: builder.query({
+      query: () => ({
+        url: `${endpoints.APPLICATION}/recruiter-get-application?page=0&pageSize=100&order=asc`,
+        method: 'GET',
+      }),
+    }),
+    putApplication: builder.mutation({
+      query: ({ id, credentials }) => ({
+        url: `${endpoints.APPLICATION}/${id}/${credentials}`,
+        method: 'PUT',
+        data: id, credentials
+      }),
+    }),
   }),
 });
 
@@ -172,11 +183,10 @@ export const {
   useUploadCVMutation,
   useApplyJobMutation,
   useBecomePremiumMutation,
-
   useCreateJobMutation,
-
-  useDashboardDataQuery
-
+  useDashboardDataQuery,
+  useGetAppilcationQuery,
+  usePutApplicationMutation
 } = internHubApi;
 
 export default internHubApi;
