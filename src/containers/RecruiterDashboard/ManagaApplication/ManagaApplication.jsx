@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Avatar, Table, Modal, Button, Select } from "antd";
+import { Avatar, Table, Modal, Button, Select, Tag } from "antd";
 import { useGetAppilcationQuery, usePutApplicationMutation } from "@/services/internHubApi";
 import { EditOutlined } from "@ant-design/icons";
 
@@ -11,7 +11,7 @@ const ManageApplication = () => {
     const { data: dataSource, isLoading: isLoading } = useGetAppilcationQuery()
     const [updateStatus, { isLoading: isApplying, isSuccess: isApplySuccess, isError: isApplyError }] = usePutApplicationMutation()
     console.log("dataSource: ", dataSource)
-    if (isLoading) {
+    if (isLoading || isApplying) {
         return (
             <div className="flex items-center justify-center min-h-screen">
                 Loading ...
@@ -54,16 +54,8 @@ const ManageApplication = () => {
         {
             title: "Status",
             dataIndex: "status",
-            render: () => (
-                <Select
-                    defaultValue="PENDING"
-                    style={{ width: 120 }}
-                    onChange={(value) => console.log(`selected ${value}`)}
-                    options={[
-                        { value: 'PENDING', label: 'PENDING' },
-                        { value: 'APPROVED', label: 'APPROVED' },
-                    ]}
-                />
+            render: (status) => (
+                <Tag color={status === "PENDING" ? "yellow" : status === "ACCEPT" ? "green" : "red"}>{status}</Tag>
             )
         },
         {
@@ -79,20 +71,20 @@ const ManageApplication = () => {
             title: "Hành động",
             render: (job) => (
                 <div className="flex gap-2">
-                    <Button type="primary" onClick={()=>handleUpdate(job.id, "ACCEPT")}>
+                    <Button type="primary" onClick={() => handleUpdate(job.id, "ACCEPT")}>
                         Accept
                     </Button>
-                    <Button type="default" onClick={()=>handleUpdate(job.id, "REJECT")}>
+                    <Button type="default" onClick={() => handleUpdate(job.id, "REJECT")}>
                         Reject
                     </Button>
                 </div>
             )
         },
     ];
-    const handleUpdate= async(id, status)=>{
+    const handleUpdate = async (id, status) => {
         console.log(id, status)
-        const response = await updateStatus(id, status)
-        if(response){
+        const response = await updateStatus({ id: id, credentials: status }).unwrap();
+        if (response) {
             window.location.reload()
             console.log("handleUpdate: ", response)
         }
