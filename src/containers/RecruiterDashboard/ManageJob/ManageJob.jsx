@@ -6,23 +6,20 @@ import { useSelector } from "react-redux";
 const ManageJob = () => {
     const companyId = useSelector((state) => state.rootReducer.user.company.id)
     console.log("companyId: ", companyId)
-    const { data: jobs } = useGetAllJobQuery()
+    const { data: jobs, isLoading: isLoading } = useGetAllJobQuery()
     const jobsFilter = jobs?.filter((item)=>item?.company?.id === companyId)
+    if (isLoading) {
+        return (
+            <div className="flex items-center justify-center min-h-screen">
+                Loading ...
+            </div>
+        )
+    }
     const columns = [
         {
             title: "Tiêu đề công việc",
             dataIndex: "jobTitle",
             key: "jobTitle",
-        },
-        {
-            title: "Mô tả",
-            dataIndex: "description",
-            key: "description",
-        },
-        {
-            title: "Yêu cầu",
-            dataIndex: "requirement",
-            key: "requirement",
         },
         {
             title: "Thời hạn",

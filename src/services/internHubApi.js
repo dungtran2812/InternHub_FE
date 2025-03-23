@@ -160,6 +160,19 @@ const internHubApi = createApi({
         data: id, credentials
       }),
     }),
+    getStudentAppilcation: builder.query({
+      query: () => ({
+        url: `${endpoints.APPLICATION}/student-get-application?page=0&pageSize=100&order=asc`,
+        method: 'GET',
+      }),
+    }),
+    deleteStudentAppilcation: builder.mutation({
+      query: (id) => ({
+        url: `${endpoints.APPLICATION}/student-delete-application/${id}`,
+        method: 'DELETE',
+        data: id,
+      }),
+    }),
   }),
 });
 
@@ -186,7 +199,9 @@ export const {
   useCreateJobMutation,
   useDashboardDataQuery,
   useGetAppilcationQuery,
-  usePutApplicationMutation
+  usePutApplicationMutation,
+  useGetStudentAppilcationQuery,
+  useDeleteStudentAppilcationMutation,
 } = internHubApi;
 
 export default internHubApi;
