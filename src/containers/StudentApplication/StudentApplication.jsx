@@ -3,6 +3,7 @@ import { Avatar, Table, Modal, Button, Select, Tag } from "antd";
 import { useDeleteStudentAppilcationMutation, useGetStudentAppilcationQuery } from "@/services/internHubApi";
 import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
 import PdfPreview from "@/components/PdfPreview";
+import { Link } from "react-router-dom";
 
 const StudentManageApplication = () => {
     const [isStudentModalVisible, setIsStudentModalVisible] = useState(false);
@@ -32,7 +33,9 @@ const StudentManageApplication = () => {
             render: (record) => (
                 <div className="flex justify-between items-center">
                     <div> 
+                        <Link to={record?.student?.resume}> 
                         <PdfPreview   pdfUrl={record?.student?.resume}/>
+                        </Link>
                     </div>
                 </div>
             )
@@ -91,9 +94,10 @@ const StudentManageApplication = () => {
 
     return (
         <div className="m-10">
-            <div className="flex justify-between">
+            <div className="text-3xl font-semibold text-center">
+                Quản lý đơn ứng tuyển
             </div>
-            <Table className="mt-10" dataSource={dataSource.content} columns={columns} pagination={false} />
+            <Table className="mt-10" dataSource={dataSource.content} columns={columns}  />
 
             {/* Student Modal */}
             <Modal
