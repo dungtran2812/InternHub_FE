@@ -9,7 +9,7 @@ GlobalWorkerOptions.workerSrc = `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3
 
 const PdfPreview = ({ pdfUrl, w, h }) => {
   return (
-    pdfUrl ? <div className={`relative w-[150px] h-[300px] rounded-lg overflow-hidden shadow-lg`}>
+    pdfUrl ? <div className={`relative w-[150px] h-[150px] rounded-lg overflow-hidden shadow-lg`}>
       <Worker workerUrl="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js">
         <Viewer fileUrl={pdfUrl} />
       </Worker>
@@ -22,14 +22,14 @@ const PdfPreview = ({ pdfUrl, w, h }) => {
         <p className="text-sm">Cập nhật lần cuối 07-03-2025 19:30 PM</p>
 
         {/* Nút Chia sẻ & Tải xuống */}
-        <div className="flex gap-2 mt-2">
+        {/* <div className="flex gap-2 mt-2">
           <button className="bg-gray-700 px-3 py-1 rounded flex items-center">
             <span className="mr-1">📤</span> Chia sẻ
           </button>
           <button className="bg-gray-700 px-3 py-1 rounded flex items-center">
             <span className="mr-1">⬇️</span> <a href={pdfUrl} download>Tải xuống</a>
           </button>
-        </div>
+        </div> */}
       </div>
     </div>
       :

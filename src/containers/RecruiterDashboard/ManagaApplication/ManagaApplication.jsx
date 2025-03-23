@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Avatar, Table, Modal, Button, Select, Tag } from "antd";
 import { useGetAppilcationQuery, usePutApplicationMutation } from "@/services/internHubApi";
 import PdfPreview from "@/components/PdfPreview";
+import { Link } from "react-router-dom";
 
 const ManageApplication = () => {
     const [isStudentModalVisible, setIsStudentModalVisible] = useState(false);
@@ -48,9 +49,9 @@ const ManageApplication = () => {
             title: "CV",
             render: (record) => (
                 <div className="flex justify-between items-center">
-                    <div>
-                        <PdfPreview   pdfUrl={record?.student?.resume}/>
-                    </div>
+                     <Link to={record?.student?.resume}> 
+                                           <PdfPreview   pdfUrl={record?.student?.resume}/>
+                                           </Link>
                 </div>
             )
         },
@@ -116,6 +117,9 @@ const ManageApplication = () => {
                 <button className="text-blue-800">Data Table</button>
                 <button className="text-blue-800">Export excel</button>
             </div> */}
+            <div className="text-3xl font-semibold text-center">
+                Quản lý đơn ứng tuyển
+            </div>
             <Table className="mt-10" dataSource={dataSource.content} columns={columns}  />
 
             {/* Student Modal */}
