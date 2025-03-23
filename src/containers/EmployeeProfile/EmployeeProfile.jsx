@@ -15,7 +15,7 @@ const EmployeeProfile = () => {
     const user = useSelector((state) => state.rootReducer.user);
     console.log("user: ", user)
     const [putStudentProfile, { isLoading }] = usePutStudentProfileMutation();
-    const [fetchUser , { data: userInfo, isLoading: userInfoLoading }] = useLazyGetUserInfoQuery();
+    const [fetchUser, { data: userInfo, isLoading: userInfoLoading }] = useLazyGetUserInfoQuery();
     const [file, setFile] = useState(null);
 
     useEffect(() => {
@@ -71,7 +71,7 @@ const EmployeeProfile = () => {
         };
         try {
             await putStudentProfile({ id: user.userId, credentials: valuesSubmit }).unwrap();
-            await fetchUser ().unwrap();
+            await fetchUser().unwrap();
         } catch (error) {
             console.error('Cập nhật thất bại:', error);
         }
@@ -218,11 +218,19 @@ const EmployeeProfile = () => {
                         </div>
                         <div className="flex mt-2">
                             <CheckCircleOutlined className="text-xl text-green-400 mr-2" />
-                            Nhắn tin qua Top Connect trên TopCV
+                            Nhắn tin qua Top Connect trên InternHub
                         </div>
                         <div className="flex mt-2">
                             <CheckCircleOutlined className="text-xl text-green-400 mr-2" />
                             Email và Số điện thoại của bạn
+                        </div>
+                        <div className="flex mt-2">
+                            <CheckCircleOutlined className="text-xl text-green-400 mr-2" />
+                            <Link to={"/my-application"}>
+                                <div className="text-blue-500">
+                                    Xem appliaction của bạn
+                                </div>
+                            </Link>
                         </div>
                     </div>
                 </div>

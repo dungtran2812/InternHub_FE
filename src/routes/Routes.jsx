@@ -34,6 +34,7 @@ import BecomePremium from "@/containers/BecomePremium/BecomePremium";
 import PaymentSuccess from "@/containers/PaymentSuccess/PaymentSuccess";
 import PaymentFailed from "@/containers/PaymentFailed/PaymentFailed";
 import ManageJob from "@/containers/RecruiterDashboard/ManageJob/ManageJob";
+import StudentManageApplication from "@/containers/StudentApplication/StudentApplication";
 
 const AppRoutes = () => {
   return (
@@ -60,6 +61,7 @@ const AppRoutes = () => {
         <Route path="job-detail/:id" element={<JobDetail />} />
         <Route path="create-cv" element={<CreateCV />} />
         <Route path="become-premium" element={<BecomePremium />} />
+        <Route path="my-application" element={<StudentManageApplication />} />
       </Route>
 
       {/* Protected Admin Routes */}
