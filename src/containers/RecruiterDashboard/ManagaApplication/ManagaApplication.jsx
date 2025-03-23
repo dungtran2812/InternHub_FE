@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Avatar, Table, Modal, Button, Select, Tag } from "antd";
 import { useGetAppilcationQuery, usePutApplicationMutation } from "@/services/internHubApi";
-import { EditOutlined } from "@ant-design/icons";
+import PdfPreview from "@/components/PdfPreview";
 
 const ManageApplication = () => {
     const [isStudentModalVisible, setIsStudentModalVisible] = useState(false);
@@ -20,18 +20,6 @@ const ManageApplication = () => {
     }
     const columns = [
         {
-            title: "Number",
-            dataIndex: "number",
-            render: (number) => (
-                <div className="flex justify-between items-center">
-                    <div>{number}</div>
-                    <div>
-                        <Avatar size="32" src="https://avatars.githubusercontent.com/u/155450761?v=4" />
-                    </div>
-                </div>
-            )
-        },
-        {
             title: "Full Name",
             dataIndex: "fullName",
             key: "fullName",
@@ -41,15 +29,30 @@ const ManageApplication = () => {
                 </Button>
             )
         },
+        {
+            title: "Ảnh đại diện",
+            render: (record) => (
+                <div className="flex justify-between items-center">
+                    <div>
+                        <Avatar size="32" src={record?.student?.avtUrl === "" ? "https://avatars.githubusercontent.com/u/155450761?v=4" : record?.student?.avtUrl} />
+                    </div>
+                </div>
+            )
+        },
         // {
         //     title: "CV",
         //     dataIndex: "cv",
         //     key: "cv",
         // },
         {
-            title: "Cover Letter",
-            dataIndex: "coverLetter",
-            key: "coverLetter",
+            title: "CV",
+            render: (record) => (
+                <div className="flex justify-between items-center">
+                    <div>
+                        <PdfPreview   pdfUrl={record?.student?.resume}/>
+                    </div>
+                </div>
+            )
         },
         {
             title: "Status",
@@ -109,11 +112,11 @@ const ManageApplication = () => {
 
     return (
         <div className="m-10">
-            <div className="flex justify-between">
+            {/* <div className="flex justify-between">
                 <button className="text-blue-800">Data Table</button>
                 <button className="text-blue-800">Export excel</button>
-            </div>
-            <Table className="mt-10" dataSource={dataSource.content} columns={columns} pagination={false} />
+            </div> */}
+            <Table className="mt-10" dataSource={dataSource.content} columns={columns}  />
 
             {/* Student Modal */}
             <Modal

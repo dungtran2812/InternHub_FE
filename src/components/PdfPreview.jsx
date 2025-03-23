@@ -7,9 +7,9 @@ import { GlobalWorkerOptions } from 'pdfjs-dist';
 // Đặt workerSrc cho pdfjs-dist (phiên bản 3.11.174)
 GlobalWorkerOptions.workerSrc = `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js`;
 
-const PdfPreview = ({ pdfUrl }) => {
+const PdfPreview = ({ pdfUrl, w, h }) => {
   return (
-    pdfUrl ? <div className="relative w-[350px] h-[500px] rounded-lg overflow-hidden shadow-lg">
+    pdfUrl ? <div className={`relative w-[150px] h-[300px] rounded-lg overflow-hidden shadow-lg`}>
       <Worker workerUrl="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js">
         <Viewer fileUrl={pdfUrl} />
       </Worker>

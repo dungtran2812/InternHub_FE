@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Avatar, Table, Modal, Button, Select, Tag } from "antd";
 import { useDeleteStudentAppilcationMutation, useGetStudentAppilcationQuery } from "@/services/internHubApi";
 import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
+import PdfPreview from "@/components/PdfPreview";
 
 const StudentManageApplication = () => {
     const [isStudentModalVisible, setIsStudentModalVisible] = useState(false);
@@ -27,9 +28,14 @@ const StudentManageApplication = () => {
         //     key: "cv",
         // },
         {
-            title: "Cover Letter",
-            dataIndex: "coverLetter",
-            key: "coverLetter",
+            title: "CV",
+            render: (record) => (
+                <div className="flex justify-between items-center">
+                    <div> 
+                        <PdfPreview   pdfUrl={record?.student?.resume}/>
+                    </div>
+                </div>
+            )
         },
         {
             title: "Status",
@@ -86,8 +92,6 @@ const StudentManageApplication = () => {
     return (
         <div className="m-10">
             <div className="flex justify-between">
-                <button className="text-blue-800">Data Table</button>
-                <button className="text-blue-800">Export excel</button>
             </div>
             <Table className="mt-10" dataSource={dataSource.content} columns={columns} pagination={false} />
 
