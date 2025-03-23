@@ -155,7 +155,7 @@ const internHubApi = createApi({
     }),
     putApplication: builder.mutation({
       query: ({ id, credentials }) => ({
-        url: `${endpoints.APPLICATION}/${id}/${credentials}`,
+        url: `application/${id}/update-status?status=${credentials}`,
         method: 'PUT',
         data: id, credentials
       }),
