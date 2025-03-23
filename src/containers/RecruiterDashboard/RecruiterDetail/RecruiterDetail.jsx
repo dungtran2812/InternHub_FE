@@ -11,6 +11,13 @@ const RecruiterDetail = () => {
   const { data: company, isLoading, isError } = useGetCompanyByIdQuery(id)
   const { data: jobs } = useGetAllJobQuery()
   const jobsFilter = jobs?.filter(item => item?.company?.id === id)
+  if (isLoading) {
+    return (
+      <div className='flex justify-center items-center min-h-screen'>
+        Loading ...
+      </div>
+    )
+  }
   return (
     <div className="mx-5">
       <div className="container mx-auto justify-items-center mt-5">

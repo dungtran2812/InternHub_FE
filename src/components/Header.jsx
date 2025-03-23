@@ -18,8 +18,9 @@ const Header = () => {
   const navigate = useNavigate();
   const accessToken = useSelector((state) => state.rootReducer.user.accessToken);
   const avtUrl = useSelector((state) => state.rootReducer.user.avtUrl);
+  
   const navItems = [
-    { label: "Việc làm", href: "/jobs" },
+    { label: "Premium", href: "/become-premium" },
     { label: "Hồ sơ & CV", href: "/employee-profile" },
     { label: "Tạo CV", href: "/create-cv" },
     { label: "Công ty", href: "/companies" },

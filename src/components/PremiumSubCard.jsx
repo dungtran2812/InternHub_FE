@@ -23,13 +23,13 @@ const PremiumSubCard = () => {
       window.location.href = response.message
     }
   };
-  // if (isApplying) {
-  //   return (
-  //     <div className="flex justify-center items-center">
-  //       Loading...
-  //     </div>
-  //   )
-  // }
+  if (isApplying) {
+    return (
+      <div className="flex justify-center items-center">
+        Loading...
+      </div>
+    )
+  }
   return (
     <div className="flex flex-col w-full max-w-lg mx-auto min-h-[500px] p-5 lg:p-10
                     justify-center items-start gap-6 md:gap-8
