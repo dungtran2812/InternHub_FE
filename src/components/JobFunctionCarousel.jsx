@@ -12,22 +12,22 @@ import nextButton from "@/assets/nextButton.svg"
 import carouselDot from "@/assets/carouselDot.svg"
 
 const categories = [
-  { name: "Tiếp Thị Số", icon: "/placeholder.svg?height=40&width=40", jobs: 12 },
-  { name: "Kinh Doanh Quốc Tế", icon: "/placeholder.svg?height=40&width=40", jobs: 8 },
-  { name: "Ngôn Ngữ", icon: "/placeholder.svg?height=40&width=40", jobs: 15 },
-  { name: "Quan Hệ Công Chúng", icon: "/placeholder.svg?height=40&width=40", jobs: 6 },
-  { name: "Kỹ Thuật Phần Mềm", icon: "/placeholder.svg?height=40&width=40", jobs: 25 },
-  { name: "Thiết Kế Đồ Họa", icon: "/placeholder.svg?height=40&width=40", jobs: 18 },
-  { name: "Quản Lý Khách Sạn", icon: "/placeholder.svg?height=40&width=40", jobs: 10 },
-  { name: "Truyền Thông Tiếp Thị", icon: "/placeholder.svg?height=40&width=40", jobs: 9 },
-  { name: "Khoa Học Dữ Liệu", icon: "/placeholder.svg?height=40&width=40", jobs: 14 },
-  { name: "Nhân Sự", icon: "/placeholder.svg?height=40&width=40", jobs: 7 },
-  { name: "Tài Chính", icon: "/placeholder.svg?height=40&width=40", jobs: 16 },
-  { name: "Quản Lý Dự Án", icon: "/placeholder.svg?height=40&width=40", jobs: 11 },
-  { name: "Viết Nội Dung", icon: "/placeholder.svg?height=40&width=40", jobs: 13 },
-  { name: "Thiết Kế UI/UX", icon: "/placeholder.svg?height=40&width=40", jobs: 20 },
-  { name: "Bán Hàng", icon: "/placeholder.svg?height=40&width=40", jobs: 17 },
-  { name: "Dịch Vụ Khách Hàng", icon: "/placeholder.svg?height=40&width=40", jobs: 22 }
+  { name: "Tiếp Thị Số", icon: "https://subiz.com.vn/blog/wp-content/uploads/2022/12/tiep-thi-ky-thuat-so-e1671439917982.jpg", jobs: 12 },
+  { name: "Kinh Doanh Quốc Tế", icon: "https://cdn.vietnambiz.vn/2019/8/30/international-business-15671553038501110641058.png", jobs: 8 },
+  { name: "Ngôn Ngữ", icon: "https://fbu.edu.vn/wp-content/uploads/2022/01/truong-dao-tao-ngon-ngu-anh-tai-ha-noi.jpg", jobs: 15 },
+  { name: "Quan Hệ Công Chúng", icon: "https://cdn.vietnambiz.vn/2019/8/30/international-business-15671553038501110641058.png", jobs: 6 },
+  { name: "Kỹ Thuật Phần Mềm", icon: "https://cdn.vietnambiz.vn/2019/8/30/international-business-15671553038501110641058.png", jobs: 25 },
+  { name: "Thiết Kế Đồ Họa", icon: "https://cdn.vietnambiz.vn/2019/8/30/international-business-15671553038501110641058.png", jobs: 18 },
+  { name: "Quản Lý Khách Sạn", icon: "https://cdn.vietnambiz.vn/2019/8/30/international-business-15671553038501110641058.png", jobs: 10 },
+  { name: "Truyền Thông Tiếp Thị", icon: "https://cdn.vietnambiz.vn/2019/8/30/international-business-15671553038501110641058.png", jobs: 9 },
+  { name: "Khoa Học Dữ Liệu", icon: "https://cdn.vietnambiz.vn/2019/8/30/international-business-15671553038501110641058.png", jobs: 14 },
+  { name: "Nhân Sự", icon: "https://cdn.vietnambiz.vn/2019/8/30/international-business-15671553038501110641058.png", jobs: 7 },
+  { name: "Tài Chính", icon: "https://cdn.vietnambiz.vn/2019/8/30/international-business-15671553038501110641058.png", jobs: 16 },
+  { name: "Quản Lý Dự Án", icon: "https://cdn.vietnambiz.vn/2019/8/30/international-business-15671553038501110641058.png", jobs: 11 },
+  { name: "Viết Nội Dung", icon: "https://cdn.vietnambiz.vn/2019/8/30/international-business-15671553038501110641058.png", jobs: 13 },
+  { name: "Thiết Kế UI/UX", icon: "https://cdn.vietnambiz.vn/2019/8/30/international-business-15671553038501110641058.png", jobs: 20 },
+  { name: "Bán Hàng", icon: "https://cdn.vietnambiz.vn/2019/8/30/international-business-15671553038501110641058.png", jobs: 17 },
+  { name: "Dịch Vụ Khách Hàng", icon: "https://cdn.vietnambiz.vn/2019/8/30/international-business-15671553038501110641058.png", jobs: 22 }
 ]
 
 
