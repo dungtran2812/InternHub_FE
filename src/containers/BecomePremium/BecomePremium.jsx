@@ -1,8 +1,8 @@
 import FreePlanCard from '@/components/FreePlanCard'
 import PremiumSubCard from '@/components/PremiumSubCard'
-import React from 'react'
 
 const BecomePremium = () => {
+
   return (
     <div className=''>
       <div className='bg-blue-100 py-14 text-center'>

@@ -15,7 +15,7 @@ const internHubApi = createApi({
     }),
     signup: builder.mutation({
       query: (credentials) => ({
-        url: endpoints.SIGNUP,
+        url: endpoints.STUDENT_SIGNUP,
         method: 'POST',
         data: credentials,
       }),
@@ -181,6 +181,7 @@ export const {
   useSignupMutation,
   useRecruiterSignupMutation,
   useLazyGetUserInfoQuery,
+  useGetUserInfoQuery,
   useGetCompanyByIdQuery,
   useGetAllCompanyQuery,
   useGetAllReviewQuery,

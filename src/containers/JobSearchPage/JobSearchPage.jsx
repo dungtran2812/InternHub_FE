@@ -14,7 +14,7 @@ import { Link } from "react-router-dom"
 
 export default function JobSearchPage() {
   const { industry, jobFunction, searchText } = useSelector((state) => state.rootReducer.user.search)
-  const [page, setPage] = useState(0)
+  const [page, setPage] = useState(1)
   const [pageSize, setPageSize] = useState(12)
 
   const {

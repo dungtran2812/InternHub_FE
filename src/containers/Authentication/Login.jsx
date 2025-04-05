@@ -6,14 +6,16 @@ import PasswordIcon from '../../assets/loginPageIcon/PasswordIcon.svg';
 import { useLazyGetUserInfoQuery, useLoginMutation } from '@/services/internHubApi';
 import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { useToast } from '@/hooks/use-toast';
 import { useEffect, useState } from 'react';
 import { GOOGLE_AUTH_URL } from '@/consts/urlconst';
-import { setAccessToken, setEmail, setFullName, setGender, setMajor, setPhone, setRole, setUserId, setResume, setGpa, setAvtUrl, setCompany } from '@/features/user';
+import { setAccessToken, setEmail, setFullName, setGender, setMajor, setPhone, setRole, setUserId, setResume, setGpa, setAvtUrl, setCompany, setIsLoggedIn, setIsPremium } from '@/features/user';
 
 const Login = () => {
+  const location = useLocation();
+  const { rejectAccess } = location.state || {};
   const dispatch = useDispatch();
   const { toast } = useToast();
   const navigate = useNavigate();
@@ -27,6 +29,8 @@ const Login = () => {
       
       // Dispatch all user data
       dispatch(setEmail(userInfo.email));
+      dispatch(setIsLoggedIn(true));
+      dispatch(setIsPremium(userInfo.isPremium));
       dispatch(setAvtUrl(userInfo.avtUrl));
       dispatch(setRole(userInfo.role));
       dispatch(setUserId(userInfo.id));
@@ -54,6 +58,17 @@ const Login = () => {
       navigate(routes[userInfo.role] || '/');
     }
   }, [userInfo, loginSuccess, userInfoLoading, dispatch, navigate, toast]);
+
+  useEffect(() => {
+    if (rejectAccess) {
+      toast({
+        variant: 'destructive',
+        title: 'Truy cập bị từ chối',
+        description: 'Bạn không có quyền truy cập vào trang này.',
+      });
+    }
+  }
+  ,[rejectAccess, toast])
 
   const handleSubmit = async (values) => {
     try {

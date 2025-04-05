@@ -24,6 +24,7 @@ const initialState = {
     location: null,
     searchText: null
   },
+  isPremium: null,
 };
 
 const userSlice = createSlice({
@@ -81,6 +82,9 @@ const userSlice = createSlice({
     setCompany(state, action) {
       state.company = action.payload;
     },
+    setIsPremium(state, action) {
+      state.isPremium = action.payload;
+    },
     clearUserInfo(state) {
       state.isLoggedIn = false;
       state.isFirstLogin = false;
@@ -96,6 +100,7 @@ const userSlice = createSlice({
       state.resume = ""; 
       state.gpa = null;
       state.company = { id: "" }; // Reset company khi đăng xuất
+      state.isPremium = null;
     },
     setUser(state, action) {
       const { 
@@ -143,7 +148,8 @@ export const {
   setCompany,
   clearUserInfo,
   setAccessTokenExpired,
-  setSearch
+  setSearch,
+  setIsPremium
 } = userSlice.actions;
 
 export default userSlice.reducer;
