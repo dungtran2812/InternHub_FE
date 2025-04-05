@@ -15,7 +15,7 @@ const PrivateRoleBasedRoute  = (props) => {
 		rejectAccess: !canAccessWithRoles
 	};
 
-	return canAccessWithRoles ? <Component /> : <Navigate to='/' state={routingState} />;
+	return canAccessWithRoles ? <Component /> : <Navigate to='/login' state={routingState} />;
 };
 
 

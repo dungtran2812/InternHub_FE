@@ -1,9 +1,13 @@
 import { Button } from "@/components/ui/button";
 import premiumFeature from '../assets/planCard/premiumFeature.svg';
-import { useBecomePremiumMutation } from "@/services/internHubApi";
-import { redirect, useNavigate } from "react-router-dom";
+import { useBecomePremiumMutation, useGetUserInfoQuery } from "@/services/internHubApi";
+import { Link, redirect, useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const PremiumSubCard = () => {
+  const { data: userInfo, isLoading: isLoadingUser} = useGetUserInfoQuery()
+  const isPremium = userInfo?.isPremium
+  const isLoggedIn = useSelector((state) => state.rootReducer.user.isLoggedIn)
   const navigate = useNavigate();
   const [becomePremium, { isLoading: isApplying, isSuccess: isApplySuccess, isError: isApplyError }] = useBecomePremiumMutation()
   const features = [
@@ -23,7 +27,7 @@ const PremiumSubCard = () => {
       window.location.href = response.message
     }
   };
-  if (isApplying) {
+  if (isApplying || isLoadingUser) {
     return (
       <div className="flex justify-center items-center">
         Loading...
@@ -56,13 +60,25 @@ const PremiumSubCard = () => {
       </div>
 
       <div >
-        <Button
-          isLoading={isApplying}
-          onClick={handleBecomePremium}
-          className="bg-[#FFE492] text-[#112396] hover:bg-[#FFE492]/90 mt-4"
-        >
-          Bắt đầu ngay
-        </Button>
+        {
+          isLoggedIn ? (
+            isPremium ? (
+              <span className="text-white">Tài khoản của bạn đã là premium!</span>
+            ) : (
+              <Button
+                isLoading={isApplying}
+                onClick={handleBecomePremium}
+                className="bg-[#FFE492] text-[#112396] hover:bg-[#FFE492]/90 mt-4"
+              >
+                Bắt đầu ngay
+              </Button>
+            )
+          ) : (
+            <Link to={"/login"} className="bg-[#FFE492] text-[#112396] hover:bg-[#FFE492]/90 mt-4 inline-block py-2 px-4 rounded">
+              Vui lòng đăng nhập để nâng cấp tài khoản
+            </Link>
+          )
+        }
       </div>
     </div>
   );

@@ -56,12 +56,48 @@ const AppRoutes = () => {
         <Route path="about" element={<AboutUsPage />} />
         <Route path="blog" element={<BlogPage />} />
         <Route path="companies" element={<CompanyList />} />
-        <Route path="employee-profile" element={<EmployeeProfile />} />
+        <Route
+          path="employee-profile"
+          element={
+            <PrivateRoleBasedRoute
+              path="/employee-profile"
+              requiredRoles={["STUDENT"]}
+              Component={EmployeeProfile}
+            />
+          }
+        />
         <Route path="company/:id" element={<RecruiterDetail />} />
-        <Route path="job-detail/:id" element={<JobDetail />} />
-        <Route path="create-cv" element={<CreateCV />} />
+        <Route
+          path="job-detail/:id"
+          element={
+            <PrivateRoleBasedRoute
+            path="/job-detail/:id"
+              requiredRoles={["STUDENT"]}
+              Component={JobDetail}
+            />
+          }
+        />
+        <Route
+          path="create-cv"
+          element={
+            <PrivateRoleBasedRoute
+              path="/create-cv"
+              requiredRoles={["STUDENT"]}
+              Component={CreateCV}
+            />
+          }
+        />
         <Route path="become-premium" element={<BecomePremium />} />
-        <Route path="my-application" element={<StudentManageApplication />} />
+        <Route
+          path="my-application"
+          element={
+            <PrivateRoleBasedRoute
+            path="/my-application"
+              requiredRoles={["STUDENT"]}
+              Component={StudentManageApplication}
+            />
+          }
+        />
       </Route>
 
       {/* Protected Admin Routes */}
