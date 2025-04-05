@@ -6,7 +6,7 @@ const HomeLayout = () => {
 	return (
 		<>
 			<Header />
-			<Outlet />
+			<main className="mt-16"><Outlet /></main>
 			{
 				!location.pathname.includes('create-cv') && <Footer />
 			}
