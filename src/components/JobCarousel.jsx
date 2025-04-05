@@ -1,10 +1,11 @@
 "use client"
 
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel"
-import { useGetAllJobQuery } from "@/services/internHubApi"
+import {useGetJobFilterQuery } from "@/services/internHubApi"
 import JobCard from "./JobCard"
 import { Card, CardContent } from "./ui/card"
 import { Link } from "react-router-dom"
+import { useEffect, useState } from "react"
 
 const JOBS_PER_PAGE = 9
 
@@ -27,8 +28,19 @@ function LoadingCard() {
 }
 
 export default function JobCarousel() {
-  const { data: jobs, isLoading, isError } = useGetAllJobQuery()
+  const { data, isLoading, isError } = useGetJobFilterQuery({page: 1, pageSize: 90})
+  const [api, setApi] = useState(null)
+  const [current, setCurrent] = useState(0)
+  const jobs = data?.content
+  useEffect(() => {
+    if (!api) {
+      return
+    }
 
+    api.on("select", () => {
+      setCurrent(api.selectedScrollSnap())
+    })
+  }, [api])
   if (isError) {
     return (
       <div className="text-center py-12 animate-in fade-in">
@@ -50,8 +62,9 @@ export default function JobCarousel() {
       <Carousel
         opts={{
           align: "start",
-          loop: true,
+          loop: false,
         }}
+        setApi={setApi}
         className="w-full max-w-[1200px] mx-auto"
       >
         <CarouselContent>
@@ -79,12 +92,19 @@ export default function JobCarousel() {
         </CarouselContent>
         <CarouselPrevious className="hidden md:flex -left-12" />
         <CarouselNext className="hidden md:flex -right-12" />
-        <div className="mt-8 flex justify-center gap-2">
-          {!isLoading &&
-            jobPages.map((_, index) => (
-              <div key={index} className={`h-2 w-2 rounded-full ${index === 0 ? "bg-blue-600" : "bg-gray-300"}`} />
-            ))}
-        </div>
+              {/* Navigation Dots */}
+      <div className="flex justify-center gap-2 mt-4">
+        {jobPages?.map((_, index) => (
+          <button
+            key={index}
+            onClick={() => api?.scrollTo(index)}
+            className={`w-3 h-3 rounded-full transition-all duration-300 ${
+              current === index ? "bg-primary scale-125" : "bg-primary/30 hover:bg-primary/50"
+            }`}
+            aria-label={`Go to slide ${index + 1}`}
+          />
+        ))}
+      </div>
       </Carousel>
     </div>
   )
