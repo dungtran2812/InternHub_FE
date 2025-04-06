@@ -35,6 +35,7 @@ import PaymentSuccess from "@/containers/PaymentSuccess/PaymentSuccess";
 import PaymentFailed from "@/containers/PaymentFailed/PaymentFailed";
 import ManageJob from "@/containers/RecruiterDashboard/ManageJob/ManageJob";
 import StudentManageApplication from "@/containers/StudentApplication/StudentApplication";
+import DashboardDetail from "@/containers/Admin/Dashborad/DashboardDetail";
 
 const AppRoutes = () => {
   return (
@@ -111,6 +112,7 @@ const AppRoutes = () => {
         }
       >
         <Route path="/admin" element={<Dashboard />} />
+        <Route path="/admin/detailed-dasboard" element={<DashboardDetail />} />
         <Route path="/admin/manage-users" element={<ManageUserAccount />} />
       </Route>
 

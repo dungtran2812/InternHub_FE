@@ -4,13 +4,14 @@ import internText from "@/assets/orgLogo/interntext.png";
 import internLogo from "@/assets/orgLogo/internlogoWhite.png";
 import homeIcon from "@/assets/sidebarIcon/homeicon.svg";
 import postIntern from "@/assets/sidebarIcon/postIntern.svg";
+import ChartAreaIcon from "@/assets/sidebarIcon/chart-area.svg"; // Updated import for BarChart icon
 import logoutIcon from "@/assets/logouticon.svg";
 
 const AdminSidebar = () => {
   const sidebarItems = [
     { label: "Dashboard", href: "/admin", icon: homeIcon },
+    { label: "Dashboard Detail", href: "/admin/detailed-dasboard", icon: ChartAreaIcon }, // Updated icon to BarChart
     { label: "Quản lý người dùng", href: "/admin/manage-users", icon: postIntern },
-
   ];
 
   return (

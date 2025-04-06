@@ -1,4 +1,5 @@
 import FreePlanCard from '@/components/FreePlanCard'
+import PremiumPlusSubCard from '@/components/PremiumPlusCard'
 import PremiumSubCard from '@/components/PremiumSubCard'
 
 const BecomePremium = () => {
@@ -16,9 +17,10 @@ const BecomePremium = () => {
       <div className='mx-20 mt-10'>
         <div className='container mx-auto '>
           <div className='justify-items-center'>
-            <div className='grid grid-cols-2 gap-10 '>
+            <div className='grid grid-cols-3 gap-10 '>
               <FreePlanCard />
               <PremiumSubCard />
+              <PremiumPlusSubCard />
             </div>
           </div>
           <div className='text-center mt-10'>

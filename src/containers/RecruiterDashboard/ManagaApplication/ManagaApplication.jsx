@@ -120,7 +120,7 @@ const ManageApplication = () => {
             <div className="text-3xl font-semibold text-center">
                 Quản lý đơn ứng tuyển
             </div>
-            <Table className="mt-10" dataSource={dataSource.content} columns={columns}  />
+            <Table className="mt-10" dataSource={dataSource?.content} columns={columns}  />
 
             {/* Student Modal */}
             <Modal

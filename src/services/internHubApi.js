@@ -132,6 +132,12 @@ const internHubApi = createApi({
         method: 'POST',
       }),
     }),
+    becomePremiumPlus: builder.mutation({
+      query: () => ({
+        url: `${endpoints.PREMIUM}/buy-premium?premiumPlanId=7475a2f3-2e18-42d4-999a-3740ea2f2a5e`,
+        method: 'POST',
+      }),
+    }),
 
     createJob: builder.mutation({
       query: (credentials) => ({
@@ -203,6 +209,7 @@ export const {
   usePutApplicationMutation,
   useGetStudentAppilcationQuery,
   useDeleteStudentAppilcationMutation,
+  useBecomePremiumPlusMutation,
 } = internHubApi;
 
 export default internHubApi;
