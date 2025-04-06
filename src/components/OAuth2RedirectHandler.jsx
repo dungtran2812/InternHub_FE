@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { useToast } from "@/hooks/use-toast";
+import { setIsLoggedIn, setIsPremium } from "../features/user";
 
 const OAuth2RedirectHandler = () => {
     const dispatch = useDispatch();
@@ -31,6 +32,8 @@ const OAuth2RedirectHandler = () => {
                         dispatch(setUserId(userInfo.id));
                         dispatch(setFullName(userInfo.fullName));
                         dispatch(setGender(userInfo.gender));
+                        dispatch(setIsPremium(userInfo.isPremium));
+                        dispatch(setIsLoggedIn(true));
 
                         // Show success toast
                         toast({
