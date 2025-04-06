@@ -11,6 +11,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { setFullName } from "@/features/user"
 import { useToast } from "@/hooks/use-toast"
 import { useEffect, useState } from "react"
+import { GOOGLE_AUTH_URL } from "@/consts/urlconst"
 // Toaster is moved to the root layout file
 // import { Toaster } from '@/components/ui/toaster';
 
@@ -32,9 +33,9 @@ const SignUp = () => {
     gender: Yup.string().required("Required"),
   })
 
-  const handleGoogleSignUp = () => {
-    // Implement Google signup logic
-  }
+  const handleGoogleSignUp = async () => {
+    window.location.href = GOOGLE_AUTH_URL;
+  };
 
   const handleSubmit = async (values) => {
       console.log("Signup data:", values)
