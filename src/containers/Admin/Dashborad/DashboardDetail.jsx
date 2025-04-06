@@ -5,86 +5,168 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { ChartContainer, ChartTooltip, ChartTooltipContent } from "@/components/ui/chart"
 
 export default function Dashboard() {
-  // Data for column chart - package sales over time (now including 49k package)
+  // BUGFIX 1: Corrected data structure for salesTimeData
+  // - Added index property for proper reference in custom renderer
+  // - Fixed date format to be consistent (MM/DD)
+  // - Ensured total values match the sum of package values
   const salesTimeData = [
-    { date: "05/04", "49k": 7, "99k": 0 },
-    { date: "06/04", "49k": 60, "99k": 6 },
-    { date: "07/04", "49k": 0, "99k": 4 },
+    {
+      date: "04/05",
+      total: 7,
+      index: 0,
+      packages: [{ name: "49k", value: 7, color: "hsl(220, 70%, 50%)" }],
+    },
+    {
+      date: "04/06",
+      total: 66,
+      index: 1,
+      packages: [
+        { name: "49k", value: 60, color: "hsl(220, 70%, 50%)" },
+        { name: "99k", value: 6, color: "hsl(280, 70%, 50%)" },
+      ],
+    },
+    {
+      date: "04/07",
+      total: 4,
+      index: 2,
+      packages: [{ name: "99k", value: 4, color: "hsl(280, 70%, 50%)" }],
+    },
   ]
 
   // Data for pie chart - user distribution by package type
   const userDistributionData = [
-    { type: "Không gói", users: 253, color: "hsl(var(--chart-1))" },
-    { type: "Gói 39k", users: 67, color: "hsl(var(--chart-2))" },
-    { type: "Gói 99k", users: 10, color: "hsl(var(--chart-3))" },
+    { type: "No Package", users: 253, color: "hsl(10, 80%, 60%)" },
+    { type: "39k Package", users: 67, color: "hsl(150, 80%, 45%)" },
+    { type: "99k Package", users: 10, color: "hsl(200, 80%, 55%)" },
   ]
 
   // Data for donut chart - packages sold by type
   const packageSalesData = [
-    { type: "Gói 39k", sales: 67, color: "hsl(var(--chart-4))" },
-    { type: "Gói 99k", sales: 10, color: "hsl(var(--chart-5))" },
+    { type: "39k Package", sales: 67, color: "hsl(150, 80%, 45%)" },
+    { type: "99k Package", sales: 10, color: "hsl(200, 80%, 55%)" },
   ]
 
   // Calculate total packages sold
   const totalPackages = packageSalesData.reduce((acc, curr) => acc + curr.sales, 0)
 
-  // Calculate percentage of 39k packasges
+  // Calculate percentage of 39k packages
   const percentageOf39k = Math.round((67 / totalPackages) * 100)
 
   // Enhanced color scheme
   const columnChartConfig = {
     "49k": {
-      label: "Gói 49k",
+      label: "49k Package",
       color: "hsl(220, 70%, 50%)",
     },
     "99k": {
-      label: "Gói 99k",
+      label: "99k Package",
       color: "hsl(280, 70%, 50%)",
+    },
+    total: {
+      label: "Total Sales",
+      color: "hsl(250, 70%, 50%)",
     },
   }
 
   const userDistributionConfig = {
     users: {
-      label: "Người dùng",
+      label: "Users",
     },
-    "Không gói": {
-      label: "Không gói",
-      color: "hsl(10, 70%, 55%)",
+    "No Package": {
+      label: "No Package",
+      color: "hsl(10, 80%, 60%)",
     },
-    "Gói 39k": {
-      label: "Gói 39k",
-      color: "hsl(150, 70%, 40%)",
+    "39k Package": {
+      label: "39k Package",
+      color: "hsl(150, 80%, 45%)",
     },
-    "Gói 99k": {
-      label: "Gói 99k",
-      color: "hsl(200, 70%, 50%)",
+    "99k Package": {
+      label: "99k Package",
+      color: "hsl(200, 80%, 55%)",
     },
   }
 
   const packageSalesConfig = {
     sales: {
-      label: "Doanh số",
+      label: "Sales",
     },
-    "Gói 39k": {
-      label: "Gói 39k",
-      color: "hsl(150, 70%, 40%)",
+    "39k Package": {
+      label: "39k Package",
+      color: "hsl(150, 80%, 45%)",
     },
-    "Gói 99k": {
-      label: "Gói 99k",
-      color: "hsl(200, 70%, 50%)",
+    "99k Package": {
+      label: "99k Package",
+      color: "hsl(200, 80%, 55%)",
     },
+  }
+
+  // BUGFIX 2: Improved custom stacked bar renderer with error handling and proper data access
+  const renderCustomizedStackedBar = (props) => {
+    // Added type safety and error handling
+    if (!props || typeof props !== "object") {
+      console.error("Invalid props passed to renderCustomizedStackedBar")
+      return null
+    }
+
+    const { x, y, width, height, index } = props
+
+    // Added error handling for invalid index
+    if (index === undefined || !salesTimeData[index]) {
+      console.error(`Invalid index ${index} or missing data`)
+      return null
+    }
+
+    const packages = salesTimeData[index].packages
+
+    // Added error handling for missing packages data
+    if (!packages || !Array.isArray(packages) || packages.length === 0) {
+      console.error(`No package data found for index ${index}`)
+      return null
+    }
+
+    const totalHeight = height
+    let currentY = y + totalHeight
+
+    // BUGFIX 3: Improved stacking logic to ensure proper rendering
+    // Sort packages to ensure consistent stacking order
+    const sortedPackages = [...packages].sort((a, b) => a.name.localeCompare(b.name))
+
+    return (
+      <g>
+        {sortedPackages.map((pkg, i) => {
+          // Added validation to prevent division by zero
+          const pkgHeight = salesTimeData[index].total > 0 ? (pkg.value / salesTimeData[index].total) * totalHeight : 0
+
+          currentY -= pkgHeight
+
+          return (
+            <rect
+              key={`rect-${index}-${i}`}
+              x={x}
+              y={currentY}
+              width={width}
+              height={pkgHeight}
+              fill={pkg.color}
+              // Only apply radius to top of the topmost segment
+              rx={i === 0 ? 4 : 0}
+              ry={i === 0 ? 4 : 0}
+            />
+          )
+        })}
+      </g>
+    )
   }
 
   return (
     <div className="p-6 bg-background">
-      <h1 className="text-3xl font-bold mb-6">Dashboard</h1>
+      <h1 className="text-3xl font-bold mb-6">Sales Dashboard</h1>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {/* Column Chart */}
         <Card>
           <CardHeader>
-            <CardTitle>Doanh Số Gói Theo Thời Gian</CardTitle>
-            <CardDescription>Doanh số hàng ngày từ 5-7 tháng 4</CardDescription>
+            <CardTitle>Package Sales Over Time</CardTitle>
+            <CardDescription>Daily sales from April 5-7</CardDescription>
           </CardHeader>
           <CardContent>
             <ChartContainer config={columnChartConfig} className="h-[300px]">
@@ -92,10 +174,79 @@ export default function Dashboard() {
                 <CartesianGrid vertical={false} strokeDasharray="3 3" />
                 <XAxis dataKey="date" />
                 <YAxis allowDecimals={false} />
-                <ChartTooltip content={<ChartTooltipContent />} />
-                <Legend />
-                <Bar dataKey="49k" fill={columnChartConfig["49k"].color} radius={[4, 4, 0, 0]} />
-                <Bar dataKey="99k" fill={columnChartConfig["99k"].color} radius={[4, 4, 0, 0]} />
+                {/* BUGFIX 4: Improved tooltip with error handling */}
+                <ChartTooltip
+                  content={({ active, payload }) => {
+                    if (!active || !payload || !payload.length || !payload[0].payload) {
+                      return null
+                    }
+
+                    const dataIndex = payload[0].payload.index
+                    if (dataIndex === undefined || !salesTimeData[dataIndex]) {
+                      return null
+                    }
+
+                    const data = salesTimeData[dataIndex]
+
+                    return (
+                      <div className="bg-background p-2 border rounded shadow-sm">
+                        <p className="font-medium">{data.date}</p>
+                        {data.packages &&
+                          data.packages.map((pkg, i) => (
+                            <p key={i} className="flex items-center gap-2">
+                              <span
+                                className="inline-block w-3 h-3 rounded-full"
+                                style={{ backgroundColor: pkg.color }}
+                              ></span>
+                              <span>
+                                {pkg.name}: {pkg.value}
+                              </span>
+                            </p>
+                          ))}
+                        <p className="font-medium mt-1 border-t pt-1">Total: {data.total}</p>
+                      </div>
+                    )
+                  }}
+                />
+                {/* BUGFIX 5: Added custom legend for better clarity */}
+                <Legend
+                  content={({ payload }) => {
+                    if (!payload || !payload.length) return null
+
+                    // Extract unique package types from all data
+                    const packageTypes = new Set()
+                    salesTimeData.forEach((day) => {
+                      day.packages.forEach((pkg) => {
+                        packageTypes.add(pkg.name)
+                      })
+                    })
+
+                    return (
+                      <div className="flex justify-center gap-4 mt-2">
+                        {Array.from(packageTypes).map((type, index) => {
+                          const color = type === "49k" ? columnChartConfig["49k"].color : columnChartConfig["99k"].color
+
+                          return (
+                            <div key={index} className="flex items-center gap-1">
+                              <span
+                                className="inline-block w-3 h-3 rounded-full"
+                                style={{ backgroundColor: color }}
+                              ></span>
+                              <span>{type} Package</span>
+                            </div>
+                          )
+                        })}
+                      </div>
+                    )
+                  }}
+                />
+                {/* BUGFIX 6: Improved Bar component with proper data handling */}
+                <Bar
+                  dataKey="total"
+                  name="Total Sales"
+                  fill={columnChartConfig["total"].color}
+                  shape={renderCustomizedStackedBar}
+                />
               </BarChart>
             </ChartContainer>
           </CardContent>
@@ -104,8 +255,8 @@ export default function Dashboard() {
         {/* Pie Chart */}
         <Card>
           <CardHeader>
-            <CardTitle>Phân Bố Người Dùng Theo Loại Gói</CardTitle>
-            <CardDescription>Tổng số người dùng: 330</CardDescription>
+            <CardTitle>User Distribution by Package Type</CardTitle>
+            <CardDescription>Total users: 330</CardDescription>
           </CardHeader>
           <CardContent>
             <ChartContainer config={userDistributionConfig} className="h-[300px]">
@@ -133,8 +284,8 @@ export default function Dashboard() {
         {/* Donut Chart */}
         <Card>
           <CardHeader>
-            <CardTitle>Gói Đã Bán Theo Loại</CardTitle>
-            <CardDescription>Tổng số gói đã bán: {totalPackages}</CardDescription>
+            <CardTitle>Packages Sold by Type</CardTitle>
+            <CardDescription>Total packages sold: {totalPackages}</CardDescription>
           </CardHeader>
           <CardContent>
             <ChartContainer config={packageSalesConfig} className="h-[300px]">
@@ -163,7 +314,7 @@ export default function Dashboard() {
                               {totalPackages}
                             </tspan>
                             <tspan x={viewBox.cx} y={(viewBox.cy || 0) + 20} className="fill-muted-foreground text-xs">
-                              Tổng
+                              Total
                             </tspan>
                           </text>
                         )
@@ -179,43 +330,47 @@ export default function Dashboard() {
         {/* Text Summary */}
         <Card>
           <CardHeader>
-            <CardTitle>Phát Hiện Chính</CardTitle>
-            <CardDescription>Tóm tắt dữ liệu doanh số và người dùng</CardDescription>
+            <CardTitle>Key Findings</CardTitle>
+            <CardDescription>Summary of sales and user data</CardDescription>
           </CardHeader>
           <CardContent className="space-y-4">
             <div>
-              <h3 className="font-semibold text-lg">Doanh Số Gói</h3>
+              <h3 className="font-semibold text-lg">Package Sales</h3>
               <ul className="list-disc pl-5 space-y-1">
                 <li>
-                  Tổng số gói đã bán: <span className="font-medium">{totalPackages}</span>
+                  Total packages sold: <span className="font-medium">{totalPackages}</span>
                 </li>
                 <li>
-                  Gói 39k: <span className="font-medium">67</span> ({percentageOf39k}%)
+                  39k packages: <span className="font-medium">67</span> ({percentageOf39k}%)
                 </li>
                 <li>
-                  Gói 99k: <span className="font-medium">10</span> ({100 - percentageOf39k}%)
+                  99k packages: <span className="font-medium">10</span> ({100 - percentageOf39k}%)
+                </li>
+                {/* BUGFIX 7: Added 49k package information to summary */}
+                <li>
+                  49k packages: <span className="font-medium">67</span> (sold on April 5-6)
                 </li>
               </ul>
             </div>
 
             <div>
-              <h3 className="font-semibold text-lg">Phân Bố Người Dùng</h3>
+              <h3 className="font-semibold text-lg">User Distribution</h3>
               <ul className="list-disc pl-5 space-y-1">
                 <li>
-                  Tổng số người dùng khảo sát: <span className="font-medium">330</span>
+                  Total users surveyed: <span className="font-medium">330</span>
                 </li>
                 <li>
-                  Người dùng có gói: <span className="font-medium">77</span> (~23%)
+                  Users with packages: <span className="font-medium">77</span> (~23%)
                 </li>
                 <li>
-                  Người dùng không có gói: <span className="font-medium">253</span> (~77%)
+                  Users without packages: <span className="font-medium">253</span> (~77%)
                 </li>
               </ul>
             </div>
 
             <div className="bg-muted p-3 rounded-md">
-              <p className="font-medium">Nhận Xét Quan Trọng:</p>
-              <p>Gói 39k phổ biến hơn đáng kể, chiếm gần 87% tổng số gói đã bán.</p>
+              <p className="font-medium">Key Insight:</p>
+              <p>The 39k package is significantly more popular, accounting for nearly 87% of total packages sold.</p>
             </div>
           </CardContent>
         </Card>
