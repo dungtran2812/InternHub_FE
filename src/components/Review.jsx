@@ -47,32 +47,33 @@ const Review = ({ reviews }) => {
                             <div className="flex justify-between items-center">
                                 <div className="flex gap-2 items-center">
                                     <div className="w-7 h-7 rounded-full overflow-hidden">
+                                        {console.log(review)}
                                         <img
-                                            src={review.student.avtUrl}
-                                            alt={review.student.name}
+                                            src={review.avtUrl}
+                                            alt={review.content}
                                             className="w-full h-full object-cover"
                                         />
                                     </div>
                                     <span className="font-medium text-gray-800">
-                                        {review.student.name}
+                                        {review.author}
                                     </span>
                                 </div>
                                 <div className="flex">
                                     <Rate
                                         allowHalf
-                                        defaultValue={review.rate}
+                                        defaultValue={review.rating}
                                         disabled
                                     />
                                 </div>
                             </div>
 
                             <div className="text-gray-700">
-                                {review.reviewContent}
+                                {review.content}
                             </div>
 
                             <div className="flex justify-between items-center">
                                 <span className="text-sm text-gray-500">
-                                    {formatDate(review.date)}
+                                    {review.date}
                                 </span>
                                 <button className="p-1 px-2 bg-gray-200 hover:bg-gray-300 border border-gray-400 rounded-md flex items-center gap-1 text-gray-700 transition duration-300">
                                     <ion-icon name="share-outline"></ion-icon> Share
