@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { useSelector } from "react-redux"
 import { AlertCircle, ChevronLeft, ChevronRight, ChevronsLeft, ChevronsRight } from "lucide-react"
 
@@ -30,34 +30,21 @@ export default function JobSearchPage() {
     pageSize: pageSize,
   })
 
-  const totalPages = jobData ? Math.ceil(jobData.totalElements / pageSize) : 0
+  const totalPages = jobData?.totalPages
 
   const handlePageChange = (newPage) => {
+    console.log(newPage)
     setPage(newPage)
-    window.scrollTo({ top: 0, behavior: "smooth" })
   }
 
   const handlePageSizeChange = (value) => {
     setPageSize(Number(value))
-    setPage(0)
+    setPage(1)
   }
 
-  // Generate array of page numbers to display
-  const getPageNumbers = () => {
-    const pageNumbers = []
-    const maxVisiblePages = 5
-    let startPage = Math.max(0, page - Math.floor(maxVisiblePages / 2))
-    const endPage = Math.min(totalPages - 1, startPage + maxVisiblePages - 1)
-
-    if (endPage - startPage + 1 < maxVisiblePages) {
-      startPage = Math.max(0, endPage - maxVisiblePages + 1)
-    }
-
-    for (let i = startPage; i <= endPage; i++) {
-      pageNumbers.push(i)
-    }
-    return pageNumbers
-  }
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" })
+  }, [page])
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -115,23 +102,23 @@ export default function JobSearchPage() {
           {/* Pagination */}
           {!isLoadingJob && !errorJob && jobData?.content.length > 0 && (
             <div className="flex items-center justify-center gap-2">
-              <Button variant="outline" size="icon" onClick={() => handlePageChange(0)} disabled={page === 0}>
+              <Button variant="outline" size="icon" onClick={() => handlePageChange(1)} disabled={page === 1}>
                 <ChevronsLeft className="h-4 w-4" />
               </Button>
-              <Button variant="outline" size="icon" onClick={() => handlePageChange(page - 1)} disabled={page === 0}>
+              <Button variant="outline" size="icon" onClick={() => handlePageChange(page - 1)} disabled={page === 1}>
                 <ChevronLeft className="h-4 w-4" />
               </Button>
 
               <div className="flex gap-1">
-                {getPageNumbers().map((pageNum) => (
+                {Array.from({ length: totalPages }, (_, index) => (
                   <Button
-                    key={pageNum}
-                    variant={pageNum === page ? "default" : "outline"}
+                    key={index + 1}
+                    variant={index + 1 === page ? "default" : "outline"}
                     size="sm"
-                    onClick={() => handlePageChange(pageNum)}
+                    onClick={() => handlePageChange(index + 1)}
                     className="min-w-[40px]"
                   >
-                    {pageNum + 1}
+                    {index + 1}
                   </Button>
                 ))}
               </div>
@@ -140,15 +127,15 @@ export default function JobSearchPage() {
                 variant="outline"
                 size="icon"
                 onClick={() => handlePageChange(page + 1)}
-                disabled={page >= totalPages - 1}
+                disabled={page >= totalPages}
               >
                 <ChevronRight className="h-4 w-4" />
               </Button>
               <Button
                 variant="outline"
                 size="icon"
-                onClick={() => handlePageChange(totalPages - 1)}
-                disabled={page >= totalPages - 1}
+                onClick={() => handlePageChange(totalPages)}
+                disabled={page >= totalPages}
               >
                 <ChevronsRight className="h-4 w-4" />
               </Button>
