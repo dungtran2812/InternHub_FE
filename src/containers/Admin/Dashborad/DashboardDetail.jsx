@@ -27,30 +27,30 @@ export default function Dashboard() {
     },
     {
       date: "04/07",
-      total: 4,
+      total: 5,
       index: 2,
-      packages: [{ name: "99k", value: 4, color: "hsl(280, 70%, 50%)" }],
+      packages: [{ name: "99k", value: 5, color: "hsl(280, 70%, 50%)" }],
     },
   ]
 
   // Data for pie chart - user distribution by package type
   const userDistributionData = [
     { type: "No Package", users: 253, color: "hsl(10, 80%, 60%)" },
-    { type: "39k Package", users: 67, color: "hsl(150, 80%, 45%)" },
-    { type: "99k Package", users: 10, color: "hsl(200, 80%, 55%)" },
+    { type: "49k Package", users: 67, color: "hsl(150, 80%, 45%)" },
+    { type: "99k Package", users: 11, color: "hsl(200, 80%, 55%)" },
   ]
 
   // Data for donut chart - packages sold by type
   const packageSalesData = [
-    { type: "39k Package", sales: 67, color: "hsl(150, 80%, 45%)" },
-    { type: "99k Package", sales: 10, color: "hsl(200, 80%, 55%)" },
+    { type: "49k Package", sales: 67, color: "hsl(150, 80%, 45%)" },
+    { type: "99k Package", sales: 11, color: "hsl(200, 80%, 55%)" },
   ]
 
   // Calculate total packages sold
   const totalPackages = packageSalesData.reduce((acc, curr) => acc + curr.sales, 0)
 
-  // Calculate percentage of 39k packages
-  const percentageOf39k = Math.round((67 / totalPackages) * 100)
+  // Calculate percentage of 49k packages
+  const percentageOf49k = Math.round((67 / totalPackages) * 100)
 
   // Enhanced color scheme
   const columnChartConfig = {
@@ -76,8 +76,8 @@ export default function Dashboard() {
       label: "No Package",
       color: "hsl(10, 80%, 60%)",
     },
-    "39k Package": {
-      label: "39k Package",
+    "49k Package": {
+      label: "49k Package",
       color: "hsl(150, 80%, 45%)",
     },
     "99k Package": {
@@ -90,8 +90,8 @@ export default function Dashboard() {
     sales: {
       label: "Sales",
     },
-    "39k Package": {
-      label: "39k Package",
+    "49k Package": {
+      label: "49k Package",
       color: "hsl(150, 80%, 45%)",
     },
     "99k Package": {
@@ -341,10 +341,10 @@ export default function Dashboard() {
                   Total packages sold: <span className="font-medium">{totalPackages}</span>
                 </li>
                 <li>
-                  39k packages: <span className="font-medium">67</span> ({percentageOf39k}%)
+                  49k packages: <span className="font-medium">67</span> ({percentageOf49k}%)
                 </li>
                 <li>
-                  99k packages: <span className="font-medium">10</span> ({100 - percentageOf39k}%)
+                  99k packages: <span className="font-medium">11</span> ({100 - percentageOf49k}%)
                 </li>
                 {/* BUGFIX 7: Added 49k package information to summary */}
                 <li>
@@ -370,7 +370,7 @@ export default function Dashboard() {
 
             <div className="bg-muted p-3 rounded-md">
               <p className="font-medium">Key Insight:</p>
-              <p>The 39k package is significantly more popular, accounting for nearly 87% of total packages sold.</p>
+              <p>The 49k package is significantly more popular, accounting for nearly 87% of total packages sold.</p>
             </div>
           </CardContent>
         </Card>
