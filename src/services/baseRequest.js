@@ -86,6 +86,13 @@ const setUpInterceptor = (store) => {
         }
       }
 
+      if (config.data) {
+				const haveFile = Object.values(config.data).some((e) => e && e.toString() === '[object File]');
+				if (haveFile) {
+					config.headers['Content-Type'] = 'multipart/form-data';
+				}
+			}
+
       return config;
     },
     (error) => {

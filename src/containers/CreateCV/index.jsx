@@ -9,14 +9,14 @@ import { Form, Input, Button } from 'antd';
 import { setJobTitle, updatePersonalInfo } from '@/features/cv';
 import { generatePDF } from '@/utils/generateCV';
 import { useEffect } from 'react';
-import { useGetUserInfoQuery } from '@/services/internHubApi';
+import { useGetUserInfoQuery, useUploadCVMutation } from '@/services/internHubApi';
 import { Link } from 'react-router-dom';
 
 const CreateCV = () => {
     const { data: userInfo } = useGetUserInfoQuery();
     const { isPremium } = userInfo || {};
-    const accessToken = useSelector((state) => state.rootReducer.user.accessToken);
     const dispatch = useDispatch();
+    const [ saveCV , {isLoading}] = useUploadCVMutation();
 
     // Get user data from Redux store
     const userProfile = useSelector((state) => state.rootReducer.user);
@@ -128,12 +128,12 @@ const CreateCV = () => {
 
                                     <div className="flex justify-center mt-5">
                                         <Button
-                                            onClick={() => generatePDF(cv, combinedData, 'profile', accessToken)}
+                                            onClick={() => generatePDF(cv, combinedData, 'profile', saveCV)}
                                             type="primary" htmlType="default">Save</Button>
                                         <Button
                                             className="ml-2"
                                             type="default"
-                                            onClick={() => generatePDF(cv, combinedData, 'download')}
+                                            onClick={() => generatePDF(cv, combinedData, 'download', saveCV)}
                                         >
                                             Download PDF
                                         </Button>

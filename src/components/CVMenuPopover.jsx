@@ -4,25 +4,26 @@ import { Button } from "@/components/ui/button";
 import { Command, CommandList } from "@/components/ui/command";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { saveCV } from "@/utils/saveCV";
 import PdfPreview from "./PdfPreview";
 import { message, Upload } from "antd";
 import { PlusOutlined } from "@ant-design/icons";
 import { setResume } from "@/features/user";
+import { useUploadCVMutation } from "@/services/internHubApi";
 
 const CVMenuPopover = () => {
+  const [ saveCV, {isLoading}] = useUploadCVMutation();
   const dispatch = useDispatch();
   const resume = useSelector((state) => state.rootReducer.user.resume);
-  const accessToken = useSelector((state) => state.rootReducer.user.accessToken);
   const [file, setFile] = React.useState(null);
   const [open, setOpen] = React.useState(false);
 
   const handleUpload = async ({ file, onSuccess, onError }) => {
     try {
         message.loading({ content: "Uploading...", key: "upload" });
-        const formData = new FormData();
-        formData.append('file', file); // Append the file to the form data
-        const { resume } = await saveCV(formData, accessToken); // Call saveCV with formData
+        const payload = {
+            file: file,
+        }
+        const { resume } = await saveCV(payload); // Call saveCV with formData
         if (resume) {
           dispatch(setResume(resume));
             message.success({ content: "Upload thành công!", key: "upload" });
